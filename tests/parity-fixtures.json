@@ -1,0 +1,2516 @@
+{
+  "source": "ParetoDomain iPhone compilación 30; salida calculada por Swift, 2026-10-14",
+  "bounds": {
+    "start": "2026-10-12T00:00:00Z",
+    "end": "2026-10-19T00:00:00Z"
+  },
+  "cases": [
+    [],
+    [
+      {
+        "id": "00000000-0000-0000-0000-000000000001",
+        "categoria": "Trabajo y estudio",
+        "evento": "texto repetido",
+        "emocion": "",
+        "nivel": 4,
+        "nivel_original_10": 9,
+        "problema": "A",
+        "created_at": "2026-10-13T12:00:00Z"
+      },
+      {
+        "id": "00000000-0000-0000-0000-000000000002",
+        "categoria": "Trabajo y estudio",
+        "evento": "texto repetido",
+        "emocion": "",
+        "nivel": 1,
+        "nivel_original_10": 9,
+        "problema": "B",
+        "created_at": "2026-10-13T12:00:00Z"
+      }
+    ],
+    [
+      {
+        "id": "00000000-0000-0000-0000-000000000003",
+        "categoria": "Trabajo y estudio",
+        "evento": "texto repetido",
+        "emocion": "",
+        "nivel": 5,
+        "nivel_original_10": 9,
+        "problema": "A",
+        "created_at": "2026-10-13T12:00:00Z"
+      },
+      {
+        "id": "00000000-0000-0000-0000-000000000004",
+        "categoria": "Trabajo y estudio",
+        "evento": "texto repetido",
+        "emocion": "",
+        "nivel": 2,
+        "nivel_original_10": 9,
+        "problema": "B",
+        "created_at": "2026-10-13T12:00:00Z"
+      },
+      {
+        "id": "00000000-0000-0000-0000-000000000005",
+        "categoria": "Trabajo y estudio",
+        "evento": "texto repetido",
+        "emocion": "",
+        "nivel": 1,
+        "nivel_original_10": 9,
+        "problema": "C",
+        "created_at": "2026-10-13T12:00:00Z"
+      }
+    ],
+    [
+      {
+        "id": "00000000-0000-0000-0000-000000000006",
+        "categoria": "Trabajo y estudio",
+        "evento": "texto repetido",
+        "emocion": "",
+        "nivel": 5,
+        "nivel_original_10": 9,
+        "problema": "  Comunicación ",
+        "created_at": "2026-10-13T12:00:00Z"
+      },
+      {
+        "id": "00000000-0000-0000-0000-000000000007",
+        "categoria": "Alma",
+        "evento": "texto repetido",
+        "emocion": "",
+        "nivel": 3,
+        "nivel_original_10": 9,
+        "problema": "comunicacion",
+        "created_at": "2026-10-13T12:00:00Z"
+      },
+      {
+        "id": "00000000-0000-0000-0000-000000000008",
+        "categoria": "Trabajo y estudio",
+        "evento": "texto repetido",
+        "emocion": "",
+        "nivel": 4,
+        "nivel_original_10": 9,
+        "problema": null,
+        "created_at": "2026-10-13T12:00:00Z"
+      }
+    ],
+    [
+      {
+        "id": "00000000-0000-0000-0000-000000000009",
+        "categoria": "Trabajo y estudio",
+        "evento": "texto repetido",
+        "emocion": "",
+        "nivel": 5,
+        "nivel_original_10": 9,
+        "problema": "B",
+        "created_at": "2026-10-13T12:00:00Z"
+      },
+      {
+        "id": "00000000-0000-0000-0000-000000000010",
+        "categoria": "Trabajo y estudio",
+        "evento": "texto repetido",
+        "emocion": "",
+        "nivel": 2,
+        "nivel_original_10": 9,
+        "problema": "A",
+        "created_at": "2026-10-13T12:00:00Z"
+      },
+      {
+        "id": "00000000-0000-0000-0000-000000000011",
+        "categoria": "Trabajo y estudio",
+        "evento": "texto repetido",
+        "emocion": "",
+        "nivel": 3,
+        "nivel_original_10": 9,
+        "problema": "A",
+        "created_at": "2026-10-13T12:00:00Z"
+      },
+      {
+        "id": "00000000-0000-0000-0000-000000000012",
+        "categoria": "Trabajo",
+        "evento": "texto repetido",
+        "emocion": "",
+        "nivel": 5,
+        "nivel_original_10": 9,
+        "problema": "C",
+        "created_at": "2026-10-13T12:00:00Z"
+      }
+    ],
+    [
+      {
+        "id": "00000000-0000-0000-0000-000000000013",
+        "categoria": "Trabajo y estudio",
+        "evento": "texto repetido",
+        "emocion": "",
+        "nivel": 1,
+        "nivel_original_10": 9,
+        "problema": null,
+        "created_at": "2026-10-13T12:00:00Z"
+      },
+      {
+        "id": "00000000-0000-0000-0000-000000000014",
+        "categoria": "Relaciones y vínculos",
+        "evento": "texto repetido",
+        "emocion": "",
+        "nivel": 2,
+        "nivel_original_10": 9,
+        "problema": "Problema 1",
+        "created_at": "2026-10-13T12:00:00Z"
+      },
+      {
+        "id": "00000000-0000-0000-0000-000000000015",
+        "categoria": "Salud y bienestar",
+        "evento": "texto repetido",
+        "emocion": "",
+        "nivel": 3,
+        "nivel_original_10": 9,
+        "problema": "Problema 2",
+        "created_at": "2026-10-13T12:00:00Z"
+      },
+      {
+        "id": "00000000-0000-0000-0000-000000000016",
+        "categoria": "Dinero y seguridad",
+        "evento": "texto repetido",
+        "emocion": "",
+        "nivel": 4,
+        "nivel_original_10": 9,
+        "problema": "Problema 3",
+        "created_at": "2026-10-13T12:00:00Z"
+      },
+      {
+        "id": "00000000-0000-0000-0000-000000000017",
+        "categoria": "Hogar y vida diaria",
+        "evento": "texto repetido",
+        "emocion": "",
+        "nivel": 5,
+        "nivel_original_10": 9,
+        "problema": null,
+        "created_at": "2026-10-13T12:00:00Z"
+      },
+      {
+        "id": "00000000-0000-0000-0000-000000000018",
+        "categoria": "Mundo interior",
+        "evento": "texto repetido",
+        "emocion": "",
+        "nivel": 1,
+        "nivel_original_10": 9,
+        "problema": "Problema 5",
+        "created_at": "2026-10-13T12:00:00Z"
+      },
+      {
+        "id": "00000000-0000-0000-0000-000000000019",
+        "categoria": "Trabajo y estudio",
+        "evento": "texto repetido",
+        "emocion": "",
+        "nivel": 2,
+        "nivel_original_10": 9,
+        "problema": "Problema 6",
+        "created_at": "2026-10-13T12:00:00Z"
+      },
+      {
+        "id": "00000000-0000-0000-0000-000000000020",
+        "categoria": "Relaciones y vínculos",
+        "evento": "texto repetido",
+        "emocion": "",
+        "nivel": 3,
+        "nivel_original_10": 9,
+        "problema": "Problema 0",
+        "created_at": "2026-10-13T12:00:00Z"
+      },
+      {
+        "id": "00000000-0000-0000-0000-000000000021",
+        "categoria": "Salud y bienestar",
+        "evento": "texto repetido",
+        "emocion": "",
+        "nivel": 4,
+        "nivel_original_10": 9,
+        "problema": null,
+        "created_at": "2026-10-13T12:00:00Z"
+      },
+      {
+        "id": "00000000-0000-0000-0000-000000000022",
+        "categoria": "Dinero y seguridad",
+        "evento": "texto repetido",
+        "emocion": "",
+        "nivel": 5,
+        "nivel_original_10": 9,
+        "problema": "Problema 2",
+        "created_at": "2026-10-13T12:00:00Z"
+      },
+      {
+        "id": "00000000-0000-0000-0000-000000000023",
+        "categoria": "Hogar y vida diaria",
+        "evento": "texto repetido",
+        "emocion": "",
+        "nivel": 1,
+        "nivel_original_10": 9,
+        "problema": "Problema 3",
+        "created_at": "2026-10-13T12:00:00Z"
+      },
+      {
+        "id": "00000000-0000-0000-0000-000000000024",
+        "categoria": "Mundo interior",
+        "evento": "texto repetido",
+        "emocion": "",
+        "nivel": 2,
+        "nivel_original_10": 9,
+        "problema": "Problema 4",
+        "created_at": "2026-10-13T12:00:00Z"
+      },
+      {
+        "id": "00000000-0000-0000-0000-000000000025",
+        "categoria": "Trabajo y estudio",
+        "evento": "texto repetido",
+        "emocion": "",
+        "nivel": 3,
+        "nivel_original_10": 9,
+        "problema": null,
+        "created_at": "2026-10-13T12:00:00Z"
+      },
+      {
+        "id": "00000000-0000-0000-0000-000000000026",
+        "categoria": "Relaciones y vínculos",
+        "evento": "texto repetido",
+        "emocion": "",
+        "nivel": 4,
+        "nivel_original_10": 9,
+        "problema": "Problema 6",
+        "created_at": "2026-10-13T12:00:00Z"
+      },
+      {
+        "id": "00000000-0000-0000-0000-000000000027",
+        "categoria": "Salud y bienestar",
+        "evento": "texto repetido",
+        "emocion": "",
+        "nivel": 5,
+        "nivel_original_10": 9,
+        "problema": "Problema 0",
+        "created_at": "2026-10-13T12:00:00Z"
+      },
+      {
+        "id": "00000000-0000-0000-0000-000000000028",
+        "categoria": "Dinero y seguridad",
+        "evento": "texto repetido",
+        "emocion": "",
+        "nivel": 1,
+        "nivel_original_10": 9,
+        "problema": "Problema 1",
+        "created_at": "2026-10-13T12:00:00Z"
+      },
+      {
+        "id": "00000000-0000-0000-0000-000000000029",
+        "categoria": "Hogar y vida diaria",
+        "evento": "texto repetido",
+        "emocion": "",
+        "nivel": 2,
+        "nivel_original_10": 9,
+        "problema": null,
+        "created_at": "2026-10-13T12:00:00Z"
+      },
+      {
+        "id": "00000000-0000-0000-0000-000000000030",
+        "categoria": "Mundo interior",
+        "evento": "texto repetido",
+        "emocion": "",
+        "nivel": 3,
+        "nivel_original_10": 9,
+        "problema": "Problema 3",
+        "created_at": "2026-10-13T12:00:00Z"
+      },
+      {
+        "id": "00000000-0000-0000-0000-000000000031",
+        "categoria": "Trabajo y estudio",
+        "evento": "texto repetido",
+        "emocion": "",
+        "nivel": 4,
+        "nivel_original_10": 9,
+        "problema": "Problema 4",
+        "created_at": "2026-10-13T12:00:00Z"
+      },
+      {
+        "id": "00000000-0000-0000-0000-000000000032",
+        "categoria": "Relaciones y vínculos",
+        "evento": "texto repetido",
+        "emocion": "",
+        "nivel": 5,
+        "nivel_original_10": 9,
+        "problema": "Problema 5",
+        "created_at": "2026-10-13T12:00:00Z"
+      },
+      {
+        "id": "00000000-0000-0000-0000-000000000033",
+        "categoria": "Salud y bienestar",
+        "evento": "texto repetido",
+        "emocion": "",
+        "nivel": 1,
+        "nivel_original_10": 9,
+        "problema": null,
+        "created_at": "2026-10-13T12:00:00Z"
+      },
+      {
+        "id": "00000000-0000-0000-0000-000000000034",
+        "categoria": "Dinero y seguridad",
+        "evento": "texto repetido",
+        "emocion": "",
+        "nivel": 2,
+        "nivel_original_10": 9,
+        "problema": "Problema 0",
+        "created_at": "2026-10-13T12:00:00Z"
+      },
+      {
+        "id": "00000000-0000-0000-0000-000000000035",
+        "categoria": "Hogar y vida diaria",
+        "evento": "texto repetido",
+        "emocion": "",
+        "nivel": 3,
+        "nivel_original_10": 9,
+        "problema": "Problema 1",
+        "created_at": "2026-10-13T12:00:00Z"
+      },
+      {
+        "id": "00000000-0000-0000-0000-000000000036",
+        "categoria": "Mundo interior",
+        "evento": "texto repetido",
+        "emocion": "",
+        "nivel": 4,
+        "nivel_original_10": 9,
+        "problema": "Problema 2",
+        "created_at": "2026-10-13T12:00:00Z"
+      },
+      {
+        "id": "00000000-0000-0000-0000-000000000037",
+        "categoria": "Trabajo y estudio",
+        "evento": "texto repetido",
+        "emocion": "",
+        "nivel": 5,
+        "nivel_original_10": 9,
+        "problema": null,
+        "created_at": "2026-10-13T12:00:00Z"
+      },
+      {
+        "id": "00000000-0000-0000-0000-000000000038",
+        "categoria": "Relaciones y vínculos",
+        "evento": "texto repetido",
+        "emocion": "",
+        "nivel": 1,
+        "nivel_original_10": 9,
+        "problema": "Problema 4",
+        "created_at": "2026-10-13T12:00:00Z"
+      },
+      {
+        "id": "00000000-0000-0000-0000-000000000039",
+        "categoria": "Salud y bienestar",
+        "evento": "texto repetido",
+        "emocion": "",
+        "nivel": 2,
+        "nivel_original_10": 9,
+        "problema": "Problema 5",
+        "created_at": "2026-10-13T12:00:00Z"
+      },
+      {
+        "id": "00000000-0000-0000-0000-000000000040",
+        "categoria": "Dinero y seguridad",
+        "evento": "texto repetido",
+        "emocion": "",
+        "nivel": 3,
+        "nivel_original_10": 9,
+        "problema": "Problema 6",
+        "created_at": "2026-10-13T12:00:00Z"
+      },
+      {
+        "id": "00000000-0000-0000-0000-000000000041",
+        "categoria": "Hogar y vida diaria",
+        "evento": "texto repetido",
+        "emocion": "",
+        "nivel": 4,
+        "nivel_original_10": 9,
+        "problema": null,
+        "created_at": "2026-10-13T12:00:00Z"
+      },
+      {
+        "id": "00000000-0000-0000-0000-000000000042",
+        "categoria": "Mundo interior",
+        "evento": "texto repetido",
+        "emocion": "",
+        "nivel": 5,
+        "nivel_original_10": 9,
+        "problema": "Problema 1",
+        "created_at": "2026-10-13T12:00:00Z"
+      },
+      {
+        "id": "00000000-0000-0000-0000-000000000043",
+        "categoria": "Trabajo y estudio",
+        "evento": "texto repetido",
+        "emocion": "",
+        "nivel": 1,
+        "nivel_original_10": 9,
+        "problema": "Problema 2",
+        "created_at": "2026-10-13T12:00:00Z"
+      },
+      {
+        "id": "00000000-0000-0000-0000-000000000044",
+        "categoria": "Relaciones y vínculos",
+        "evento": "texto repetido",
+        "emocion": "",
+        "nivel": 2,
+        "nivel_original_10": 9,
+        "problema": "Problema 3",
+        "created_at": "2026-10-13T12:00:00Z"
+      },
+      {
+        "id": "00000000-0000-0000-0000-000000000045",
+        "categoria": "Salud y bienestar",
+        "evento": "texto repetido",
+        "emocion": "",
+        "nivel": 3,
+        "nivel_original_10": 9,
+        "problema": null,
+        "created_at": "2026-10-13T12:00:00Z"
+      },
+      {
+        "id": "00000000-0000-0000-0000-000000000046",
+        "categoria": "Dinero y seguridad",
+        "evento": "texto repetido",
+        "emocion": "",
+        "nivel": 4,
+        "nivel_original_10": 9,
+        "problema": "Problema 5",
+        "created_at": "2026-10-13T12:00:00Z"
+      },
+      {
+        "id": "00000000-0000-0000-0000-000000000047",
+        "categoria": "Hogar y vida diaria",
+        "evento": "texto repetido",
+        "emocion": "",
+        "nivel": 5,
+        "nivel_original_10": 9,
+        "problema": "Problema 6",
+        "created_at": "2026-10-13T12:00:00Z"
+      },
+      {
+        "id": "00000000-0000-0000-0000-000000000048",
+        "categoria": "Mundo interior",
+        "evento": "texto repetido",
+        "emocion": "",
+        "nivel": 1,
+        "nivel_original_10": 9,
+        "problema": "Problema 0",
+        "created_at": "2026-10-13T12:00:00Z"
+      },
+      {
+        "id": "00000000-0000-0000-0000-000000000049",
+        "categoria": "Trabajo y estudio",
+        "evento": "texto repetido",
+        "emocion": "",
+        "nivel": 2,
+        "nivel_original_10": 9,
+        "problema": null,
+        "created_at": "2026-10-13T12:00:00Z"
+      },
+      {
+        "id": "00000000-0000-0000-0000-000000000050",
+        "categoria": "Relaciones y vínculos",
+        "evento": "texto repetido",
+        "emocion": "",
+        "nivel": 3,
+        "nivel_original_10": 9,
+        "problema": "Problema 2",
+        "created_at": "2026-10-13T12:00:00Z"
+      },
+      {
+        "id": "00000000-0000-0000-0000-000000000051",
+        "categoria": "Salud y bienestar",
+        "evento": "texto repetido",
+        "emocion": "",
+        "nivel": 4,
+        "nivel_original_10": 9,
+        "problema": "Problema 3",
+        "created_at": "2026-10-13T12:00:00Z"
+      },
+      {
+        "id": "00000000-0000-0000-0000-000000000052",
+        "categoria": "Dinero y seguridad",
+        "evento": "texto repetido",
+        "emocion": "",
+        "nivel": 5,
+        "nivel_original_10": 9,
+        "problema": "Problema 4",
+        "created_at": "2026-10-13T12:00:00Z"
+      },
+      {
+        "id": "00000000-0000-0000-0000-000000000053",
+        "categoria": "Hogar y vida diaria",
+        "evento": "texto repetido",
+        "emocion": "",
+        "nivel": 1,
+        "nivel_original_10": 9,
+        "problema": null,
+        "created_at": "2026-10-13T12:00:00Z"
+      },
+      {
+        "id": "00000000-0000-0000-0000-000000000054",
+        "categoria": "Mundo interior",
+        "evento": "texto repetido",
+        "emocion": "",
+        "nivel": 2,
+        "nivel_original_10": 9,
+        "problema": "Problema 6",
+        "created_at": "2026-10-13T12:00:00Z"
+      },
+      {
+        "id": "00000000-0000-0000-0000-000000000055",
+        "categoria": "Trabajo y estudio",
+        "evento": "texto repetido",
+        "emocion": "",
+        "nivel": 3,
+        "nivel_original_10": 9,
+        "problema": "Problema 0",
+        "created_at": "2026-10-13T12:00:00Z"
+      },
+      {
+        "id": "00000000-0000-0000-0000-000000000056",
+        "categoria": "Relaciones y vínculos",
+        "evento": "texto repetido",
+        "emocion": "",
+        "nivel": 4,
+        "nivel_original_10": 9,
+        "problema": "Problema 1",
+        "created_at": "2026-10-13T12:00:00Z"
+      },
+      {
+        "id": "00000000-0000-0000-0000-000000000057",
+        "categoria": "Salud y bienestar",
+        "evento": "texto repetido",
+        "emocion": "",
+        "nivel": 5,
+        "nivel_original_10": 9,
+        "problema": null,
+        "created_at": "2026-10-13T12:00:00Z"
+      },
+      {
+        "id": "00000000-0000-0000-0000-000000000058",
+        "categoria": "Dinero y seguridad",
+        "evento": "texto repetido",
+        "emocion": "",
+        "nivel": 1,
+        "nivel_original_10": 9,
+        "problema": "Problema 3",
+        "created_at": "2026-10-13T12:00:00Z"
+      },
+      {
+        "id": "00000000-0000-0000-0000-000000000059",
+        "categoria": "Hogar y vida diaria",
+        "evento": "texto repetido",
+        "emocion": "",
+        "nivel": 2,
+        "nivel_original_10": 9,
+        "problema": "Problema 4",
+        "created_at": "2026-10-13T12:00:00Z"
+      },
+      {
+        "id": "00000000-0000-0000-0000-000000000060",
+        "categoria": "Mundo interior",
+        "evento": "texto repetido",
+        "emocion": "",
+        "nivel": 3,
+        "nivel_original_10": 9,
+        "problema": "Problema 5",
+        "created_at": "2026-10-13T12:00:00Z"
+      },
+      {
+        "id": "00000000-0000-0000-0000-000000000061",
+        "categoria": "Trabajo y estudio",
+        "evento": "texto repetido",
+        "emocion": "",
+        "nivel": 4,
+        "nivel_original_10": 9,
+        "problema": null,
+        "created_at": "2026-10-13T12:00:00Z"
+      },
+      {
+        "id": "00000000-0000-0000-0000-000000000062",
+        "categoria": "Relaciones y vínculos",
+        "evento": "texto repetido",
+        "emocion": "",
+        "nivel": 5,
+        "nivel_original_10": 9,
+        "problema": "Problema 0",
+        "created_at": "2026-10-13T12:00:00Z"
+      },
+      {
+        "id": "00000000-0000-0000-0000-000000000063",
+        "categoria": "Salud y bienestar",
+        "evento": "texto repetido",
+        "emocion": "",
+        "nivel": 1,
+        "nivel_original_10": 9,
+        "problema": "Problema 1",
+        "created_at": "2026-10-13T12:00:00Z"
+      },
+      {
+        "id": "00000000-0000-0000-0000-000000000064",
+        "categoria": "Dinero y seguridad",
+        "evento": "texto repetido",
+        "emocion": "",
+        "nivel": 2,
+        "nivel_original_10": 9,
+        "problema": "Problema 2",
+        "created_at": "2026-10-13T12:00:00Z"
+      },
+      {
+        "id": "00000000-0000-0000-0000-000000000065",
+        "categoria": "Hogar y vida diaria",
+        "evento": "texto repetido",
+        "emocion": "",
+        "nivel": 3,
+        "nivel_original_10": 9,
+        "problema": null,
+        "created_at": "2026-10-13T12:00:00Z"
+      },
+      {
+        "id": "00000000-0000-0000-0000-000000000066",
+        "categoria": "Mundo interior",
+        "evento": "texto repetido",
+        "emocion": "",
+        "nivel": 4,
+        "nivel_original_10": 9,
+        "problema": "Problema 4",
+        "created_at": "2026-10-13T12:00:00Z"
+      },
+      {
+        "id": "00000000-0000-0000-0000-000000000067",
+        "categoria": "Trabajo y estudio",
+        "evento": "texto repetido",
+        "emocion": "",
+        "nivel": 5,
+        "nivel_original_10": 9,
+        "problema": "Problema 5",
+        "created_at": "2026-10-13T12:00:00Z"
+      },
+      {
+        "id": "00000000-0000-0000-0000-000000000068",
+        "categoria": "Relaciones y vínculos",
+        "evento": "texto repetido",
+        "emocion": "",
+        "nivel": 1,
+        "nivel_original_10": 9,
+        "problema": "Problema 6",
+        "created_at": "2026-10-13T12:00:00Z"
+      },
+      {
+        "id": "00000000-0000-0000-0000-000000000069",
+        "categoria": "Salud y bienestar",
+        "evento": "texto repetido",
+        "emocion": "",
+        "nivel": 2,
+        "nivel_original_10": 9,
+        "problema": null,
+        "created_at": "2026-10-13T12:00:00Z"
+      },
+      {
+        "id": "00000000-0000-0000-0000-000000000070",
+        "categoria": "Dinero y seguridad",
+        "evento": "texto repetido",
+        "emocion": "",
+        "nivel": 3,
+        "nivel_original_10": 9,
+        "problema": "Problema 1",
+        "created_at": "2026-10-13T12:00:00Z"
+      },
+      {
+        "id": "00000000-0000-0000-0000-000000000071",
+        "categoria": "Hogar y vida diaria",
+        "evento": "texto repetido",
+        "emocion": "",
+        "nivel": 4,
+        "nivel_original_10": 9,
+        "problema": "Problema 2",
+        "created_at": "2026-10-13T12:00:00Z"
+      },
+      {
+        "id": "00000000-0000-0000-0000-000000000072",
+        "categoria": "Mundo interior",
+        "evento": "texto repetido",
+        "emocion": "",
+        "nivel": 5,
+        "nivel_original_10": 9,
+        "problema": "Problema 3",
+        "created_at": "2026-10-13T12:00:00Z"
+      },
+      {
+        "id": "00000000-0000-0000-0000-000000000073",
+        "categoria": "Trabajo y estudio",
+        "evento": "texto repetido",
+        "emocion": "",
+        "nivel": 1,
+        "nivel_original_10": 9,
+        "problema": null,
+        "created_at": "2026-10-13T12:00:00Z"
+      },
+      {
+        "id": "00000000-0000-0000-0000-000000000074",
+        "categoria": "Relaciones y vínculos",
+        "evento": "texto repetido",
+        "emocion": "",
+        "nivel": 2,
+        "nivel_original_10": 9,
+        "problema": "Problema 5",
+        "created_at": "2026-10-13T12:00:00Z"
+      },
+      {
+        "id": "00000000-0000-0000-0000-000000000075",
+        "categoria": "Salud y bienestar",
+        "evento": "texto repetido",
+        "emocion": "",
+        "nivel": 3,
+        "nivel_original_10": 9,
+        "problema": "Problema 6",
+        "created_at": "2026-10-13T12:00:00Z"
+      },
+      {
+        "id": "00000000-0000-0000-0000-000000000076",
+        "categoria": "Dinero y seguridad",
+        "evento": "texto repetido",
+        "emocion": "",
+        "nivel": 4,
+        "nivel_original_10": 9,
+        "problema": "Problema 0",
+        "created_at": "2026-10-13T12:00:00Z"
+      },
+      {
+        "id": "00000000-0000-0000-0000-000000000077",
+        "categoria": "Hogar y vida diaria",
+        "evento": "texto repetido",
+        "emocion": "",
+        "nivel": 5,
+        "nivel_original_10": 9,
+        "problema": null,
+        "created_at": "2026-10-13T12:00:00Z"
+      },
+      {
+        "id": "00000000-0000-0000-0000-000000000078",
+        "categoria": "Mundo interior",
+        "evento": "texto repetido",
+        "emocion": "",
+        "nivel": 1,
+        "nivel_original_10": 9,
+        "problema": "Problema 2",
+        "created_at": "2026-10-13T12:00:00Z"
+      },
+      {
+        "id": "00000000-0000-0000-0000-000000000079",
+        "categoria": "Trabajo y estudio",
+        "evento": "texto repetido",
+        "emocion": "",
+        "nivel": 2,
+        "nivel_original_10": 9,
+        "problema": "Problema 3",
+        "created_at": "2026-10-13T12:00:00Z"
+      },
+      {
+        "id": "00000000-0000-0000-0000-000000000080",
+        "categoria": "Relaciones y vínculos",
+        "evento": "texto repetido",
+        "emocion": "",
+        "nivel": 3,
+        "nivel_original_10": 9,
+        "problema": "Problema 4",
+        "created_at": "2026-10-13T12:00:00Z"
+      },
+      {
+        "id": "00000000-0000-0000-0000-000000000081",
+        "categoria": "Salud y bienestar",
+        "evento": "texto repetido",
+        "emocion": "",
+        "nivel": 4,
+        "nivel_original_10": 9,
+        "problema": null,
+        "created_at": "2026-10-13T12:00:00Z"
+      },
+      {
+        "id": "00000000-0000-0000-0000-000000000082",
+        "categoria": "Dinero y seguridad",
+        "evento": "texto repetido",
+        "emocion": "",
+        "nivel": 5,
+        "nivel_original_10": 9,
+        "problema": "Problema 6",
+        "created_at": "2026-10-13T12:00:00Z"
+      },
+      {
+        "id": "00000000-0000-0000-0000-000000000083",
+        "categoria": "Hogar y vida diaria",
+        "evento": "texto repetido",
+        "emocion": "",
+        "nivel": 1,
+        "nivel_original_10": 9,
+        "problema": "Problema 0",
+        "created_at": "2026-10-13T12:00:00Z"
+      },
+      {
+        "id": "00000000-0000-0000-0000-000000000084",
+        "categoria": "Mundo interior",
+        "evento": "texto repetido",
+        "emocion": "",
+        "nivel": 2,
+        "nivel_original_10": 9,
+        "problema": "Problema 1",
+        "created_at": "2026-10-13T12:00:00Z"
+      },
+      {
+        "id": "00000000-0000-0000-0000-000000000085",
+        "categoria": "Trabajo y estudio",
+        "evento": "texto repetido",
+        "emocion": "",
+        "nivel": 3,
+        "nivel_original_10": 9,
+        "problema": null,
+        "created_at": "2026-10-13T12:00:00Z"
+      },
+      {
+        "id": "00000000-0000-0000-0000-000000000086",
+        "categoria": "Relaciones y vínculos",
+        "evento": "texto repetido",
+        "emocion": "",
+        "nivel": 4,
+        "nivel_original_10": 9,
+        "problema": "Problema 3",
+        "created_at": "2026-10-13T12:00:00Z"
+      },
+      {
+        "id": "00000000-0000-0000-0000-000000000087",
+        "categoria": "Salud y bienestar",
+        "evento": "texto repetido",
+        "emocion": "",
+        "nivel": 5,
+        "nivel_original_10": 9,
+        "problema": "Problema 4",
+        "created_at": "2026-10-13T12:00:00Z"
+      },
+      {
+        "id": "00000000-0000-0000-0000-000000000088",
+        "categoria": "Dinero y seguridad",
+        "evento": "texto repetido",
+        "emocion": "",
+        "nivel": 1,
+        "nivel_original_10": 9,
+        "problema": "Problema 5",
+        "created_at": "2026-10-13T12:00:00Z"
+      },
+      {
+        "id": "00000000-0000-0000-0000-000000000089",
+        "categoria": "Hogar y vida diaria",
+        "evento": "texto repetido",
+        "emocion": "",
+        "nivel": 2,
+        "nivel_original_10": 9,
+        "problema": null,
+        "created_at": "2026-10-13T12:00:00Z"
+      },
+      {
+        "id": "00000000-0000-0000-0000-000000000090",
+        "categoria": "Mundo interior",
+        "evento": "texto repetido",
+        "emocion": "",
+        "nivel": 3,
+        "nivel_original_10": 9,
+        "problema": "Problema 0",
+        "created_at": "2026-10-13T12:00:00Z"
+      },
+      {
+        "id": "00000000-0000-0000-0000-000000000091",
+        "categoria": "Trabajo y estudio",
+        "evento": "texto repetido",
+        "emocion": "",
+        "nivel": 4,
+        "nivel_original_10": 9,
+        "problema": "Problema 1",
+        "created_at": "2026-10-13T12:00:00Z"
+      },
+      {
+        "id": "00000000-0000-0000-0000-000000000092",
+        "categoria": "Relaciones y vínculos",
+        "evento": "texto repetido",
+        "emocion": "",
+        "nivel": 5,
+        "nivel_original_10": 9,
+        "problema": "Problema 2",
+        "created_at": "2026-10-13T12:00:00Z"
+      },
+      {
+        "id": "00000000-0000-0000-0000-000000000093",
+        "categoria": "Salud y bienestar",
+        "evento": "texto repetido",
+        "emocion": "",
+        "nivel": 1,
+        "nivel_original_10": 9,
+        "problema": null,
+        "created_at": "2026-10-13T12:00:00Z"
+      },
+      {
+        "id": "00000000-0000-0000-0000-000000000094",
+        "categoria": "Dinero y seguridad",
+        "evento": "texto repetido",
+        "emocion": "",
+        "nivel": 2,
+        "nivel_original_10": 9,
+        "problema": "Problema 4",
+        "created_at": "2026-10-13T12:00:00Z"
+      },
+      {
+        "id": "00000000-0000-0000-0000-000000000095",
+        "categoria": "Hogar y vida diaria",
+        "evento": "texto repetido",
+        "emocion": "",
+        "nivel": 3,
+        "nivel_original_10": 9,
+        "problema": "Problema 5",
+        "created_at": "2026-10-13T12:00:00Z"
+      },
+      {
+        "id": "00000000-0000-0000-0000-000000000096",
+        "categoria": "Mundo interior",
+        "evento": "texto repetido",
+        "emocion": "",
+        "nivel": 4,
+        "nivel_original_10": 9,
+        "problema": "Problema 6",
+        "created_at": "2026-10-13T12:00:00Z"
+      },
+      {
+        "id": "00000000-0000-0000-0000-000000000097",
+        "categoria": "Trabajo y estudio",
+        "evento": "texto repetido",
+        "emocion": "",
+        "nivel": 5,
+        "nivel_original_10": 9,
+        "problema": null,
+        "created_at": "2026-10-13T12:00:00Z"
+      },
+      {
+        "id": "00000000-0000-0000-0000-000000000098",
+        "categoria": "Relaciones y vínculos",
+        "evento": "texto repetido",
+        "emocion": "",
+        "nivel": 1,
+        "nivel_original_10": 9,
+        "problema": "Problema 1",
+        "created_at": "2026-10-13T12:00:00Z"
+      },
+      {
+        "id": "00000000-0000-0000-0000-000000000099",
+        "categoria": "Salud y bienestar",
+        "evento": "texto repetido",
+        "emocion": "",
+        "nivel": 2,
+        "nivel_original_10": 9,
+        "problema": "Problema 2",
+        "created_at": "2026-10-13T12:00:00Z"
+      },
+      {
+        "id": "00000000-0000-0000-0000-000000000100",
+        "categoria": "Dinero y seguridad",
+        "evento": "texto repetido",
+        "emocion": "",
+        "nivel": 3,
+        "nivel_original_10": 9,
+        "problema": "Problema 3",
+        "created_at": "2026-10-13T12:00:00Z"
+      },
+      {
+        "id": "00000000-0000-0000-0000-000000000101",
+        "categoria": "Hogar y vida diaria",
+        "evento": "texto repetido",
+        "emocion": "",
+        "nivel": 4,
+        "nivel_original_10": 9,
+        "problema": null,
+        "created_at": "2026-10-13T12:00:00Z"
+      },
+      {
+        "id": "00000000-0000-0000-0000-000000000102",
+        "categoria": "Mundo interior",
+        "evento": "texto repetido",
+        "emocion": "",
+        "nivel": 5,
+        "nivel_original_10": 9,
+        "problema": "Problema 5",
+        "created_at": "2026-10-13T12:00:00Z"
+      },
+      {
+        "id": "00000000-0000-0000-0000-000000000103",
+        "categoria": "Trabajo y estudio",
+        "evento": "texto repetido",
+        "emocion": "",
+        "nivel": 1,
+        "nivel_original_10": 9,
+        "problema": "Problema 6",
+        "created_at": "2026-10-13T12:00:00Z"
+      },
+      {
+        "id": "00000000-0000-0000-0000-000000000104",
+        "categoria": "Relaciones y vínculos",
+        "evento": "texto repetido",
+        "emocion": "",
+        "nivel": 2,
+        "nivel_original_10": 9,
+        "problema": "Problema 0",
+        "created_at": "2026-10-13T12:00:00Z"
+      },
+      {
+        "id": "00000000-0000-0000-0000-000000000105",
+        "categoria": "Salud y bienestar",
+        "evento": "texto repetido",
+        "emocion": "",
+        "nivel": 3,
+        "nivel_original_10": 9,
+        "problema": null,
+        "created_at": "2026-10-13T12:00:00Z"
+      },
+      {
+        "id": "00000000-0000-0000-0000-000000000106",
+        "categoria": "Dinero y seguridad",
+        "evento": "texto repetido",
+        "emocion": "",
+        "nivel": 4,
+        "nivel_original_10": 9,
+        "problema": "Problema 2",
+        "created_at": "2026-10-13T12:00:00Z"
+      },
+      {
+        "id": "00000000-0000-0000-0000-000000000107",
+        "categoria": "Hogar y vida diaria",
+        "evento": "texto repetido",
+        "emocion": "",
+        "nivel": 5,
+        "nivel_original_10": 9,
+        "problema": "Problema 3",
+        "created_at": "2026-10-13T12:00:00Z"
+      },
+      {
+        "id": "00000000-0000-0000-0000-000000000108",
+        "categoria": "Mundo interior",
+        "evento": "texto repetido",
+        "emocion": "",
+        "nivel": 1,
+        "nivel_original_10": 9,
+        "problema": "Problema 4",
+        "created_at": "2026-10-13T12:00:00Z"
+      },
+      {
+        "id": "00000000-0000-0000-0000-000000000109",
+        "categoria": "Trabajo y estudio",
+        "evento": "texto repetido",
+        "emocion": "",
+        "nivel": 2,
+        "nivel_original_10": 9,
+        "problema": null,
+        "created_at": "2026-10-13T12:00:00Z"
+      },
+      {
+        "id": "00000000-0000-0000-0000-000000000110",
+        "categoria": "Relaciones y vínculos",
+        "evento": "texto repetido",
+        "emocion": "",
+        "nivel": 3,
+        "nivel_original_10": 9,
+        "problema": "Problema 6",
+        "created_at": "2026-10-13T12:00:00Z"
+      },
+      {
+        "id": "00000000-0000-0000-0000-000000000111",
+        "categoria": "Salud y bienestar",
+        "evento": "texto repetido",
+        "emocion": "",
+        "nivel": 4,
+        "nivel_original_10": 9,
+        "problema": "Problema 0",
+        "created_at": "2026-10-13T12:00:00Z"
+      },
+      {
+        "id": "00000000-0000-0000-0000-000000000112",
+        "categoria": "Dinero y seguridad",
+        "evento": "texto repetido",
+        "emocion": "",
+        "nivel": 5,
+        "nivel_original_10": 9,
+        "problema": "Problema 1",
+        "created_at": "2026-10-13T12:00:00Z"
+      },
+      {
+        "id": "00000000-0000-0000-0000-000000000113",
+        "categoria": "Hogar y vida diaria",
+        "evento": "texto repetido",
+        "emocion": "",
+        "nivel": 1,
+        "nivel_original_10": 9,
+        "problema": null,
+        "created_at": "2026-10-13T12:00:00Z"
+      },
+      {
+        "id": "00000000-0000-0000-0000-000000000114",
+        "categoria": "Mundo interior",
+        "evento": "texto repetido",
+        "emocion": "",
+        "nivel": 2,
+        "nivel_original_10": 9,
+        "problema": "Problema 3",
+        "created_at": "2026-10-13T12:00:00Z"
+      },
+      {
+        "id": "00000000-0000-0000-0000-000000000115",
+        "categoria": "Trabajo y estudio",
+        "evento": "texto repetido",
+        "emocion": "",
+        "nivel": 3,
+        "nivel_original_10": 9,
+        "problema": "Problema 4",
+        "created_at": "2026-10-13T12:00:00Z"
+      },
+      {
+        "id": "00000000-0000-0000-0000-000000000116",
+        "categoria": "Relaciones y vínculos",
+        "evento": "texto repetido",
+        "emocion": "",
+        "nivel": 4,
+        "nivel_original_10": 9,
+        "problema": "Problema 5",
+        "created_at": "2026-10-13T12:00:00Z"
+      },
+      {
+        "id": "00000000-0000-0000-0000-000000000117",
+        "categoria": "Salud y bienestar",
+        "evento": "texto repetido",
+        "emocion": "",
+        "nivel": 5,
+        "nivel_original_10": 9,
+        "problema": null,
+        "created_at": "2026-10-13T12:00:00Z"
+      },
+      {
+        "id": "00000000-0000-0000-0000-000000000118",
+        "categoria": "Dinero y seguridad",
+        "evento": "texto repetido",
+        "emocion": "",
+        "nivel": 1,
+        "nivel_original_10": 9,
+        "problema": "Problema 0",
+        "created_at": "2026-10-13T12:00:00Z"
+      },
+      {
+        "id": "00000000-0000-0000-0000-000000000119",
+        "categoria": "Hogar y vida diaria",
+        "evento": "texto repetido",
+        "emocion": "",
+        "nivel": 2,
+        "nivel_original_10": 9,
+        "problema": "Problema 1",
+        "created_at": "2026-10-13T12:00:00Z"
+      },
+      {
+        "id": "00000000-0000-0000-0000-000000000120",
+        "categoria": "Mundo interior",
+        "evento": "texto repetido",
+        "emocion": "",
+        "nivel": 3,
+        "nivel_original_10": 9,
+        "problema": "Problema 2",
+        "created_at": "2026-10-13T12:00:00Z"
+      },
+      {
+        "id": "00000000-0000-0000-0000-000000000121",
+        "categoria": "Trabajo y estudio",
+        "evento": "texto repetido",
+        "emocion": "",
+        "nivel": 4,
+        "nivel_original_10": 9,
+        "problema": null,
+        "created_at": "2026-10-13T12:00:00Z"
+      },
+      {
+        "id": "00000000-0000-0000-0000-000000000122",
+        "categoria": "Relaciones y vínculos",
+        "evento": "texto repetido",
+        "emocion": "",
+        "nivel": 5,
+        "nivel_original_10": 9,
+        "problema": "Problema 4",
+        "created_at": "2026-10-13T12:00:00Z"
+      },
+      {
+        "id": "00000000-0000-0000-0000-000000000123",
+        "categoria": "Salud y bienestar",
+        "evento": "texto repetido",
+        "emocion": "",
+        "nivel": 1,
+        "nivel_original_10": 9,
+        "problema": "Problema 5",
+        "created_at": "2026-10-13T12:00:00Z"
+      },
+      {
+        "id": "00000000-0000-0000-0000-000000000124",
+        "categoria": "Dinero y seguridad",
+        "evento": "texto repetido",
+        "emocion": "",
+        "nivel": 2,
+        "nivel_original_10": 9,
+        "problema": "Problema 6",
+        "created_at": "2026-10-13T12:00:00Z"
+      },
+      {
+        "id": "00000000-0000-0000-0000-000000000125",
+        "categoria": "Hogar y vida diaria",
+        "evento": "texto repetido",
+        "emocion": "",
+        "nivel": 3,
+        "nivel_original_10": 9,
+        "problema": null,
+        "created_at": "2026-10-13T12:00:00Z"
+      },
+      {
+        "id": "00000000-0000-0000-0000-000000000126",
+        "categoria": "Mundo interior",
+        "evento": "texto repetido",
+        "emocion": "",
+        "nivel": 4,
+        "nivel_original_10": 9,
+        "problema": "Problema 1",
+        "created_at": "2026-10-13T12:00:00Z"
+      },
+      {
+        "id": "00000000-0000-0000-0000-000000000127",
+        "categoria": "Trabajo y estudio",
+        "evento": "texto repetido",
+        "emocion": "",
+        "nivel": 5,
+        "nivel_original_10": 9,
+        "problema": "Problema 2",
+        "created_at": "2026-10-13T12:00:00Z"
+      },
+      {
+        "id": "00000000-0000-0000-0000-000000000128",
+        "categoria": "Relaciones y vínculos",
+        "evento": "texto repetido",
+        "emocion": "",
+        "nivel": 1,
+        "nivel_original_10": 9,
+        "problema": "Problema 3",
+        "created_at": "2026-10-13T12:00:00Z"
+      },
+      {
+        "id": "00000000-0000-0000-0000-000000000129",
+        "categoria": "Salud y bienestar",
+        "evento": "texto repetido",
+        "emocion": "",
+        "nivel": 2,
+        "nivel_original_10": 9,
+        "problema": null,
+        "created_at": "2026-10-13T12:00:00Z"
+      },
+      {
+        "id": "00000000-0000-0000-0000-000000000130",
+        "categoria": "Dinero y seguridad",
+        "evento": "texto repetido",
+        "emocion": "",
+        "nivel": 3,
+        "nivel_original_10": 9,
+        "problema": "Problema 5",
+        "created_at": "2026-10-13T12:00:00Z"
+      },
+      {
+        "id": "00000000-0000-0000-0000-000000000131",
+        "categoria": "Hogar y vida diaria",
+        "evento": "texto repetido",
+        "emocion": "",
+        "nivel": 4,
+        "nivel_original_10": 9,
+        "problema": "Problema 6",
+        "created_at": "2026-10-13T12:00:00Z"
+      },
+      {
+        "id": "00000000-0000-0000-0000-000000000132",
+        "categoria": "Mundo interior",
+        "evento": "texto repetido",
+        "emocion": "",
+        "nivel": 5,
+        "nivel_original_10": 9,
+        "problema": "Problema 0",
+        "created_at": "2026-10-13T12:00:00Z"
+      },
+      {
+        "id": "00000000-0000-0000-0000-000000000133",
+        "categoria": "Trabajo y estudio",
+        "evento": "texto repetido",
+        "emocion": "",
+        "nivel": 1,
+        "nivel_original_10": 9,
+        "problema": null,
+        "created_at": "2026-10-13T12:00:00Z"
+      }
+    ]
+  ],
+  "expected": [
+    {
+      "areas": [
+        {
+          "load": 0,
+          "name": "Trabajo y estudio"
+        },
+        {
+          "load": 0,
+          "name": "Relaciones y vínculos"
+        },
+        {
+          "load": 0,
+          "name": "Salud y bienestar"
+        },
+        {
+          "load": 0,
+          "name": "Dinero y seguridad"
+        },
+        {
+          "load": 0,
+          "name": "Hogar y vida diaria"
+        },
+        {
+          "load": 0,
+          "name": "Mundo interior"
+        }
+      ],
+      "classifiedLoad": 0,
+      "coverage": 0,
+      "points": [],
+      "problems": [],
+      "total": 0,
+      "unclassifiedCount": 0
+    },
+    {
+      "areas": [
+        {
+          "load": 5,
+          "name": "Trabajo y estudio"
+        },
+        {
+          "load": 0,
+          "name": "Relaciones y vínculos"
+        },
+        {
+          "load": 0,
+          "name": "Salud y bienestar"
+        },
+        {
+          "load": 0,
+          "name": "Dinero y seguridad"
+        },
+        {
+          "load": 0,
+          "name": "Hogar y vida diaria"
+        },
+        {
+          "load": 0,
+          "name": "Mundo interior"
+        }
+      ],
+      "classifiedLoad": 5,
+      "coverage": 100,
+      "points": [
+        {
+          "cumulative": 80,
+          "id": "00000000-0000-0000-0000-000000000001",
+          "priority": true,
+          "share": 80
+        },
+        {
+          "cumulative": 100,
+          "id": "00000000-0000-0000-0000-000000000002",
+          "priority": false,
+          "share": 20
+        }
+      ],
+      "problems": [
+        {
+          "average": 4,
+          "count": 1,
+          "cumulative": 80,
+          "key": "a",
+          "load": 4,
+          "priority": true,
+          "share": 80
+        },
+        {
+          "average": 1,
+          "count": 1,
+          "cumulative": 100,
+          "key": "b",
+          "load": 1,
+          "priority": false,
+          "share": 20
+        }
+      ],
+      "total": 5,
+      "unclassifiedCount": 0
+    },
+    {
+      "areas": [
+        {
+          "load": 8,
+          "name": "Trabajo y estudio"
+        },
+        {
+          "load": 0,
+          "name": "Relaciones y vínculos"
+        },
+        {
+          "load": 0,
+          "name": "Salud y bienestar"
+        },
+        {
+          "load": 0,
+          "name": "Dinero y seguridad"
+        },
+        {
+          "load": 0,
+          "name": "Hogar y vida diaria"
+        },
+        {
+          "load": 0,
+          "name": "Mundo interior"
+        }
+      ],
+      "classifiedLoad": 8,
+      "coverage": 100,
+      "points": [
+        {
+          "cumulative": 62.5,
+          "id": "00000000-0000-0000-0000-000000000003",
+          "priority": true,
+          "share": 62.5
+        },
+        {
+          "cumulative": 87.5,
+          "id": "00000000-0000-0000-0000-000000000004",
+          "priority": true,
+          "share": 25
+        },
+        {
+          "cumulative": 100,
+          "id": "00000000-0000-0000-0000-000000000005",
+          "priority": false,
+          "share": 12.5
+        }
+      ],
+      "problems": [
+        {
+          "average": 5,
+          "count": 1,
+          "cumulative": 62.5,
+          "key": "a",
+          "load": 5,
+          "priority": true,
+          "share": 62.5
+        },
+        {
+          "average": 2,
+          "count": 1,
+          "cumulative": 87.5,
+          "key": "b",
+          "load": 2,
+          "priority": true,
+          "share": 25
+        },
+        {
+          "average": 1,
+          "count": 1,
+          "cumulative": 100,
+          "key": "c",
+          "load": 1,
+          "priority": false,
+          "share": 12.5
+        }
+      ],
+      "total": 8,
+      "unclassifiedCount": 0
+    },
+    {
+      "areas": [
+        {
+          "load": 9,
+          "name": "Trabajo y estudio"
+        },
+        {
+          "load": 3,
+          "name": "Alma"
+        },
+        {
+          "load": 0,
+          "name": "Relaciones y vínculos"
+        },
+        {
+          "load": 0,
+          "name": "Salud y bienestar"
+        },
+        {
+          "load": 0,
+          "name": "Dinero y seguridad"
+        },
+        {
+          "load": 0,
+          "name": "Hogar y vida diaria"
+        },
+        {
+          "load": 0,
+          "name": "Mundo interior"
+        }
+      ],
+      "classifiedLoad": 8,
+      "coverage": 66.66666666666666,
+      "points": [
+        {
+          "cumulative": 41.66666666666667,
+          "id": "00000000-0000-0000-0000-000000000006",
+          "priority": true,
+          "share": 41.66666666666667
+        },
+        {
+          "cumulative": 75,
+          "id": "00000000-0000-0000-0000-000000000008",
+          "priority": true,
+          "share": 33.33333333333333
+        },
+        {
+          "cumulative": 100,
+          "id": "00000000-0000-0000-0000-000000000007",
+          "priority": true,
+          "share": 25
+        }
+      ],
+      "problems": [
+        {
+          "average": 4,
+          "count": 2,
+          "cumulative": 100,
+          "key": "comunicacion",
+          "load": 8,
+          "priority": true,
+          "share": 100
+        }
+      ],
+      "total": 12,
+      "unclassifiedCount": 1
+    },
+    {
+      "areas": [
+        {
+          "load": 10,
+          "name": "Trabajo y estudio"
+        },
+        {
+          "load": 5,
+          "name": "Trabajo"
+        },
+        {
+          "load": 0,
+          "name": "Relaciones y vínculos"
+        },
+        {
+          "load": 0,
+          "name": "Salud y bienestar"
+        },
+        {
+          "load": 0,
+          "name": "Dinero y seguridad"
+        },
+        {
+          "load": 0,
+          "name": "Hogar y vida diaria"
+        },
+        {
+          "load": 0,
+          "name": "Mundo interior"
+        }
+      ],
+      "classifiedLoad": 15,
+      "coverage": 100,
+      "points": [
+        {
+          "cumulative": 33.33333333333333,
+          "id": "00000000-0000-0000-0000-000000000009",
+          "priority": true,
+          "share": 33.33333333333333
+        },
+        {
+          "cumulative": 66.66666666666666,
+          "id": "00000000-0000-0000-0000-000000000012",
+          "priority": true,
+          "share": 33.33333333333333
+        },
+        {
+          "cumulative": 86.66666666666667,
+          "id": "00000000-0000-0000-0000-000000000011",
+          "priority": true,
+          "share": 20
+        },
+        {
+          "cumulative": 100,
+          "id": "00000000-0000-0000-0000-000000000010",
+          "priority": false,
+          "share": 13.333333333333334
+        }
+      ],
+      "problems": [
+        {
+          "average": 2.5,
+          "count": 2,
+          "cumulative": 33.33333333333333,
+          "key": "a",
+          "load": 5,
+          "priority": true,
+          "share": 33.33333333333333
+        },
+        {
+          "average": 5,
+          "count": 1,
+          "cumulative": 66.66666666666666,
+          "key": "b",
+          "load": 5,
+          "priority": true,
+          "share": 33.33333333333333
+        },
+        {
+          "average": 5,
+          "count": 1,
+          "cumulative": 100,
+          "key": "c",
+          "load": 5,
+          "priority": true,
+          "share": 33.33333333333333
+        }
+      ],
+      "total": 15,
+      "unclassifiedCount": 0
+    },
+    {
+      "areas": [
+        {
+          "load": 61,
+          "name": "Trabajo y estudio"
+        },
+        {
+          "load": 60,
+          "name": "Relaciones y vínculos"
+        },
+        {
+          "load": 60,
+          "name": "Salud y bienestar"
+        },
+        {
+          "load": 60,
+          "name": "Dinero y seguridad"
+        },
+        {
+          "load": 60,
+          "name": "Hogar y vida diaria"
+        },
+        {
+          "load": 60,
+          "name": "Mundo interior"
+        }
+      ],
+      "classifiedLoad": 270,
+      "coverage": 74.3801652892562,
+      "points": [
+        {
+          "cumulative": 1.3850415512465373,
+          "id": "00000000-0000-0000-0000-000000000017",
+          "priority": true,
+          "share": 1.3850415512465373
+        },
+        {
+          "cumulative": 2.7700831024930745,
+          "id": "00000000-0000-0000-0000-000000000022",
+          "priority": true,
+          "share": 1.3850415512465373
+        },
+        {
+          "cumulative": 4.1551246537396125,
+          "id": "00000000-0000-0000-0000-000000000027",
+          "priority": true,
+          "share": 1.3850415512465373
+        },
+        {
+          "cumulative": 5.540166204986149,
+          "id": "00000000-0000-0000-0000-000000000032",
+          "priority": true,
+          "share": 1.3850415512465373
+        },
+        {
+          "cumulative": 6.9252077562326875,
+          "id": "00000000-0000-0000-0000-000000000037",
+          "priority": true,
+          "share": 1.3850415512465373
+        },
+        {
+          "cumulative": 8.310249307479225,
+          "id": "00000000-0000-0000-0000-000000000042",
+          "priority": true,
+          "share": 1.3850415512465373
+        },
+        {
+          "cumulative": 9.695290858725762,
+          "id": "00000000-0000-0000-0000-000000000047",
+          "priority": true,
+          "share": 1.3850415512465373
+        },
+        {
+          "cumulative": 11.080332409972298,
+          "id": "00000000-0000-0000-0000-000000000052",
+          "priority": true,
+          "share": 1.3850415512465373
+        },
+        {
+          "cumulative": 12.465373961218837,
+          "id": "00000000-0000-0000-0000-000000000057",
+          "priority": true,
+          "share": 1.3850415512465373
+        },
+        {
+          "cumulative": 13.850415512465375,
+          "id": "00000000-0000-0000-0000-000000000062",
+          "priority": true,
+          "share": 1.3850415512465373
+        },
+        {
+          "cumulative": 15.23545706371191,
+          "id": "00000000-0000-0000-0000-000000000067",
+          "priority": true,
+          "share": 1.3850415512465373
+        },
+        {
+          "cumulative": 16.62049861495845,
+          "id": "00000000-0000-0000-0000-000000000072",
+          "priority": true,
+          "share": 1.3850415512465373
+        },
+        {
+          "cumulative": 18.005540166204987,
+          "id": "00000000-0000-0000-0000-000000000077",
+          "priority": true,
+          "share": 1.3850415512465373
+        },
+        {
+          "cumulative": 19.390581717451525,
+          "id": "00000000-0000-0000-0000-000000000082",
+          "priority": true,
+          "share": 1.3850415512465373
+        },
+        {
+          "cumulative": 20.77562326869806,
+          "id": "00000000-0000-0000-0000-000000000087",
+          "priority": true,
+          "share": 1.3850415512465373
+        },
+        {
+          "cumulative": 22.160664819944596,
+          "id": "00000000-0000-0000-0000-000000000092",
+          "priority": true,
+          "share": 1.3850415512465373
+        },
+        {
+          "cumulative": 23.545706371191137,
+          "id": "00000000-0000-0000-0000-000000000097",
+          "priority": true,
+          "share": 1.3850415512465373
+        },
+        {
+          "cumulative": 24.930747922437675,
+          "id": "00000000-0000-0000-0000-000000000102",
+          "priority": true,
+          "share": 1.3850415512465373
+        },
+        {
+          "cumulative": 26.31578947368421,
+          "id": "00000000-0000-0000-0000-000000000107",
+          "priority": true,
+          "share": 1.3850415512465373
+        },
+        {
+          "cumulative": 27.70083102493075,
+          "id": "00000000-0000-0000-0000-000000000112",
+          "priority": true,
+          "share": 1.3850415512465373
+        },
+        {
+          "cumulative": 29.085872576177284,
+          "id": "00000000-0000-0000-0000-000000000117",
+          "priority": true,
+          "share": 1.3850415512465373
+        },
+        {
+          "cumulative": 30.47091412742382,
+          "id": "00000000-0000-0000-0000-000000000122",
+          "priority": true,
+          "share": 1.3850415512465373
+        },
+        {
+          "cumulative": 31.855955678670362,
+          "id": "00000000-0000-0000-0000-000000000127",
+          "priority": true,
+          "share": 1.3850415512465373
+        },
+        {
+          "cumulative": 33.2409972299169,
+          "id": "00000000-0000-0000-0000-000000000132",
+          "priority": true,
+          "share": 1.3850415512465373
+        },
+        {
+          "cumulative": 34.34903047091413,
+          "id": "00000000-0000-0000-0000-000000000016",
+          "priority": true,
+          "share": 1.10803324099723
+        },
+        {
+          "cumulative": 35.45706371191136,
+          "id": "00000000-0000-0000-0000-000000000021",
+          "priority": true,
+          "share": 1.10803324099723
+        },
+        {
+          "cumulative": 36.56509695290859,
+          "id": "00000000-0000-0000-0000-000000000026",
+          "priority": true,
+          "share": 1.10803324099723
+        },
+        {
+          "cumulative": 37.67313019390582,
+          "id": "00000000-0000-0000-0000-000000000031",
+          "priority": true,
+          "share": 1.10803324099723
+        },
+        {
+          "cumulative": 38.78116343490305,
+          "id": "00000000-0000-0000-0000-000000000036",
+          "priority": true,
+          "share": 1.10803324099723
+        },
+        {
+          "cumulative": 39.88919667590028,
+          "id": "00000000-0000-0000-0000-000000000041",
+          "priority": true,
+          "share": 1.10803324099723
+        },
+        {
+          "cumulative": 40.99722991689751,
+          "id": "00000000-0000-0000-0000-000000000046",
+          "priority": true,
+          "share": 1.10803324099723
+        },
+        {
+          "cumulative": 42.10526315789473,
+          "id": "00000000-0000-0000-0000-000000000051",
+          "priority": true,
+          "share": 1.10803324099723
+        },
+        {
+          "cumulative": 43.21329639889196,
+          "id": "00000000-0000-0000-0000-000000000056",
+          "priority": true,
+          "share": 1.10803324099723
+        },
+        {
+          "cumulative": 44.32132963988919,
+          "id": "00000000-0000-0000-0000-000000000061",
+          "priority": true,
+          "share": 1.10803324099723
+        },
+        {
+          "cumulative": 45.42936288088642,
+          "id": "00000000-0000-0000-0000-000000000066",
+          "priority": true,
+          "share": 1.10803324099723
+        },
+        {
+          "cumulative": 46.53739612188366,
+          "id": "00000000-0000-0000-0000-000000000071",
+          "priority": true,
+          "share": 1.10803324099723
+        },
+        {
+          "cumulative": 47.64542936288089,
+          "id": "00000000-0000-0000-0000-000000000076",
+          "priority": true,
+          "share": 1.10803324099723
+        },
+        {
+          "cumulative": 48.75346260387812,
+          "id": "00000000-0000-0000-0000-000000000081",
+          "priority": true,
+          "share": 1.10803324099723
+        },
+        {
+          "cumulative": 49.86149584487535,
+          "id": "00000000-0000-0000-0000-000000000086",
+          "priority": true,
+          "share": 1.10803324099723
+        },
+        {
+          "cumulative": 50.96952908587258,
+          "id": "00000000-0000-0000-0000-000000000091",
+          "priority": true,
+          "share": 1.10803324099723
+        },
+        {
+          "cumulative": 52.07756232686981,
+          "id": "00000000-0000-0000-0000-000000000096",
+          "priority": true,
+          "share": 1.10803324099723
+        },
+        {
+          "cumulative": 53.18559556786704,
+          "id": "00000000-0000-0000-0000-000000000101",
+          "priority": true,
+          "share": 1.10803324099723
+        },
+        {
+          "cumulative": 54.29362880886427,
+          "id": "00000000-0000-0000-0000-000000000106",
+          "priority": true,
+          "share": 1.10803324099723
+        },
+        {
+          "cumulative": 55.4016620498615,
+          "id": "00000000-0000-0000-0000-000000000111",
+          "priority": true,
+          "share": 1.10803324099723
+        },
+        {
+          "cumulative": 56.50969529085873,
+          "id": "00000000-0000-0000-0000-000000000116",
+          "priority": true,
+          "share": 1.10803324099723
+        },
+        {
+          "cumulative": 57.61772853185596,
+          "id": "00000000-0000-0000-0000-000000000121",
+          "priority": true,
+          "share": 1.10803324099723
+        },
+        {
+          "cumulative": 58.72576177285319,
+          "id": "00000000-0000-0000-0000-000000000126",
+          "priority": true,
+          "share": 1.10803324099723
+        },
+        {
+          "cumulative": 59.83379501385041,
+          "id": "00000000-0000-0000-0000-000000000131",
+          "priority": true,
+          "share": 1.10803324099723
+        },
+        {
+          "cumulative": 60.664819944598335,
+          "id": "00000000-0000-0000-0000-000000000015",
+          "priority": true,
+          "share": 0.8310249307479225
+        },
+        {
+          "cumulative": 61.495844875346265,
+          "id": "00000000-0000-0000-0000-000000000020",
+          "priority": true,
+          "share": 0.8310249307479225
+        },
+        {
+          "cumulative": 62.32686980609419,
+          "id": "00000000-0000-0000-0000-000000000025",
+          "priority": true,
+          "share": 0.8310249307479225
+        },
+        {
+          "cumulative": 63.1578947368421,
+          "id": "00000000-0000-0000-0000-000000000030",
+          "priority": true,
+          "share": 0.8310249307479225
+        },
+        {
+          "cumulative": 63.988919667590025,
+          "id": "00000000-0000-0000-0000-000000000035",
+          "priority": true,
+          "share": 0.8310249307479225
+        },
+        {
+          "cumulative": 64.81994459833795,
+          "id": "00000000-0000-0000-0000-000000000040",
+          "priority": true,
+          "share": 0.8310249307479225
+        },
+        {
+          "cumulative": 65.65096952908587,
+          "id": "00000000-0000-0000-0000-000000000045",
+          "priority": true,
+          "share": 0.8310249307479225
+        },
+        {
+          "cumulative": 66.4819944598338,
+          "id": "00000000-0000-0000-0000-000000000050",
+          "priority": true,
+          "share": 0.8310249307479225
+        },
+        {
+          "cumulative": 67.31301939058172,
+          "id": "00000000-0000-0000-0000-000000000055",
+          "priority": true,
+          "share": 0.8310249307479225
+        },
+        {
+          "cumulative": 68.14404432132964,
+          "id": "00000000-0000-0000-0000-000000000060",
+          "priority": true,
+          "share": 0.8310249307479225
+        },
+        {
+          "cumulative": 68.97506925207756,
+          "id": "00000000-0000-0000-0000-000000000065",
+          "priority": true,
+          "share": 0.8310249307479225
+        },
+        {
+          "cumulative": 69.80609418282549,
+          "id": "00000000-0000-0000-0000-000000000070",
+          "priority": true,
+          "share": 0.8310249307479225
+        },
+        {
+          "cumulative": 70.6371191135734,
+          "id": "00000000-0000-0000-0000-000000000075",
+          "priority": true,
+          "share": 0.8310249307479225
+        },
+        {
+          "cumulative": 71.46814404432132,
+          "id": "00000000-0000-0000-0000-000000000080",
+          "priority": true,
+          "share": 0.8310249307479225
+        },
+        {
+          "cumulative": 72.29916897506925,
+          "id": "00000000-0000-0000-0000-000000000085",
+          "priority": true,
+          "share": 0.8310249307479225
+        },
+        {
+          "cumulative": 73.13019390581718,
+          "id": "00000000-0000-0000-0000-000000000090",
+          "priority": true,
+          "share": 0.8310249307479225
+        },
+        {
+          "cumulative": 73.9612188365651,
+          "id": "00000000-0000-0000-0000-000000000095",
+          "priority": true,
+          "share": 0.8310249307479225
+        },
+        {
+          "cumulative": 74.79224376731301,
+          "id": "00000000-0000-0000-0000-000000000100",
+          "priority": true,
+          "share": 0.8310249307479225
+        },
+        {
+          "cumulative": 75.62326869806094,
+          "id": "00000000-0000-0000-0000-000000000105",
+          "priority": true,
+          "share": 0.8310249307479225
+        },
+        {
+          "cumulative": 76.45429362880887,
+          "id": "00000000-0000-0000-0000-000000000110",
+          "priority": true,
+          "share": 0.8310249307479225
+        },
+        {
+          "cumulative": 77.28531855955679,
+          "id": "00000000-0000-0000-0000-000000000115",
+          "priority": true,
+          "share": 0.8310249307479225
+        },
+        {
+          "cumulative": 78.1163434903047,
+          "id": "00000000-0000-0000-0000-000000000120",
+          "priority": true,
+          "share": 0.8310249307479225
+        },
+        {
+          "cumulative": 78.94736842105263,
+          "id": "00000000-0000-0000-0000-000000000125",
+          "priority": true,
+          "share": 0.8310249307479225
+        },
+        {
+          "cumulative": 79.77839335180056,
+          "id": "00000000-0000-0000-0000-000000000130",
+          "priority": true,
+          "share": 0.8310249307479225
+        },
+        {
+          "cumulative": 80.33240997229917,
+          "id": "00000000-0000-0000-0000-000000000014",
+          "priority": true,
+          "share": 0.554016620498615
+        },
+        {
+          "cumulative": 80.88642659279779,
+          "id": "00000000-0000-0000-0000-000000000019",
+          "priority": false,
+          "share": 0.554016620498615
+        },
+        {
+          "cumulative": 81.4404432132964,
+          "id": "00000000-0000-0000-0000-000000000024",
+          "priority": false,
+          "share": 0.554016620498615
+        },
+        {
+          "cumulative": 81.99445983379502,
+          "id": "00000000-0000-0000-0000-000000000029",
+          "priority": false,
+          "share": 0.554016620498615
+        },
+        {
+          "cumulative": 82.54847645429363,
+          "id": "00000000-0000-0000-0000-000000000034",
+          "priority": false,
+          "share": 0.554016620498615
+        },
+        {
+          "cumulative": 83.10249307479224,
+          "id": "00000000-0000-0000-0000-000000000039",
+          "priority": false,
+          "share": 0.554016620498615
+        },
+        {
+          "cumulative": 83.65650969529086,
+          "id": "00000000-0000-0000-0000-000000000044",
+          "priority": false,
+          "share": 0.554016620498615
+        },
+        {
+          "cumulative": 84.21052631578947,
+          "id": "00000000-0000-0000-0000-000000000049",
+          "priority": false,
+          "share": 0.554016620498615
+        },
+        {
+          "cumulative": 84.7645429362881,
+          "id": "00000000-0000-0000-0000-000000000054",
+          "priority": false,
+          "share": 0.554016620498615
+        },
+        {
+          "cumulative": 85.3185595567867,
+          "id": "00000000-0000-0000-0000-000000000059",
+          "priority": false,
+          "share": 0.554016620498615
+        },
+        {
+          "cumulative": 85.87257617728532,
+          "id": "00000000-0000-0000-0000-000000000064",
+          "priority": false,
+          "share": 0.554016620498615
+        },
+        {
+          "cumulative": 86.42659279778393,
+          "id": "00000000-0000-0000-0000-000000000069",
+          "priority": false,
+          "share": 0.554016620498615
+        },
+        {
+          "cumulative": 86.98060941828255,
+          "id": "00000000-0000-0000-0000-000000000074",
+          "priority": false,
+          "share": 0.554016620498615
+        },
+        {
+          "cumulative": 87.53462603878116,
+          "id": "00000000-0000-0000-0000-000000000079",
+          "priority": false,
+          "share": 0.554016620498615
+        },
+        {
+          "cumulative": 88.08864265927978,
+          "id": "00000000-0000-0000-0000-000000000084",
+          "priority": false,
+          "share": 0.554016620498615
+        },
+        {
+          "cumulative": 88.64265927977839,
+          "id": "00000000-0000-0000-0000-000000000089",
+          "priority": false,
+          "share": 0.554016620498615
+        },
+        {
+          "cumulative": 89.19667590027701,
+          "id": "00000000-0000-0000-0000-000000000094",
+          "priority": false,
+          "share": 0.554016620498615
+        },
+        {
+          "cumulative": 89.75069252077562,
+          "id": "00000000-0000-0000-0000-000000000099",
+          "priority": false,
+          "share": 0.554016620498615
+        },
+        {
+          "cumulative": 90.30470914127424,
+          "id": "00000000-0000-0000-0000-000000000104",
+          "priority": false,
+          "share": 0.554016620498615
+        },
+        {
+          "cumulative": 90.85872576177285,
+          "id": "00000000-0000-0000-0000-000000000109",
+          "priority": false,
+          "share": 0.554016620498615
+        },
+        {
+          "cumulative": 91.41274238227147,
+          "id": "00000000-0000-0000-0000-000000000114",
+          "priority": false,
+          "share": 0.554016620498615
+        },
+        {
+          "cumulative": 91.96675900277008,
+          "id": "00000000-0000-0000-0000-000000000119",
+          "priority": false,
+          "share": 0.554016620498615
+        },
+        {
+          "cumulative": 92.5207756232687,
+          "id": "00000000-0000-0000-0000-000000000124",
+          "priority": false,
+          "share": 0.554016620498615
+        },
+        {
+          "cumulative": 93.07479224376732,
+          "id": "00000000-0000-0000-0000-000000000129",
+          "priority": false,
+          "share": 0.554016620498615
+        },
+        {
+          "cumulative": 93.35180055401662,
+          "id": "00000000-0000-0000-0000-000000000013",
+          "priority": false,
+          "share": 0.2770083102493075
+        },
+        {
+          "cumulative": 93.62880886426593,
+          "id": "00000000-0000-0000-0000-000000000018",
+          "priority": false,
+          "share": 0.2770083102493075
+        },
+        {
+          "cumulative": 93.90581717451524,
+          "id": "00000000-0000-0000-0000-000000000023",
+          "priority": false,
+          "share": 0.2770083102493075
+        },
+        {
+          "cumulative": 94.18282548476455,
+          "id": "00000000-0000-0000-0000-000000000028",
+          "priority": false,
+          "share": 0.2770083102493075
+        },
+        {
+          "cumulative": 94.45983379501385,
+          "id": "00000000-0000-0000-0000-000000000033",
+          "priority": false,
+          "share": 0.2770083102493075
+        },
+        {
+          "cumulative": 94.73684210526315,
+          "id": "00000000-0000-0000-0000-000000000038",
+          "priority": false,
+          "share": 0.2770083102493075
+        },
+        {
+          "cumulative": 95.01385041551247,
+          "id": "00000000-0000-0000-0000-000000000043",
+          "priority": false,
+          "share": 0.2770083102493075
+        },
+        {
+          "cumulative": 95.29085872576178,
+          "id": "00000000-0000-0000-0000-000000000048",
+          "priority": false,
+          "share": 0.2770083102493075
+        },
+        {
+          "cumulative": 95.56786703601108,
+          "id": "00000000-0000-0000-0000-000000000053",
+          "priority": false,
+          "share": 0.2770083102493075
+        },
+        {
+          "cumulative": 95.84487534626038,
+          "id": "00000000-0000-0000-0000-000000000058",
+          "priority": false,
+          "share": 0.2770083102493075
+        },
+        {
+          "cumulative": 96.1218836565097,
+          "id": "00000000-0000-0000-0000-000000000063",
+          "priority": false,
+          "share": 0.2770083102493075
+        },
+        {
+          "cumulative": 96.39889196675901,
+          "id": "00000000-0000-0000-0000-000000000068",
+          "priority": false,
+          "share": 0.2770083102493075
+        },
+        {
+          "cumulative": 96.67590027700831,
+          "id": "00000000-0000-0000-0000-000000000073",
+          "priority": false,
+          "share": 0.2770083102493075
+        },
+        {
+          "cumulative": 96.95290858725761,
+          "id": "00000000-0000-0000-0000-000000000078",
+          "priority": false,
+          "share": 0.2770083102493075
+        },
+        {
+          "cumulative": 97.22991689750693,
+          "id": "00000000-0000-0000-0000-000000000083",
+          "priority": false,
+          "share": 0.2770083102493075
+        },
+        {
+          "cumulative": 97.50692520775624,
+          "id": "00000000-0000-0000-0000-000000000088",
+          "priority": false,
+          "share": 0.2770083102493075
+        },
+        {
+          "cumulative": 97.78393351800554,
+          "id": "00000000-0000-0000-0000-000000000093",
+          "priority": false,
+          "share": 0.2770083102493075
+        },
+        {
+          "cumulative": 98.06094182825484,
+          "id": "00000000-0000-0000-0000-000000000098",
+          "priority": false,
+          "share": 0.2770083102493075
+        },
+        {
+          "cumulative": 98.33795013850416,
+          "id": "00000000-0000-0000-0000-000000000103",
+          "priority": false,
+          "share": 0.2770083102493075
+        },
+        {
+          "cumulative": 98.61495844875347,
+          "id": "00000000-0000-0000-0000-000000000108",
+          "priority": false,
+          "share": 0.2770083102493075
+        },
+        {
+          "cumulative": 98.89196675900277,
+          "id": "00000000-0000-0000-0000-000000000113",
+          "priority": false,
+          "share": 0.2770083102493075
+        },
+        {
+          "cumulative": 99.16897506925207,
+          "id": "00000000-0000-0000-0000-000000000118",
+          "priority": false,
+          "share": 0.2770083102493075
+        },
+        {
+          "cumulative": 99.44598337950139,
+          "id": "00000000-0000-0000-0000-000000000123",
+          "priority": false,
+          "share": 0.2770083102493075
+        },
+        {
+          "cumulative": 99.7229916897507,
+          "id": "00000000-0000-0000-0000-000000000128",
+          "priority": false,
+          "share": 0.2770083102493075
+        },
+        {
+          "cumulative": 100,
+          "id": "00000000-0000-0000-0000-000000000133",
+          "priority": false,
+          "share": 0.2770083102493075
+        }
+      ],
+      "problems": [
+        {
+          "average": 3.230769230769231,
+          "count": 13,
+          "cumulative": 15.555555555555555,
+          "key": "problema 2",
+          "load": 42,
+          "priority": true,
+          "share": 15.555555555555555
+        },
+        {
+          "average": 3,
+          "count": 13,
+          "cumulative": 30,
+          "key": "problema 0",
+          "load": 39,
+          "priority": true,
+          "share": 14.444444444444443
+        },
+        {
+          "average": 3,
+          "count": 13,
+          "cumulative": 44.44444444444444,
+          "key": "problema 5",
+          "load": 39,
+          "priority": true,
+          "share": 14.444444444444443
+        },
+        {
+          "average": 3,
+          "count": 13,
+          "cumulative": 58.88888888888889,
+          "key": "problema 6",
+          "load": 39,
+          "priority": true,
+          "share": 14.444444444444443
+        },
+        {
+          "average": 2.8461538461538463,
+          "count": 13,
+          "cumulative": 72.5925925925926,
+          "key": "problema 1",
+          "load": 37,
+          "priority": true,
+          "share": 13.703703703703704
+        },
+        {
+          "average": 2.8461538461538463,
+          "count": 13,
+          "cumulative": 86.29629629629629,
+          "key": "problema 3",
+          "load": 37,
+          "priority": true,
+          "share": 13.703703703703704
+        },
+        {
+          "average": 3.0833333333333335,
+          "count": 12,
+          "cumulative": 100,
+          "key": "problema 4",
+          "load": 37,
+          "priority": false,
+          "share": 13.703703703703704
+        }
+      ],
+      "total": 361,
+      "unclassifiedCount": 31
+    }
+  ]
+}
