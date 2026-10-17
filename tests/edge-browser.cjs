@@ -41,9 +41,9 @@ const {setup,login,ready,openAnalysis}=require('./browser.cjs');
     await page.getByRole('button',{name:'Guardar cambios'}).click();await page.locator('#editError').getByText(/ya no está disponible/).waitFor();
     assert.equal(await page.locator('#editEvent').inputValue(),removedText);await page.getByRole('button',{name:'Cancelar',exact:true}).click();
     // Declining replacement keeps the draft, no implicit write.
-    await page.getByRole('button',{name:'Nueva acción',exact:true}).click();await page.locator('#actionText').fill('Mi borrador sin guardar');
+    await page.getByRole('button',{name:'Acciones',exact:true}).click();await page.locator('#actionText').fill('Mi borrador sin guardar');
     await openAnalysis(page);await ready(page);await page.getByRole('button',{name:'Ver detalles',exact:true}).first().click();
-    page.once('dialog',d=>d.dismiss());await page.getByRole('button',{name:'Preparar una acción'}).click();assert.equal(await page.locator('#actionText').inputValue(),'Mi borrador sin guardar');assert.equal(await page.evaluate(()=>window.mock.palancas.length),0);
+    await page.locator('#detailDialog').getByRole('button',{name:'Preparar acción para aliviar'}).click();await page.locator('#deleteCancel').click();assert.equal(await page.locator('#actionText').inputValue(),'Mi borrador sin guardar');assert.equal(await page.evaluate(()=>window.mock.palancas.length),0);
     await page.locator('#detailClose').click();
     // Keyboard: opening/closing details and level choice preserve explicit selection.
     await page.getByRole('button',{name:'Ver todos los registros',exact:true}).focus();await page.keyboard.press('Enter');assert.ok(await page.locator('#detailDialog').isVisible());await page.keyboard.press('Escape');assert.ok(!await page.locator('#detailDialog').isVisible());

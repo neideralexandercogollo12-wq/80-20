@@ -1,7 +1,7 @@
 (function(root){
   'use strict';
   const A = root.ParetoAnalysis;
-  const levelColor=level=>level<=2?'#6ee7b7':level===3?'#34d399':'#10b981';
+  const levelColor=level=>document.body.classList.contains('native-layout')?A.sage(level):(level<=2?'#6ee7b7':level===3?'#34d399':'#10b981');
   function el(tag,text='',cls='') {const n=document.createElement(tag);n.textContent=text;n.className=cls;return n;}
   function button(text,fn,cls='') {const n=el('button',text,cls);n.type='button';n.addEventListener('click',fn);return n;}
   function levels(rows,onSelect) {

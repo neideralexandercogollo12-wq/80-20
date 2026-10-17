@@ -9,8 +9,10 @@
     return !!c.anonKey&&!c.anonKey.startsWith('TU_');
   }
   let db;try{if(publicConfig(cfg)&&window.supabase)db=window.supabase.createClient(cfg.url,cfg.anonKey,{auth:{persistSession:true,autoRefreshToken:true,detectSessionInUrl:false}});}catch{}
-  const service=new window.ParetoService.Service(db),store=new window.ParetoState.Store(service,changed);
+  const service=new window.ParetoService.Service(db),store=new window.ParetoState.Store(service,changed,new window.ParetoFocus.LocalPreferences({getItem:k=>window.localStorage.getItem(k),setItem:(k,v)=>window.localStorage.setItem(k,v)}));
   const desktop=window.matchMedia('(min-width: 768px)');
+  const standalone=window.matchMedia('(display-mode: standalone)');
+  const nativeLayout=()=>!desktop.matches||standalone.matches||navigator.standalone===true;
   let panel='scanner',historyOpen=false,historyPage=0,views=[],editing=null,authSequence=0,loginAttempt=0,busy=false,exportSequence=0,exporting=false;
   service.onSessionError=()=>{authSequence++;loginAttempt++;store.account(null);$('authMessage').textContent='Tu sesión terminó. Vuelve a entrar.';};
   let captureLevel=null,editLevel=null;
@@ -37,14 +39,29 @@
   function finishDeleteConfirmation(accepted=false){
     const resolve=deleteDecision;deleteDecision=null;$('deleteDialog').close();if(resolve)resolve(accepted);
   }
-  function confirmDelete(title){
-    finishDeleteConfirmation();$('deleteTitle').textContent=title;
+  function confirmDelete(title,label='Eliminar',description='Esta eliminación es permanente.'){
+    finishDeleteConfirmation();$('deleteTitle').textContent=title;$('deleteConfirm').textContent=label;$('deleteDescription').textContent=description;
     return new Promise(resolve=>{deleteDecision=resolve;$('deleteDialog').showModal();$('deleteCancel').focus();});
   }
   $('deleteCancel').onclick=()=>finishDeleteConfirmation();
   $('deleteConfirm').onclick=()=>finishDeleteConfirmation(true);
   $('deleteDialog').addEventListener('cancel',e=>{e.preventDefault();finishDeleteConfirmation();});
   function dismissKeyboard(){if(document.activeElement instanceof HTMLElement)document.activeElement.blur();}
+  function keyboardTools(){
+    const tools=$('keyboardTools'),field=document.activeElement;
+    const visible=nativeLayout()&&field?.matches('textarea,input:not([type=checkbox]):not([type=radio]):not([type=submit]):not([type=button])');
+    tools.hidden=!visible;if(!visible)return;
+    (field.closest('dialog')||document.body).append(tools);
+    const viewport=window.visualViewport;
+    const nav=document.querySelector('.tabs'),footer=getComputedStyle(nav).position==='fixed'?nav.getBoundingClientRect().height:0;
+    tools.style.bottom=((viewport?Math.max(0,window.innerHeight-viewport.height-viewport.offsetTop):0)+footer)+'px';
+  }
+  document.addEventListener('focusin',keyboardTools);
+  document.addEventListener('focusout',()=>setTimeout(keyboardTools,0));
+  window.visualViewport?.addEventListener('resize',keyboardTools);
+  window.visualViewport?.addEventListener('scroll',keyboardTools);
+  $('keyboardDone').onpointerdown=e=>e.preventDefault();
+  $('keyboardDone').onclick=()=>{dismissKeyboard();$('keyboardTools').hidden=true;};
   function opts(select,items,value) {select.replaceChildren();for(const [v,t] of items){const o=el('option',t);o.value=v;select.append(o);}select.value=value??items[0]?.[0]??'';}
   function areaOptions(original){return [...(original&&!A.areas.some(([n])=>n===original)?[[original,A.areaLabel(original)]]:[]),...A.areas.map(([n])=>[n,n])];}
   opts($('category'),areaOptions());opts($('importance'),[['','Elige una valoración'],...A.importanceLabels.map((_,i)=>[String(i+1),A.importanceLabel(i+1)])],'');
@@ -58,6 +75,7 @@
   function renderCaptureLevel(){makeLevels('captureLevels','captureLevel',captureLevel,$('category').value,v=>{captureLevel=v;renderCaptureLevel();document.querySelector(`input[name=captureLevel][value="${v}"]`).focus();});}
   function areaDescription(){$('areaDescription').textContent=A.areas.find(([n])=>n===$('category').value)?.[1]||'';renderCaptureLevel();}
   function renderEditLevel(){makeLevels('editLevels','editLevel',editLevel,$('editArea').value,v=>{editLevel=v;renderEditLevel();document.querySelector(`input[name=editLevel][value="${v}"]`).focus();});}
+  $('reuseProblem').onchange=()=>{if($('reuseProblem').value)$('problem').value=$('reuseProblem').value;$('reuseProblem').value='';};
   $('category').addEventListener('change',areaDescription);$('editArea').addEventListener('change',renderEditLevel);areaDescription();
   const rememberKey='pareto.remembered-email';
   try{const email=localStorage.getItem(rememberKey);if(email){$('email').value=email;$('remember').checked=true;}}catch{}
@@ -65,26 +83,26 @@
   function rememberEmail(){try{if($('remember').checked)localStorage.setItem(rememberKey,$('email').value.trim());else localStorage.removeItem(rememberKey);}catch{}}
   function changed(channel){
     if(channel==='account'){
-      finishDeleteConfirmation();enteringActions.clear();closeActionChoice();syncActionForm();$('actionFilter').value='';closeDetails();closeEditor();cancelExport();historyOpen=false;historyPage=0;busy=false;
+      closeArchived();finishDeleteConfirmation();enteringActions.clear();closeActionChoice();syncActionForm();$('actionFilter').value='';closeDetails();closeEditor();cancelExport();historyOpen=false;historyPage=0;busy=false;
       $('captureForm').reset();captureLevel=null;areaDescription();$('captureError').textContent='';
-      $('actionForm').reset();$('actionError').textContent='';$('password').value='';
+      $('actionForm').reset();actionFormBusy(false);$('actionError').textContent='';$('password').value='';
       $('historyQuery').value='';$('historyLevel').value='';opts($('historyArea'),[['','Todas']],'');
       $('historySection').hidden=true;$('historyToggle').textContent='Ver historial';$('historyToggle').setAttribute('aria-expanded','false');
-      $('detailBody').replaceChildren();$('historyBody').replaceChildren();$('analysisBody').replaceChildren();$('actionsBody').replaceChildren();$('problemNames').replaceChildren();
+      $('detailBody').replaceChildren();$('historyBody').replaceChildren();$('analysisBody').replaceChildren();$('actionsBody').replaceChildren();$('problemNames').replaceChildren();$('reuseProblem').hidden=true;
       $('toast').hidden=true;clearTimeout(toast.timer);
       $('captureSave').disabled=false;$('actionSave').disabled=false;
       $('app').hidden=!store.user;$('auth').hidden=!!store.user;
       if(!store.user){$('authMessage').textContent='Ingresa con tu cuenta privada.';return;}
-      $('period').value=store.period;selectPanel(desktop.matches?'actions':'scanner');
+      $('period').value=store.period;selectPanel(nativeLayout()?'scanner':'actions');
     }
-    if(channel==='period'){closeDetails();closeEditor();cancelExport();}
-    if(channel==='analysis'||channel==='period'){renderAnalysis();renderDetail();}
+    if(channel==='period'){finishDeleteConfirmation();closeArchived();closeActionChoice();closeDetails();closeEditor();cancelExport();}
+    if(channel==='analysis'||channel==='period'||channel==='focus'){renderAnalysis();renderDetail();renderArchived();}
     if(channel==='history'){renderHistory();}
-    if(channel==='names'){renderProblemOptions();$('problemNames').replaceChildren(...store.names.map(n=>{const o=el('option');o.value=n;return o;}));}
+    if(channel==='names'){opts($('reuseProblem'),[['','Reutilizar un nombre'],...store.names.map(n=>[n,n])],'');$('reuseProblem').hidden=!store.names.length;renderProblemOptions();$('problemNames').replaceChildren(...store.names.map(n=>{const o=el('option');o.value=n;return o;}));}
     if(channel==='actions')renderActions();
   }
   function selectPanel(id){
-    dismissKeyboard();closeDetails();panel=id;
+    dismissKeyboard();closeArchived();closeDetails();if(nativeLayout()&&id==='new-action')id='actions';panel=id;
     document.querySelectorAll('.panel').forEach(n=>n.hidden=n.id!==id);
     document.querySelectorAll('[data-panel]').forEach(n=>n.setAttribute('aria-current',n.dataset.panel===id?'page':'false'));
     if(id==='analysis'){store.load('analysis');if(historyOpen)store.load('history');}
@@ -94,16 +112,22 @@
   document.querySelectorAll('[data-panel]').forEach(b=>b.addEventListener('click',()=>selectPanel(b.dataset.panel)));
   function layout(){
     const nav=document.querySelector('.tabs');
-    const order=desktop.matches?['actions','new-action','analysis','scanner']:['scanner','actions','new-action','analysis'];
+    const native=nativeLayout();document.body.classList.toggle('native-layout',native);
+    const order=native?['scanner','analysis','actions','new-action']:['actions','new-action','analysis','scanner'];
+    document.querySelector('[data-panel="new-action"]').hidden=native;
+    document.querySelector('[data-panel="analysis"]').hidden=false;
+    if(native){$('actions').insertBefore($('actionForm'),$('actions').querySelector('.section-head'));}
+    else{$('new-action').append($('actionForm'));}
+    if(native&&panel==='new-action'){selectPanel('actions');}
     order.forEach(id=>nav.append(document.querySelector(`[data-panel="${id}"]`)));
     if(desktop.matches){
       document.querySelector('.topbar').insertBefore(nav,$('logout'));
     }else{
       $('app').append(nav);
     }
-    if(store.user)renderActions();
+    if(store.user){renderActions();renderDetail();}
   }
-  desktop.addEventListener('change',layout);
+  desktop.addEventListener('change',layout);standalone.addEventListener('change',layout);
   layout();
   function status(channel,target,empty){
     const s=store.status[channel]||{};
@@ -123,18 +147,53 @@
     if(status('analysis',target))return;
     if(!store.analysis.length)target.append(el('p','No hay registros en este período.','status'));
     target.append(button('Ver todos los registros',()=>openDetail({kind:'all'})),metrics(store.analysis));
-    const r=A.analyze(store.analysis);
-    if(r.problems.length){
-      const top=card('Problema principal del período'),first=r.problems[0],ties=r.problems.filter(p=>p.load===first.load);
+    const r=A.analyze(store.analysis),pending=store.pendingProblems;
+    if(store.status.focus?.error){const warning=card();warning.append(el('p',store.status.focus.error,'error'),button('Reintentar preferencias',()=>{try{store.reloadFocus();}catch(e){toast(e.message);}}));target.append(warning);}
+    if(store.archivedProblems.length)target.append(button(`Ver apartados (${store.archivedProblems.length})`,()=>{$('archivedError').textContent='';renderArchived();$('archivedDialog').showModal();},'plain'));
+    const areaTotals=A.categoryTotals(store.analysis),largest=areaTotals[0]?.[1]||0,leaders=areaTotals.filter(([,load])=>load===largest);
+    const principal=card('Principal foco por área');principal.append(el('p',!largest?'Sin datos':leaders.length>1?'Áreas empatadas':A.areaLabel(leaders[0][0])),el('p',pct(r.total?largest/r.total*100:0),'hint'));target.append(principal);
+    if(pending.length){
+      const top=card('Problema pendiente principal'),first=pending[0],ties=pending.filter(p=>p.load===first.load);
       if(ties.length>1)top.append(el('p',`${ties.length} problemas comparten la mayor carga.`,'hint'));
       ties.forEach(p=>{top.append(el('h3',p.name),el('p',`${p.count} registros · Media ${p.average.toFixed(1)}/5 · Carga ${p.load}`,'hint'),button('Ver detalles',()=>openDetail({kind:'problem',key:p.key})));});target.append(top);
-      const focus=card('Focos de atención 80/20');focus.append(el('p',`Clasificación: ${pct(r.coverage)} · Sin clasificar: ${r.unclassifiedCount} registros / ${r.unclassifiedLoad} puntos.`,'hint'));
-      r.problems.filter(p=>p.priority).forEach(p=>focus.append(problemButton(p,null)));
+      const focus=card('Focos pendientes');focus.append(el('p','Las cifras y el 80/20 incluyen todos los registros del período.','hint'));const selected=r.problems.filter(p=>p.priority),selectedLoad=selected.reduce((n,p)=>n+p.load,0);focus.append(el('p',`${selected.length} de ${r.problems.length} problemas concentran el ${pct(r.classifiedLoad?selectedLoad/r.classifiedLoad*100:0)} de la carga clasificada.`,'hint'));focus.append(el('p',`Clasificación: ${pct(r.coverage)} · Sin clasificar: ${r.unclassifiedCount} registros / ${r.unclassifiedLoad} puntos.`,'hint'));
+      pending.forEach(p=>{
+        const item=card(p.name);item.dataset.focusKey=p.key;item.append(el('p',(p.priority?'Foco de atención · ':'')+(p.count>=2?'Recurrente':'Caso aislado'),'hint'),el('p',`${p.count} registros · Intensidad media ${p.average.toFixed(1)}/5 · Carga ${p.load}`,'hint'),el('p',`${pct(p.share)} de carga · Acumulado ${pct(p.cumulative)}`,'hint'));
+        item.append(button('Ver detalles',()=>openDetail({kind:'problem',key:p.key})),button('Preparar acción para aliviar',()=>prepareFocusAction(p)),button('Omitir',()=>omitFocus(p),'plain'));
+        const records=el('details');records.append(el('summary',`Ver ${p.count} registros`));p.rows.forEach(row=>records.append(record(row)));item.append(records);focus.append(item);
+      });
       focus.append(el('p','La carga registrada orienta tu atención; no es una medida de bienestar ni una obligación de actuar.','hint'));target.append(focus);
     }
     const areas=card('Distribución por áreas');A.categoryTotals(store.analysis).forEach(([name,load])=>{
       const b=button('',()=>openDetail({kind:'area',area:name}),'area-row');b.append(el('span',A.areaLabel(name)),el('span',pct(r.total?load/r.total*100:0)+' ›'));areas.append(b);
     });target.append(areas);
+  }
+  function closeArchived(){if($('archivedDialog').open)$('archivedDialog').close();$('archivedBody').replaceChildren();$('archivedError').textContent='';}
+  function renderArchived(){
+    if(!$('archivedDialog').open && !store.user)return;
+    const body=$('archivedBody');body.replaceChildren();
+    if(store.status.analysis?.loading||store.status.analysis?.error){status('analysis',body);return;}
+    if(!store.archivedProblems.length){body.append(el('p','No tienes problemas apartados en este período.','muted'));return;}
+    store.archivedProblems.forEach(p=>{const item=card(p.name);item.append(el('p',`${p.count} registros`,'hint'),button('Volver a pendientes',()=>{
+      if(busy)return;try{store.restoreProblem(p.key);$('archivedError').textContent='';}catch{$('archivedError').textContent='No se pudo recuperar el problema. Inténtalo nuevamente.';}
+    }));body.append(item);});
+  }
+  $('archivedClose').onclick=closeArchived;
+  window.addEventListener('storage',event=>{if(store.user&&event.key==='pareto.focus.v1.'+store.user.id){try{store.reloadFocus();}catch{toast('No se pudieron actualizar los focos apartados.');}}});
+  async function omitFocus(p,close=false){if(busy)return;const c=store.context();busy=true;try{if(await store.omitProblem(p.key)&&close)closeDetails();}catch(e){if(c.active())toast(e.message);}finally{if(c.active())busy=false;}}
+  function prepareFocusAction(problem,sourceArea){
+    const origin=store.context(),period=store.period,week=store.weekOffset;
+    const totals=new Map();problem.rows.forEach(r=>totals.set(r.categoria,(totals.get(r.categoria)||0)+Number(r.nivel)));
+    const maximum=Math.max(...totals.values()),leaders=[...totals].filter(([,load])=>load===maximum).map(([n])=>n),areas=leaders.filter(n=>A.areas.some(([a])=>a===n));
+    const commit=async area=>{
+      if(!origin.active()||period!==store.period||week!==store.weekOffset||busy)return;
+      if(store.hasActionDraft()&&!await confirmDelete('¿Reemplazar el borrador actual?','Reemplazar','Se descartarán los cambios del borrador.'))return;
+      if(!origin.active()||period!==store.period||week!==store.weekOffset||busy)return;
+      store.prepareAction({name:problem.name,key:problem.key},area,problem.rows);syncActionForm();selectPanel('new-action');$('actionText').focus();$('actionForm').scrollIntoView({block:'start'});
+    };
+    if(sourceArea!==undefined)commit(A.areas.some(([n])=>n===sourceArea)?sourceArea:'');
+    else if(leaders.length>1&&areas.length)chooseArea('Elige el área de la acción',areas,'',commit);
+    else commit(areas[0]||'');
   }
   function problemButton(p,area){
     const b=button('',()=>openDetail({kind:'problem',key:p.key,area}),'area-row');
@@ -192,7 +251,8 @@
       if(!p){target.append(el('p','Este problema ya no tiene registros en este contexto.','muted'));return;}
       if(v.area)target.append(el('p',A.areaLabel(v.area),'hint'));
       target.append(metrics(p.rows),el('p',`${pct(p.share)} ${v.area?'de la carga clasificada del área':'de la carga clasificada del período'} · Acumulado ${pct(p.cumulative)}`,'hint'));
-      target.append(button('Preparar una acción',()=>prepareAction(p.name)));
+      const related=card('Áreas relacionadas');A.categoryTotals(p.rows).filter(([,load])=>load>0).forEach(([area,load])=>related.append(el('p',`${A.areaLabel(area)}: ${load} puntos de carga`,'hint')));target.append(related);
+      target.append(button('Preparar acción para aliviar',()=>prepareFocusAction(p,v.area)));target.append(button('Omitir',()=>omitFocus(p,true),'plain'));
       const h=card('Registros del problema');v.page=Math.min(v.page,Math.max(0,Math.ceil(p.rows.length/10)-1));historyList(h,[...p.rows].sort(A.historyOrder),v.page,page=>{v.page=page;renderDetail();});target.append(h);return;
     }
     if(!rows.length){target.append(el('p','No hay situaciones en esta área y período.','muted'));return;}
@@ -259,7 +319,7 @@
   }
   function syncActionForm(){
     $('actionText').value=store.actionDraft;$('importance').value=store.importance;$('actionArea').value=store.actionArea;
-    $('importanceDescription').textContent=importanceReferences[Number(store.importance)-1]||'';
+    $('importanceDescription').textContent=importanceReferences[Number(store.importance)-1]||'¿Cuánto importa para lo que hoy quieres cuidar?';
     $('actionError').textContent='';renderProblemOptions();
   }
   $('actionArea').onchange=()=>{store.actionArea=$('actionArea').value;};
@@ -267,26 +327,27 @@
   $('actionProblem').onchange=()=>{
     if(busy)return renderProblemOptions();
     const p=store.problemContexts.find(p=>p.key===$('actionProblem').value);
-    if(!p){store.actionProblem=null;renderProblemOptions();return;}
-    const commit=area=>{store.actionProblem={name:p.name,key:p.key};store.actionArea=area;syncActionForm();};
+    if(!p){store.reviewedContext=null;store.actionProblem=null;renderProblemOptions();return;}
+    const commit=area=>{store.reviewedContext=null;store.actionProblem={name:p.name,key:p.key};store.actionArea=area;syncActionForm();};
     renderProblemOptions();
     if(p.areas.length>1)chooseArea('Este problema tiene la misma carga en varias áreas',p.areas,'',commit);
     else commit(p.areas[0]||'');
   };
   function prepareAction(name, area, key=A.problemKey(name)){
     if(busy)return;
-    const p=store.problemContexts.find(p=>p.key===key);
-    const commit=value=>{if(store.hasActionDraft()&&!window.confirm('Ya tienes un borrador. ¿Reemplazarlo?'))return;store.prepareAction({name,key},value);syncActionForm();selectPanel('new-action');$('actionText').focus();};
+    const origin=store.context(),p=store.problemContexts.find(p=>p.key===key);
+    const commit=async value=>{if(store.hasActionDraft()&&!await confirmDelete('¿Reemplazar el borrador actual?','Reemplazar','Se descartarán los cambios del borrador.'))return;if(!origin.active()||busy)return;store.prepareAction({name,key},value);syncActionForm();selectPanel('new-action');$('actionText').focus();};
     if(area!==undefined)commit(area||'');
     else if(p?.areas.length>1)chooseArea('Elige el área de la acción',p.areas,'',commit);
     else commit(p?.areas[0]||'');
   }
   $('actionCancel').onclick=()=>{if(busy)return;store.clearActionDraft();syncActionForm();selectPanel('actions');};
+  function actionFormBusy(value){$('actionForm').querySelectorAll('textarea,input,select,button').forEach(n=>n.disabled=value);if(!value)renderProblemOptions();}
   $('actionForm').addEventListener('submit',async e=>{
-    e.preventDefault();if(busy)return;const c=store.context();busy=true;$('actionSave').disabled=true;$('actionError').textContent='';dismissKeyboard();
+    e.preventDefault();if(busy)return;const c=store.context();busy=true;actionFormBusy(true);$('actionError').textContent='';dismissKeyboard();
     const previousIds=new Set(store.actions.map(r=>r.id));
-    try{if(await store.saveAction()){enteringActions=new Set(store.actions.filter(r=>!previousIds.has(r.id)).map(r=>r.id));syncActionForm();selectPanel('actions');toast('Acción guardada.');}}
-    catch(e){if(c.active())$('actionError').textContent=e.message;}finally{if(c.active()){busy=false;$('actionSave').disabled=false;}}
+    try{if(await store.saveAction()){enteringActions=new Set(store.actions.filter(r=>!previousIds.has(r.id)).map(r=>r.id));syncActionForm();if(panel==='actions'||panel==='new-action')selectPanel('actions');toast(store.actionNotice||'Acción guardada.');}}
+    catch(e){if(c.active())$('actionError').textContent=e.message;}finally{if(c.active()){busy=false;actionFormBusy(false);}}
   });
   async function changeAction(row,patch){if(busy)return;const c=store.context();if(patch===null&&(!await confirmDelete('¿Eliminar esta acción?')||!c.active()||busy))return;busy=true;try{await store.changeAction(row.id,patch,()=>patch===null?animateRemoval('action',row.id):Promise.resolve());}catch(e){if(c.active()){toast(e.message);renderActions();}}finally{if(c.active())busy=false;}}
   function renderActions(){
@@ -358,7 +419,7 @@
   });
   document.addEventListener('visibilitychange',()=>{
     const hidden=document.hidden;$('privacy').hidden=!hidden;$('app').inert=hidden;$('auth').inert=hidden;
-    if(hidden){finishDeleteConfirmation();closeActionChoice();closeDetails();closeEditor();cancelExport();}
+    if(hidden){closeArchived();finishDeleteConfirmation();closeActionChoice();closeDetails();closeEditor();cancelExport();}
     else if(store.user){if(panel==='analysis')store.load('analysis');if(panel==='actions')store.load('actions');}
   });
   if(db){

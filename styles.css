@@ -130,3 +130,8 @@ dialog{border-color:#303c50;box-shadow:0 24px 100px #0009}
 
 .connection-notice{padding:.65rem 1rem;text-align:center;background:#0c2521;color:#b7ccc0;font-size:.85rem}.install-link{font-size:.8rem;color:var(--muted)}#installDialog{max-width:420px}#installInstructions{line-height:1.65}
 @media(display-mode:standalone){.topbar{padding-top:max(1rem,env(safe-area-inset-top));padding-left:max(1rem,env(safe-area-inset-left));padding-right:max(1rem,env(safe-area-inset-right))}main{padding-left:max(1rem,env(safe-area-inset-left));padding-right:max(1rem,env(safe-area-inset-right))}}
+
+.native-layout #actionForm{width:100%;margin:0 0 1.5rem}.native-layout .tabs{max-width:560px}.native-layout #actionsBody .action-row{align-items:start}.native-layout #actionsBody input[type=checkbox]{margin-top:4px}
+#keyboardTools{position:fixed;left:0;right:0;z-index:20;background:#101827;border-top:1px solid #293346;text-align:right;padding:.2rem 1rem}#keyboardTools button{min-height:38px}#archivedDialog{max-width:520px}#archivedBody{margin-top:1rem}
+/* Keep the keyboard skip link outside the visual layout until it receives focus. */
+.skip:not(:focus){clip-path:inset(50%);width:1px;height:1px;overflow:hidden;padding:0}

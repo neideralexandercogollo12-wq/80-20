@@ -103,3 +103,24 @@ Verificado con servidor HTTP local bajo `/pareto/` y Chromium con service worker
 También aprobaron las 23 pruebas de dominio/estado/servicio/Excel y los recorridos de navegador de captura/sesión, distribución, áreas y vínculos de acciones, transiciones, exportación y servidor estático con el cliente real. Las pruebas funcionales emplean Supabase simulado; no hubo escrituras sobre datos personales.
 
 Pendiente: instalación desde HTTPS publicado en el iPhone real y en navegadores de escritorio, apertura real desde su icono y revisión del selector de aplicaciones del sistema. La emulación móvil y el manifiesto validado no certifican esa instalación. No se generó IPA ni ZIP ni se modificó el proyecto iPhone.
+
+## Corrección del port funcional respecto al IPA · 16 de octubre de 2026
+
+La entrega PWA anterior preservaba la adaptación de escritorio y no incluía todos los flujos nativos. Esta revisión recupera los flujos del iPhone a partir de los fuentes de la compilación 36. Las secciones históricas que hablan de Análisis oculto o de ausencia de apartados quedan sustituidas por esta revisión y por IOS-WEB.md.
+
+Cambios:
+
+- Móvil y modo instalado: tres apartados Escáner/Análisis/Acciones, inicio en Escáner y formulario dentro de Acciones. En pestaña de escritorio se conservan el inicio en Acciones y Nueva acción independiente, pero Análisis está nuevamente visible.
+- Análisis con foco pendiente principal, todos los focos pendientes, principal área, omisión y recuperación de apartados del período. Las cifras, gráficos y exportación siguen usando todos los registros.
+- Preparación desde un foco o área, campos vacíos y vínculo al problema; selección de área según contexto del período y confirmación integrada de borrador. Retirada posterior al guardado usando únicamente identificadores revisados; casos nuevos siguen pendientes. Las segundas acciones no apartan casos nuevos.
+- Persistencia local de apartados por cuenta con clave SHA-256, corte temporal e identificadores, sin textos. Fallos de almacenamiento no ocultan el problema; si falla después de crear una acción se avisa y el borrador se limpia para impedir duplicarla. No se sincroniza con Keychain del IPA.
+- Recuperados tonos salvia en barras de móvil/modo instalado, reutilización explícita de nombres, áreas relacionadas en detalles de problemas y Listo para escritura sin interferir con las pestañas. Formularios de acción se bloquean durante el guardado, conservando campos ante errores.
+
+Verificación:
+
+- 31 pruebas de dominio/estado/servicio/exportación aprobadas, incluidas las ocho nuevas de focos y persistencia. SHA-256 coincide con la misma clave normalizada de iPhone; omitidos y restaurados no modifican cálculos.
+- Recorrido nuevo native-browser.cjs aprobado en Chromium y WebKit: tres pestañas, Análisis visible, omitir/recuperar, formulario integrado, preparación desde área, cancelación, retirada al guardar y ámbito revisado, reaparición por situación nueva, cierre por período, Listo, nombres reutilizables y salvia. Incluye modo instalado simulado en pantalla grande.
+- Recorridos existentes aprobados: captura/sesión, edición y errores, detalles y gráficos, borrado, respuestas tardías y cuenta, distribución, acciones y vínculos, animaciones, Excel, servidor estático y PWA con service worker real y actualización manual.
+- Revisadas capturas con datos simulados. No se escribieron datos personales ni se modificaron Supabase, esquema, políticas, iPhone ni el exportador Excel.
+
+Pendiente: instalación/actualización desde HTTPS publicado y revisión del teclado, navegación y miniaturas en iPhone físico. El modo instalado se simula en las pruebas; no es una certificación de instalación real ni de APIs nativas de iOS. CSV permanece retirado de la web por la decisión previa. Sin IA, ZIP ni publicación automática.

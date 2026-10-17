@@ -11,7 +11,7 @@ const mime={'.html':'text/html','.css':'text/css','.js':'application/javascript'
   res.setHeader('Content-Type',mime[path.extname(file)]||'text/plain');res.setHeader('Cache-Control','no-store');
   if(name==='config.js')return res.end("window.PARETO_CONFIG={url:'https://test.supabase.co',anonKey:'public-test-key'};");
   if(name==='vendor/supabase-2.117.3.min.js')return res.end(fs.readFileSync(path.join(__dirname,'supabase-mock.js')));
-  if(name==='sw.js')return res.end(fs.readFileSync(file,'utf8').replace('2026-10-16-1','pwa-test-'+version));
+  if(name==='sw.js')return res.end(fs.readFileSync(file,'utf8').replace(/2026-10-16-\d+/,'pwa-test-'+version));
   res.end(fs.readFileSync(file));
  });
  await new Promise(r=>server.listen(0,'127.0.0.1',r));const browser=await chromium.launch({headless:true});

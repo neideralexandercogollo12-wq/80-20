@@ -1,39 +1,42 @@
-# Referencia iPhone y versión web instalable
+# Port funcional del iPhone
 
-La revisión se hizo sobre el código fuente del proyecto iPhone, sin descompilar ni modificar el IPA. La web conserva las diferencias solicitadas para escritorio y los mismos datos de Supabase.
+La primera entrega instalable conservaba la distribución de escritorio y no trasladaba todos los flujos del IPA. Esta revisión utiliza los fuentes de la compilación 36 del iPhone para recuperar esos flujos. No se modificó el proyecto iPhone ni se descompiló el binario.
 
-| Función | Referencia iPhone | Web |
-|---|---|---|
-| Acceso y sesión | ParetoCoreApp.swift y KeychainStorage.swift | Acceso y restauración existentes; almacenamiento de sesión del navegador, no Keychain |
-| Captura y edición | ScannerView.swift y FrictionUpdate.swift | Seis áreas, cinco niveles, descripción contextual y edición completa |
-| Cálculos y gráficos | Analysis.swift, AreaAnalysis.swift y SituationPareto.swift | Dominio JS con pruebas de equivalencia existentes; Análisis permanece oculto según la preferencia web |
-| Acciones y áreas | ActionsView.swift y ActionAreas.swift | Filtro, importancia, clasificación, vínculos y segunda acción; Nueva acción conserva pestaña propia |
-| Propuesta de área | Área/período del foco nativo | Todo el historial del problema, como se solicitó para la web |
-| Problemas apartados | FocusPreferences.swift y ArchivedProblemsView.swift | Continúan exclusivos de iPhone; no se transfieren preferencias de Keychain |
-| Excel | ExcelReport.swift y ExcelStyle.swift | Exportador web existente, sin cambios de formato ni CSV |
-| Presentación | SwiftUI con pestañas inferiores | Esmeralda, escritorio con navegación superior e inicio en Acciones; móvil con navegación inferior |
-| Instalación | IPA firmado e instalado | Manifiesto web, iconos derivados del icono nativo y apertura standalone desde navegador |
+## Funciones trasladadas y verificadas
 
-La PWA no es un IPA ni utiliza SwiftUI. No incorpora IA, escritura offline, nuevas tablas ni migraciones. Mantiene la protección visual al ocultar la pestaña y los controles por propietario y cuenta existentes. Las funciones nativas del sistema no se presentan como capacidades del navegador.
+| Referencia del iPhone | Función en la web |
+|---|---|
+| ParetoCoreApp.swift | En móvil y modo instalado: Escáner, Análisis y Acciones; inicio en Escáner y protección al pasar a segundo plano |
+| ScannerView.swift | Seis áreas, emoción y problema opcionales, reutilización explícita de nombres, niveles sin selección y explicación contextual; limpieza tras guardar |
+| AnalysisView.swift | Hoy, Semana, 30/90 días, semanas anterior/actual/siguiente, métricas, foco principal por área y problema pendiente principal |
+| FocusDisposition.swift | Omitir, pendientes que reaparecen con situaciones nuevas y conservación de cálculos e informes completos |
+| ArchivedProblemsView.swift | Ver apartados del período, recuperar individualmente y estado vacío; cierre al cambiar período, semana, cuenta o apartado |
+| PrepareProblemActionButton.swift | Acción vacía, importancia sin seleccionar, vínculo al problema, área por contexto del foco, resolución de empate y confirmación de borrador |
+| AppState.swift | Retirar un foco solo después de guardar la acción; revisar por identificadores para no ocultar situaciones nuevas durante la escritura; aviso si falla la preferencia sin duplicar la acción |
+| AreaDetailView.swift | Resumen del área, participación en el período, barras por situación, Pareto avanzado, problemas del área e historial paginado con edición/borrado |
+| ProblemDetailView.swift | Cifras y áreas relacionadas del problema, registros limitados al área/período abiertos, preparación de acción y omisión |
+| SituationLevelsView.swift | Barras 1–5 con número, nombre, texto y tonos salvia en móvil/modo instalado; acceso al registro |
+| ActionsView.swift | Formulario dentro de Acciones en móvil/modo instalado, áreas, progreso filtrado, importancia, completar, eliminar y añadir otra acción vinculada sin ocultar casos nuevos |
+| Components.swift | Listo al escribir en móvil/modo instalado, cierre al guardar/cambiar apartado y conservación de saltos de línea |
+| FrictionUpdate.swift | Edición completa, campos opcionales vacíos, conservación de identidad/fecha/respaldo y errores con reintento |
+| ExcelReport.swift | Informe Excel con Áreas, Situaciones y Datos, tablas filtrables y gráficos; exportador existente conservado |
 
-## Qué se guarda al instalar
+Los cálculos y gráficos reutilizan el dominio JavaScript existente, con pruebas de equivalencia respecto a Swift. Omitir o recuperar no elimina registros, no reclasifica ni altera la carga ni el 80/20. El 80/20 siempre utiliza todos los registros clasificados del contexto.
 
-El service worker conserva únicamente una lista explícita de archivos públicos de la aplicación (HTML, CSS, JS, iconos y plantilla Excel). No intercepta ni guarda consultas externas, peticiones de escritura, configuración local ni respuestas de Supabase. Los registros consultados siguen en memoria y la sesión conserva el almacenamiento habitual del cliente Supabase.
+## Diferencias que siguen existiendo
 
-Sin internet puede abrirse la interfaz ya instalada, con aviso de conexión. No se garantiza restaurar la sesión ni consultar, editar o guardar sin red; no hay cola de cambios. La primera apertura y descarga de la interfaz requieren conexión.
+- En una pestaña de escritorio se conserva inicio en Acciones y Nueva acción independiente; **Análisis vuelve a estar accesible**. En móvil o al instalar la PWA, las tres secciones y el formulario integrado siguen el flujo del IPA.
+- El selector manual de problema, añadido específicamente para la web, sigue proponiendo área a partir de todo el historial. Preparar desde un foco usa sus registros del período; desde un área hereda esa área. Las áreas de acciones guardadas nunca se recalculan automáticamente.
+- El navegador guarda la sesión con Supabase, no con Keychain. Las preferencias de focos se guardan por cuenta en este navegador: clave SHA-256 del problema, corte temporal e identificadores revisados. No se guardan textos de situaciones ni respuestas de Supabase. No se sincronizan con las preferencias Keychain del IPA ni entre dispositivos. Al salir se limpia el estado de memoria; las preferencias persistentes se recuperan al volver a esa cuenta.
+- Excel se descarga mediante el navegador; no es la hoja nativa de compartir. CSV continúa retirado por la decisión anterior del usuario. No se incorpora IA.
+- SwiftUI, Keychain, el teclado del sistema y el selector de aplicaciones no se pueden reproducir literalmente en HTML. La cubierta de privacidad web no garantiza ocultar capturas previas realizadas por el navegador/sistema.
 
-## Actualizaciones
+## Instalación, conexión y actualizaciones
 
-Cada publicación que cambie archivos de la interfaz debe cambiar `VERSION` en `sw.js`. Se prepara una nueva caché completa. Si falla su descarga, la versión anterior permanece disponible. La nueva versión espera hasta que se pulse «Actualizar app»; el aviso pide guardar antes. Nunca se recarga automáticamente un borrador. Cada caché está separada por ruta para admitir alojamiento bajo una subcarpeta.
+La PWA conserva manifiesto standalone e iconos derivados del icono nativo. Para instalar en iPhone, debe abrirse la dirección publicada HTTPS en Safari y usar Compartir → Agregar a pantalla de inicio → Abrir como app web. Localhost sirve solo en el computador que ejecuta el servidor.
 
-## Instalación
+La caché del service worker contiene únicamente archivos públicos de la interfaz; excluye configuración, preferencias, consultas y respuestas. La sesión y las preferencias siguen sus almacenamientos separados. Sin conexión puede abrirse la interfaz almacenada, pero consultar y guardar requiere internet. No hay cola de escrituras.
 
-Se necesita HTTPS para la dirección publicada; localhost/127.0.0.1 se admite solo para probar en el propio computador. La dirección local del computador no sirve como enlace instalable del iPhone.
+Cada publicación que cambie archivos públicos debe incrementar VERSION en sw.js. La nueva caché espera la confirmación «Actualizar app» antes de activarse y recargar; el aviso indica guardar antes el borrador.
 
-- iPhone: abrir la dirección publicada en Safari → Compartir → Agregar a pantalla de inicio → activar «Abrir como app web» si aparece → Agregar.
-- Chrome/Edge de escritorio: usar «Instalar app» o la opción de instalación del navegador.
-- Safari de Mac: usar la opción Agregar al Dock cuando esté disponible.
-
-La instalación real desde la pantalla de inicio del iPhone y desde cada navegador queda pendiente de verificar en el dispositivo. No se publicó ningún sitio en esta entrega.
-
-Referencias: [instalación en iPhone, Apple](https://support.apple.com/en-lamr/guide/iphone/iphea86e5236/ios), [requisitos de PWA, MDN](https://developer.mozilla.org/en-US/docs/Web/Progressive_web_apps/Guides/Making_PWAs_installable).
+No se publicó ningún sitio ni se generó IPA/ZIP. La instalación real desde HTTPS y la revisión en un iPhone físico siguen pendientes. Las pruebas automatizadas de navegador y modo instalado simulado se distinguen de esas comprobaciones.

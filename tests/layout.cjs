@@ -7,8 +7,8 @@ const out=process.env.QA_DIR||'/tmp/pareto-web';fs.mkdirSync(out,{recursive:true
   try{
     const {page,errors}=await setup(browser,{width:1280,height:900});await login(page);
     assert.ok(await page.locator('#actions').isVisible());
-    assert.equal(await page.getByRole('button',{name:'Análisis',exact:true}).count(),0);
-    assert.deepEqual(await page.locator('.tabs button:not([hidden])').allTextContents(),['Acciones','Nueva acción','Escáner']);
+    assert.equal(await page.getByRole('button',{name:'Análisis',exact:true}).count(),1);
+    assert.deepEqual(await page.locator('.tabs button:not([hidden])').allTextContents(),['Acciones','Nueva acción','Análisis','Escáner']);
     assert.equal(await page.locator('.topbar .tabs').count(),1);
     assert.ok((await page.locator('.tabs').boundingBox()).y<100);
     assert.equal(await page.evaluate(()=>getComputedStyle(document.documentElement).getPropertyValue('--bg').trim()),'#030712');
@@ -35,11 +35,11 @@ const out=process.env.QA_DIR||'/tmp/pareto-web';fs.mkdirSync(out,{recursive:true
     assert.equal(await page.locator('#actionText').inputValue(),'Mi borrador');
     await page.setViewportSize({width:390,height:844});
     await page.waitForFunction(()=>document.querySelector('.tabs button').dataset.panel==='scanner');
-    assert.deepEqual(await page.locator('.tabs button:not([hidden])').allTextContents(),['Escáner','Acciones','Nueva acción']);
+    assert.deepEqual(await page.locator('.tabs button:not([hidden])').allTextContents(),['Escáner','Análisis','Acciones']);
     assert.equal(await page.locator('.topbar .tabs').count(),0);
     assert.ok((await page.locator('.tabs').boundingBox()).y>700);
     assert.equal(await page.locator('#actionText').inputValue(),'Mi borrador');
-    assert.ok(await page.locator('#new-action').isVisible()); // Resizing does not change the active screen.
+    assert.ok(await page.locator('#actions').isVisible()); // Resizing does not change the active screen.
     assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth));
     await page.screenshot({path:path.join(out,'actions-mobile-refined.png'),fullPage:true});
     await page.locator('#importance').selectOption('4');
@@ -49,14 +49,14 @@ const out=process.env.QA_DIR||'/tmp/pareto-web';fs.mkdirSync(out,{recursive:true
     assert.equal(await page.locator('#actionText').inputValue(),'Mi borrador');
     await page.evaluate(()=>window.mock.fail=false);
     await page.getByRole('button',{name:'Guardar acción',exact:true}).click();
+    await page.waitForFunction(()=>document.querySelector('#actionText').value==='');
     await page.locator('#actions').waitFor({state:'visible'});
-    await page.getByRole('button',{name:'Nueva acción',exact:true}).click();
     assert.equal(await page.locator('#actionText').inputValue(),'');
     await page.getByRole('button',{name:'Salir',exact:true}).click();await login(page);assert.ok(await page.locator('#scanner').isVisible());
-    assert.equal(await page.getByRole('button',{name:'Análisis',exact:true}).count(),0);
+    assert.equal(await page.getByRole('button',{name:'Análisis',exact:true}).count(),1);
     await openAnalysis(page);await page.locator('#analysisBody .metrics').waitFor();
     await page.getByRole('button',{name:'Ver todos los registros',exact:true}).click();
-    assert.equal(await page.locator('.bar-fill').first().evaluate(n=>getComputedStyle(n).backgroundColor),'rgb(16, 185, 129)');
+    assert.equal(await page.locator('.bar-fill').first().evaluate(n=>getComputedStyle(n).backgroundColor),'rgb(118, 155, 135)');
     await page.locator('#detailClose').click();
     await page.setViewportSize({width:800,height:900});
     await page.waitForFunction(()=>document.querySelector('.tabs button').dataset.panel==='actions');
