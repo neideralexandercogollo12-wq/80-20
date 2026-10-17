@@ -130,7 +130,14 @@
       await this.service.change(c.user,'palancas',id,patch,c.active);
       if(!c.active()) return false;
       await afterCommit();
-      if(c.active()) await this.load('actions'); return c.active();
+      if(!c.active()) return false;
+      // The owner-scoped write has succeeded. Keep the list mounted instead of clearing it for a read.
+      if(this.actions.some(row=>row.id===id)) {
+        this.tickets.actions=(this.tickets.actions||0)+1;
+        this.actions=patch===null?this.actions.filter(row=>row.id!==id):this.actions.map(row=>row.id===id?{...row,...patch}:row);
+        this.status.actions={loading:false,error:null};this.notify('actions');
+      } else await this.load('actions');
+      return c.active();
     }
   }
   if(typeof module !== 'undefined' && module.exports) module.exports = {Store};

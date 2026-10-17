@@ -71,3 +71,5 @@ node tests/pwa.cjs
 ```
 
 Los recorridos de navegador requieren Playwright en el entorno de desarrollo (no forma parte del sitio). PLAYWRIGHT_MODULE permite indicar su ubicación; TEST_WEBKIT=1 activa WebKit en native-browser.cjs y actions-areas.cjs. Se usa Supabase simulado sin escrituras personales. pwa.cjs prueba el service worker real bajo servidor local. La revisión física en iPhone y la instalación desde HTTPS siguen pendientes; ver VERIFICATION.md.
+
+Al completar o volver a pendientes una acción, la lista se actualiza sin vaciarse ni volver al inicio; conserva el contexto visual próximo a la acción marcada. Prueba específica: `node tests/action-scroll.cjs`, también con `TEST_WEBKIT=1`.

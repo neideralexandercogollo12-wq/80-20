@@ -124,3 +124,13 @@ Verificación:
 - Revisadas capturas con datos simulados. No se escribieron datos personales ni se modificaron Supabase, esquema, políticas, iPhone ni el exportador Excel.
 
 Pendiente: instalación/actualización desde HTTPS publicado y revisión del teclado, navegación y miniaturas en iPhone físico. El modo instalado se simula en las pruebas; no es una certificación de instalación real ni de APIs nativas de iOS. CSV permanece retirado de la web por la decisión previa. Sin IA, ZIP ni publicación automática.
+
+## Completar acciones sin salto de página · 17 de octubre de 2026
+
+Se eliminó la recarga completa de la lista después de actualizar una acción. Una vez confirmado el guardado por el servicio filtrado por propietario, se actualiza esa fila en memoria, se conserva el resto de la lista y se recalculan orden/progreso. Las lecturas anteriores pendientes se invalidan para que no reviertan el cambio. Si ya no hay una copia de la acción en memoria se conserva la consulta de recuperación.
+
+Al redistribuir la fila entre Pendientes y Completadas, se conserva la posición visual de la siguiente acción visible (o una vecina si es la última). El foco de teclado se mantiene en el contexto visible con preventScroll. No se navega ni se lleva al usuario a la fila trasladada. La misma actualización conserva clasificación, importancia, filtros y borrado confirmado.
+
+Verificación: 32 pruebas de dominio/estado/servicio/exportación aprobadas. La nueva prueba de estado verifica que no se vacía ni vuelve a consultar la lista al completar/desmarcar. `tests/action-scroll.cjs` usa 90 acciones simuladas para comprobar completar y volver a pendientes en móvil y escritorio, conservando el ancla con tolerancia de 3 píxeles. No se modificaron datos personales, iPhone ni Supabase. La revisión táctil en dispositivo físico permanece pendiente.
+
+El recorrido de 90 acciones pasó en Chromium y WebKit, en ambos tamaños. Se ancla por el identificador de la acción modificada para cubrir también el comportamiento táctil de WebKit cuando el checkbox pierde el foco. Se verificaron además clasificación/filtros/progreso y las animaciones de guardado/borrado con datos simulados.

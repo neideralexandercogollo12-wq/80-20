@@ -135,3 +135,5 @@ dialog{border-color:#303c50;box-shadow:0 24px 100px #0009}
 #keyboardTools{position:fixed;left:0;right:0;z-index:20;background:#101827;border-top:1px solid #293346;text-align:right;padding:.2rem 1rem}#keyboardTools button{min-height:38px}#archivedDialog{max-width:520px}#archivedBody{margin-top:1rem}
 /* Keep the keyboard skip link outside the visual layout until it receives focus. */
 .skip:not(:focus){clip-path:inset(50%);width:1px;height:1px;overflow:hidden;padding:0}
+
+#actionsBody{overflow-anchor:none}

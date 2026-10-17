@@ -134,3 +134,8 @@ test('borrador vinculado vacío, segunda acción huérfana, error y campos expl�
 test('sugerencias tardías no pasan a otra cuenta ni sustituyen el borrador',async()=>{
  const d=deferred(),s=new Store({read:()=>d.promise});s.account({id:'u'});s.prepareAction({name:'Propio',key:'propio'},A.areas[1][0]);s.actionDraft='Texto';const pending=s.load('names');s.account({id:'v'});s.actionDraft='Otra cuenta';d.resolve([row()]);await pending;assert.deepEqual(s.problemContexts,[]);assert.equal(s.actionDraft,'Otra cuenta');
 });
+test('actualizar acción conserva la lista durante el guardado y no vuelve a consultarla',async()=>{
+ const d=deferred();let reads=0;const s=new Store({change:()=>d.promise,read:async()=>{reads++;return [];}});s.account({id:'u'});s.actions=[{id:'a',completada:false,importancia:3},{id:'b',completada:false,importancia:4}];
+ const pending=s.changeAction('a',{completada:true});assert.equal(s.actions.length,2);assert.equal(s.actions[0].completada,false);d.resolve();await pending;assert.equal(s.actions[0].completada,true);assert.equal(s.actions.length,2);assert.equal(reads,0);
+ await s.changeAction('a',{completada:false});assert.equal(s.actions[0].completada,false);assert.equal(reads,0);
+});
