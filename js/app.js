@@ -14,7 +14,7 @@
   const standalone=window.matchMedia('(display-mode: standalone)');
   const nativeLayout=()=>!desktop.matches||standalone.matches||navigator.standalone===true;
   let updatingActionId=null;
-  let panel='scanner',historyOpen=false,historyPage=0,views=[],editing=null,authSequence=0,loginAttempt=0,busy=false,exportSequence=0,exporting=false;
+  let panel='scanner',historyOpen=false,historyPage=0,views=[],editing=null,authSequence=0,loginAttempt=0,busy=false;
   service.onSessionError=()=>{authSequence++;loginAttempt++;store.account(null);$('authMessage').textContent='Tu sesión terminó. Vuelve a entrar.';};
   let captureLevel=null,editLevel=null;
   const date=s=>new Date(s).toLocaleDateString('es-CO',{day:'2-digit',month:'short',year:'numeric'});
@@ -398,31 +398,14 @@
   }
   $('refreshActions').addEventListener('click',()=>store.load('actions'));
   function download(bytes,type,name){const url=URL.createObjectURL(new Blob([bytes],{type})),a=el('a');a.href=url;a.download=name;document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),1000);}
+  const report=window.ParetoReport.create({service,context:()=>store.context(),onDownload:bytes=>{download(bytes,'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet','pareto-core.xlsx');toast('Excel exportado.');}});
   function syncExportButtons(){
-    $('exportExcel').disabled=exporting||!!store.status.analysis?.loading||!!store.status.analysis?.error;
-    $('actionsExportExcel').disabled=exporting;
-    $('actionsExportExcel').textContent=exporting?'Preparando Excel…':'Descargar Excel';
-    $('actionsExportExcel').setAttribute('aria-busy',String(exporting));
     const period={today:'Hoy',week:'Semana','30':'30 días','90':'90 días'}[store.period];
-    $('actionsExportExcel').title='Informe de fricciones · '+period;
+    for(const id of ['exportExcel','actionsExportExcel']){$(id).textContent='Ver informe';$(id).disabled=false;$(id).title='Informe de fricciones · '+period;}
   }
-  function cancelExport(){exportSequence++;exporting=false;syncExportButtons();}
-  async function exportExcel(fresh=false){
-    if(exporting||(!fresh&&(store.status.analysis?.loading||store.status.analysis?.error)))return;
-    const c=store.context();if(!c.user)return;
-    const seq=++exportSequence,bounds=store.bounds(),active=()=>c.active()&&seq===exportSequence;
-    exporting=true;syncExportButtons();
-    try{
-      // Actions can be the first screen: fetch its report without requiring Analysis to be opened.
-      const rows=fresh?await service.read(c.user,{bounds,active}):store.analysis.map(r=>({...r}));
-      if(!active())return;
-      const data=await window.ParetoExcel.workbook(rows,bounds);
-      if(active()){download(data,'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet','pareto-core.xlsx');toast('Excel exportado.');}
-    }catch(e){if(active())toast(e.message||'No se pudo preparar Excel.');}
-    finally{if(active()){exporting=false;syncExportButtons();}}
-  }
-  $('exportExcel').addEventListener('click',()=>exportExcel());
-  $('actionsExportExcel').addEventListener('click',()=>exportExcel(true));
+  function cancelExport(){report.close(false);}
+  $('exportExcel').addEventListener('click',()=>report.open($('exportExcel'),store.period,store.weekOffset));
+  $('actionsExportExcel').addEventListener('click',()=>report.open($('actionsExportExcel'),store.period,store.weekOffset));
   async function verifySession(){
     const seq=++authSequence;
     try{const {data,error}=await db.auth.getUser();if(seq!==authSequence)return;if(error||!data?.user){store.account(null);$('authMessage').textContent=error&&error.name!=='AuthSessionMissingError'?'No se pudo verificar la sesión. Intenta entrar nuevamente.':'Ingresa con tu cuenta privada.';return;}store.account(data.user);}

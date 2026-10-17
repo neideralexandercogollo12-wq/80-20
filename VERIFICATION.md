@@ -134,3 +134,15 @@ Al redistribuir la fila entre Pendientes y Completadas, se conserva la posición
 Verificación: 32 pruebas de dominio/estado/servicio/exportación aprobadas. La nueva prueba de estado verifica que no se vacía ni vuelve a consultar la lista al completar/desmarcar. `tests/action-scroll.cjs` usa 90 acciones simuladas para comprobar completar y volver a pendientes en móvil y escritorio, conservando el ancla con tolerancia de 3 píxeles. No se modificaron datos personales, iPhone ni Supabase. La revisión táctil en dispositivo físico permanece pendiente.
 
 El recorrido de 90 acciones pasó en Chromium y WebKit, en ambos tamaños. Se ancla por el identificador de la acción modificada para cubrir también el comportamiento táctil de WebKit cuando el checkbox pierde el foco. Se verificaron además clasificación/filtros/progreso y las animaciones de guardado/borrado con datos simulados.
+
+## Vista previa del informe antes de descargar Excel · 17 de octubre de 2026
+
+Ver informe sustituye el inicio de descarga desde Acciones y Análisis. Abre un diálogo con Áreas, Situaciones y Datos; selector propio de Hoy/Semana/30/90 días, semanas anterior/actual/siguiente, Actualizar y Descargar Excel. El período inicial se hereda de Análisis pero los cambios del informe no modifican el dashboard.
+
+La preparación de filas, orden, áreas y columnas se comparte con el exportador. El informe conserva una copia en memoria: el archivo se genera desde esa copia, sin una nueva consulta, aunque se haya paginado o el origen haya cambiado después. Situaciones y Datos muestran diez filas por página, con textos completos y tablas desplazables horizontalmente en móvil. La descarga conserva todos los registros del período y el formato anterior, incluidos filtros, gráficos y respaldo original.
+
+Se validaron 33 pruebas de dominio/estado/servicio/exportación. Las nuevas pruebas de navegador verifican apertura sin descarga, períodos independientes, secciones, gráficos, textos/duplicados/caracteres especiales, paginación de 25 registros sin limitar Excel, columnas originales, actualización, errores de consulta y plantilla con reintento, vacío y descarga vacía, semanas, teclado/foco, móvil sin desbordamiento de página, lecturas tardías, cierre de sesión y cancelación de descarga pendiente al pasar a segundo plano. El recorrido ampliado pasó en Chromium y WebKit con Supabase simulado.
+
+También pasaron el recorrido general de sesión/captura/edición/acciones/Excel, servidor estático con dependencias reales, PWA con service worker real y actualización manual, y conservación de posición al completar acciones. Se inspeccionaron capturas de escritorio y móvil; el Excel descargado se comprobó contra los registros/cachés OOXML. No se alteraron las reglas de generación del archivo, esquema, políticas ni datos personales.
+
+Pendiente: revisión manual de esta vista en dispositivos físicos y apertura del archivo en Excel de escritorio/móvil; las pruebas del navegador no sustituyen esas comprobaciones. No se modificó iPhone ni se publicó o generó ZIP.

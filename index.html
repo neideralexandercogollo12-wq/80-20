@@ -17,7 +17,7 @@
   <script defer src="js/domain.js"></script><script defer src="js/service.js"></script>
   <script defer src="js/focus.js"></script>
   <script defer src="js/state.js"></script><script defer src="js/charts.js"></script>
-  <script defer src="js/excel.js"></script><script defer src="js/app.js"></script>
+  <script defer src="js/excel.js"></script><script defer src="js/report.js"></script><script defer src="js/app.js"></script>
 </head>
 <body>
   <p id="connectionNotice" class="connection-notice" role="status" hidden>Sin conexión. Para consultar o guardar, vuelve a conectarte a internet.</p>
@@ -57,7 +57,7 @@
         <div class="intro"><h1>Mapa de fricciones</h1><p class="muted">Observa qué necesita atención, sin juzgarte.</p></div>
         <div class="analysis-tools">
           <label class="sr-only" for="period">Período de análisis</label><select id="period"><option value="today">Hoy</option><option value="week" selected>Semana</option><option value="30">30 días</option><option value="90">90 días</option></select>
-          <button id="refresh">Actualizar</button><button id="exportExcel">Exportar Excel</button>
+          <button id="refresh">Actualizar</button><button id="exportExcel">Ver informe</button>
         </div>
         <div id="weekControls" class="row"><button id="prevWeek" class="plain">‹ Anterior</button><button id="currentWeek" class="plain">Esta semana</button><button id="nextWeek" class="plain">Siguiente ›</button></div>
         <p id="periodDates" class="hint"></p>
@@ -76,7 +76,7 @@
       </section>
       <section id="actions" class="panel" hidden>
         <div class="intro"><h1>Tareas y acciones</h1><p class="muted">Dale espacio a lo que para ti importa.</p></div>
-        <div class="section-head"><h2>Tus acciones</h2><div class="row"><button id="actionsExportExcel" class="plain subtle-export" title="Informe de fricciones · Semana">Descargar Excel</button><button id="refreshActions" class="plain">Actualizar</button></div></div>
+        <div class="section-head"><h2>Tus acciones</h2><div class="row"><button id="actionsExportExcel" class="plain subtle-export" title="Informe de fricciones · Semana">Ver informe</button><button id="refreshActions" class="plain">Actualizar</button></div></div>
         <label class="action-filter">Filtrar por área<select id="actionFilter"></select></label>
         <div id="actionsBody" class="stack"></div>
       </section>
@@ -104,6 +104,14 @@
   <dialog id="installDialog" aria-labelledby="installTitle"><div class="stack"><h2 id="installTitle">Pareto en tu pantalla de inicio</h2><p id="installInstructions"></p><p class="hint">Se abrirá en su propia ventana. Necesitas internet para consultar y guardar tus datos.</p><button id="installClose" type="button" class="primary">Entendido</button></div></dialog>
   <dialog id="archivedDialog" aria-labelledby="archivedTitle"><div class="dialog-head"><h2 id="archivedTitle">Apartados</h2><button id="archivedClose" type="button" class="plain">Cerrar</button></div><p class="hint">Problemas apartados del período seleccionado</p><p id="archivedError" class="error" role="alert"></p><div id="archivedBody" class="stack"></div></dialog>
   <div id="keyboardTools" hidden><button id="keyboardDone" type="button" class="plain">Listo</button></div>
+  <dialog id="reportDialog" aria-labelledby="reportTitle">
+    <div class="dialog-head"><h2 id="reportTitle">Informe de fricciones</h2><button id="reportClose" type="button" class="plain" aria-label="Cerrar informe">Cerrar</button></div>
+    <div class="report-tools"><label>Período del informe<select id="reportPeriod"><option value="today">Hoy</option><option value="week">Semana</option><option value="30">30 días</option><option value="90">90 días</option></select></label><button id="reportRefresh" type="button">Actualizar</button><button id="reportDownload" type="button" class="primary" disabled>Descargar Excel</button></div>
+    <div id="reportWeeks" class="row report-weeks"><button id="reportPrev" type="button" class="plain">‹ Anterior</button><button id="reportCurrent" type="button" class="plain">Esta semana</button><button id="reportNext" type="button" class="plain">Siguiente ›</button></div>
+    <p id="reportContext" class="hint"></p><p id="reportDownloadError" class="error" role="alert"></p>
+    <div id="reportTabs" role="tablist" aria-label="Secciones del informe"><button id="reportTabAreas" role="tab" aria-selected="true" aria-controls="reportContent" data-report-tab="areas" type="button">Áreas</button><button id="reportTabSituations" role="tab" aria-selected="false" aria-controls="reportContent" data-report-tab="situations" tabindex="-1" type="button">Situaciones</button><button id="reportTabData" role="tab" aria-selected="false" aria-controls="reportContent" data-report-tab="data" tabindex="-1" type="button">Datos</button></div>
+    <div id="reportStatus" role="status"></div><div id="reportContent" role="tabpanel" aria-labelledby="reportTabAreas" tabindex="0"></div>
+  </dialog>
   <div id="toast" role="status" hidden></div>
   <div id="privacy" hidden><span>Tu espacio personal</span></div>
   <noscript>Activa JavaScript para utilizar Pareto Core.</noscript>

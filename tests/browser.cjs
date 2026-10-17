@@ -59,7 +59,7 @@ async function main(){
     await page.locator('#period').selectOption('today');await ready(page);
     await page.evaluate(()=>window.mock.fail=true);await page.locator('#refresh').click();await page.locator('#analysisBody').getByRole('button',{name:'Reintentar'}).waitFor();assert.equal(await page.locator('#analysisBody .metrics').count(),0);await page.evaluate(()=>window.mock.fail=false);await page.locator('#analysisBody').getByRole('button',{name:'Reintentar'}).click();await ready(page);
     // Excel export uses the selected period; CSV is no longer offered.
-    const xlsxDownload=page.waitForEvent('download');await page.locator('#exportExcel').click();const xlsx=await xlsxDownload;await xlsx.saveAs(path.join(out,'pareto-web.xlsx'));
+    await page.locator('#exportExcel').click();await page.waitForFunction(()=>!document.querySelector('#reportDownload').disabled);const xlsxDownload=page.waitForEvent('download');await page.locator('#reportDownload').click();const xlsx=await xlsxDownload;await xlsx.saveAs(path.join(out,'pareto-web.xlsx'));await page.locator('#reportClose').click();
     assert.equal(await page.locator('#exportCsv').count(),0);
     // Problem action draft protection and actions persistence.
     await page.getByRole('button',{name:'Ver detalles',exact:true}).first().click();await page.locator('#detailDialog').getByRole('button',{name:'Preparar acción para aliviar'}).click();await page.locator('#actionText').waitFor({state:'visible'});assert.equal(await page.locator('#actionText').inputValue(),'');assert.notEqual(await page.locator('#actionProblem').inputValue(),'');

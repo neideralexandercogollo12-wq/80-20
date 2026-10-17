@@ -139,3 +139,9 @@ test('actualizar acción conserva la lista durante el guardado y no vuelve a con
  const pending=s.changeAction('a',{completada:true});assert.equal(s.actions.length,2);assert.equal(s.actions[0].completada,false);d.resolve();await pending;assert.equal(s.actions[0].completada,true);assert.equal(s.actions.length,2);assert.equal(reads,0);
  await s.changeAction('a',{completada:false});assert.equal(s.actions[0].completada,false);assert.equal(reads,0);
 });
+test('modelo de informe comparte filas, orden, áreas y respaldo con Excel sin mutar origen',()=>{
+ const original=[row('z',2,'Ruido','Alma'),{...row('a',5),evento:'Texto\n<seguro> & repetido',emocion:null,problema:null,nivel_original_10:null},{...row('b',5),evento:'Texto\n<seguro> & repetido'}];
+ const before=structuredClone(original),r=X.prepareReport(original,bounds);assert.deepEqual(original,before);assert.deepEqual(r.ordered.map(r=>r.id),['a','b','z']);assert.deepEqual(r.situations.map(r=>r[2]),[5,5,2]);assert.equal(r.situations[2][3],'Alma (anterior)');assert.equal(r.data[0][2],'');assert.equal(r.data[0][5],'');assert.equal(r.data[1][5],8);assert.equal(r.headers.length,6);
+ const files=X.entries(original,bounds,template);r.data.forEach(values=>values.filter(v=>typeof v==='string'&&v).forEach(v=>assert.ok(files['xl/worksheets/sheet3.xml'].includes(v.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')))));
+ original[0].evento='Cambio';assert.notEqual(r.ordered[2].evento,'Cambio');assert.equal(X.prepareReport([],bounds).ordered.length,0);
+});

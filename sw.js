@@ -1,5 +1,5 @@
 /* Only public application files are cached. API responses, config and user data are excluded. */
-const VERSION = 'pareto-shell-2026-10-17-1';
+const VERSION = 'pareto-shell-2026-10-17-3';
 const PREFIX = 'pareto-shell-';
 const BASE = new URL('./', self.location.href);
 const CACHE = VERSION + ':' + BASE.pathname;
@@ -7,7 +7,7 @@ const FILES = [
   './', 'index.html', 'styles.css', 'manifest.webmanifest',
   'assets/icon.svg', 'assets/icon-192.png', 'assets/icon-512.png', 'assets/apple-touch-icon.png',
   'assets/excel-template.json', 'vendor/supabase-2.117.3.min.js',
-  'js/focus.js', 'js/domain.js', 'js/service.js', 'js/state.js', 'js/charts.js', 'js/excel.js', 'js/app.js', 'js/pwa.js'
+  'js/focus.js', 'js/domain.js', 'js/service.js', 'js/state.js', 'js/charts.js', 'js/excel.js', 'js/report.js', 'js/app.js', 'js/pwa.js'
 ].map(path => new URL(path, BASE).href);
 self.addEventListener('install', event => {
   event.waitUntil(caches.open(CACHE).then(cache => cache.addAll(FILES)));

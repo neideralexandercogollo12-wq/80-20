@@ -34,7 +34,7 @@ El contenido se cubre al ocultar la pestaña. Las miniaturas del navegador/siste
 
 ## Excel
 
-Descarga el período elegido desde Análisis o desde Descargar Excel en Acciones; al iniciar se usa Semana. Áreas, Situaciones y Datos conservan tablas nativas filtrables y gráficos que respetan filas visibles, sin tarjetas, etiqueta de período ni bordes negros. No exporta tareas. CSV continúa retirado.
+Abre Ver informe desde Análisis o Acciones. La vista previa empieza con el período actual de Análisis (Semana al iniciar) y permite elegir Hoy, Semana, 30 o 90 días y navegar entre semanas sin cambiar el dashboard. Áreas muestra tabla y gráfico; Situaciones muestra tabla y barras salvia 1–5; Datos conserva todas las columnas. Situaciones y Datos se paginan de diez en diez. Solo Descargar Excel, dentro del informe, inicia la descarga y siempre incluye todo el período, no solo la página visible. Actualizar solicita una nueva copia; descargar usa exactamente la copia mostrada, sin volver a consultar. Áreas, Situaciones y Datos conservan tablas nativas filtrables y gráficos que respetan filas visibles, sin tarjetas, etiqueta de período ni bordes negros. No exporta tareas. CSV continúa retirado.
 
 ## Instalar
 
@@ -66,6 +66,7 @@ node tests/layout.cjs
 node tests/actions-areas.cjs
 node tests/motion.cjs
 node tests/actions-export.cjs
+node tests/report-preview.cjs
 node tests/static.cjs
 node tests/pwa.cjs
 ```
@@ -73,3 +74,5 @@ node tests/pwa.cjs
 Los recorridos de navegador requieren Playwright en el entorno de desarrollo (no forma parte del sitio). PLAYWRIGHT_MODULE permite indicar su ubicación; TEST_WEBKIT=1 activa WebKit en native-browser.cjs y actions-areas.cjs. Se usa Supabase simulado sin escrituras personales. pwa.cjs prueba el service worker real bajo servidor local. La revisión física en iPhone y la instalación desde HTTPS siguen pendientes; ver VERIFICATION.md.
 
 Al completar o volver a pendientes una acción, la lista se actualiza sin vaciarse ni volver al inicio; conserva el contexto visual próximo a la acción marcada. Prueba específica: `node tests/action-scroll.cjs`, también con `TEST_WEBKIT=1`.
+
+La vista previa se mantiene únicamente en memoria y se descarta al cerrar, cambiar cuenta o pasar a segundo plano. Incluye carga, error/reintento y retorno de foco al acceso original; no incorpora tareas, acciones ni CSV.

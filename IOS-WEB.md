@@ -28,7 +28,7 @@ Los cálculos y gráficos reutilizan el dominio JavaScript existente, con prueba
 - En una pestaña de escritorio se conserva inicio en Acciones y Nueva acción independiente; **Análisis vuelve a estar accesible**. En móvil o al instalar la PWA, las tres secciones y el formulario integrado siguen el flujo del IPA.
 - El selector manual de problema, añadido específicamente para la web, sigue proponiendo área a partir de todo el historial. Preparar desde un foco usa sus registros del período; desde un área hereda esa área. Las áreas de acciones guardadas nunca se recalculan automáticamente.
 - El navegador guarda la sesión con Supabase, no con Keychain. Las preferencias de focos se guardan por cuenta en este navegador: clave SHA-256 del problema, corte temporal e identificadores revisados. No se guardan textos de situaciones ni respuestas de Supabase. No se sincronizan con las preferencias Keychain del IPA ni entre dispositivos. Al salir se limpia el estado de memoria; las preferencias persistentes se recuperan al volver a esa cuenta.
-- Excel se descarga mediante el navegador; no es la hoja nativa de compartir. CSV continúa retirado por la decisión anterior del usuario. No se incorpora IA.
+- Excel se previsualiza en Ver informe (Áreas, Situaciones y Datos), con período independiente y descarga opcional desde la misma copia; el archivo se descarga mediante el navegador; no es la hoja nativa de compartir. CSV continúa retirado por la decisión anterior del usuario. No se incorpora IA.
 - SwiftUI, Keychain, el teclado del sistema y el selector de aplicaciones no se pueden reproducir literalmente en HTML. La cubierta de privacidad web no garantiza ocultar capturas previas realizadas por el navegador/sistema.
 
 ## Instalación, conexión y actualizaciones

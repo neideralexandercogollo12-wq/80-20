@@ -40,15 +40,23 @@
     let remaining=height,end=from;while(remaining>=(heights[end+1]||24)){remaining-=heights[end+1]||24;end++;}
     return original.replace(/<xdr:to>.*?<\/xdr:to>/s,part=>part.replace(/<xdr:row>\d+<\/xdr:row>/,`<xdr:row>${end}</xdr:row>`).replace(/<xdr:rowOff>\d+<\/xdr:rowOff>/,`<xdr:rowOff>${Math.round(remaining*12700)}</xdr:rowOff>`));
   }
+  const dataHeaders=['Área','Evento','Emoción','Nivel (1–5)','Problema','Nivel original (1–10)'];
+  function prepareReport(rows,bounds){
+    const snapshotBounds={start:new Date(bounds.start),end:new Date(bounds.end)};
+    const ordered=A.situationPoints(rows,snapshotBounds).map(p=>({...p.row}));
+    return {bounds:snapshotBounds,ordered,areas:A.categoryTotals(ordered),headers:[...dataHeaders],
+      situations:ordered.map((r,i)=>[i+1,r.evento,Number(r.nivel),A.areaLabel(r.categoria)]),
+      data:ordered.map(r=>[A.areaLabel(r.categoria),r.evento,r.emocion||'',Number(r.nivel),r.problema||'',r.nivel_original_10??''])};
+  }
   function entries(rows,bounds,template){
     if(!template['_rels/.rels']||!template['[Content_Types].xml']||!template['xl/workbook.xml'])throw new Error('Falta la plantilla de Excel.');
     if(rows.length>=1048570)throw new Error('Demasiados registros para un archivo Excel.');
-    const files={...template},ordered=A.situationPoints(rows,bounds).map(p=>p.row),areas=A.categoryTotals(ordered),last=Math.max(2,ordered.length+1);
+    const report=prepareReport(rows,bounds),files={...template},ordered=report.ordered,areas=report.areas,last=Math.max(2,ordered.length+1);
     const drawingID=id=>{const match=files[`xl/worksheets/sheet${id}.xml`]?.match(/<(?:x:)?drawing r:id="([^"]+)"/);if(!match)throw new Error('Plantilla incompleta.');return match[1];};
     const first=drawingID(1),second=drawingID(2),ah={4:32},sh={3:32};
     let dashboard=row(2,cell('A2','Áreas',styles.title))+row(4,cell('A4','Área',styles.header)+cell('B4','Carga',styles.header),32);
     areas.forEach(([name,load],i)=>{const r=i+5,h=rowHeight([A.areaLabel(name)],[34]);ah[r]=h;dashboard+=row(r,cell('A'+r,A.areaLabel(name))+num('B'+r,load,`SUMIF(Datos!A2:A${last},A${r},Datos!D2:D${last})`),h);});
-    const headers=['Área','Evento','Emoción','Nivel (1–5)','Problema','Nivel original (1–10)'];
+    const headers=report.headers;
     let situations=row(2,cell('A2','Situaciones',styles.title))+row(3,['N.º','Situación','Nivel','Área'].map((h,i)=>cell(String.fromCharCode(65+i)+'3',h,styles.header)).join(''),32);
     let data=row(1,headers.map((h,i)=>cell(String.fromCharCode(65+i)+'1',h,styles.header)).join(''),32);
     ordered.forEach((item,i)=>{const s=i+4,d=i+2,h=rowHeight([item.evento,A.areaLabel(item.categoria)],[55,34]);sh[s]=h;
@@ -89,6 +97,6 @@
     if(!cached){const response=await fetch('assets/excel-template.json');if(!response.ok)throw new Error('No se pudo cargar la plantilla Excel. Intenta de nuevo.');cached=await response.json();}
     return archive(entries(rows,bounds,cached));
   }
-  const api={entries,archive,workbook,rowHeight};
+  const api={prepareReport,entries,archive,workbook,rowHeight};
   if(typeof module!=='undefined'&&module.exports)module.exports=api;else root.ParetoExcel=api;
 })(globalThis);
