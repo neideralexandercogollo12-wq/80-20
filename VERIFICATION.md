@@ -146,3 +146,13 @@ Se validaron 33 pruebas de dominio/estado/servicio/exportación. Las nuevas prue
 También pasaron el recorrido general de sesión/captura/edición/acciones/Excel, servidor estático con dependencias reales, PWA con service worker real y actualización manual, y conservación de posición al completar acciones. Se inspeccionaron capturas de escritorio y móvil; el Excel descargado se comprobó contra los registros/cachés OOXML. No se alteraron las reglas de generación del archivo, esquema, políticas ni datos personales.
 
 Pendiente: revisión manual de esta vista en dispositivos físicos y apertura del archivo en Excel de escritorio/móvil; las pruebas del navegador no sustituyen esas comprobaciones. No se modificó iPhone ni se publicó o generó ZIP.
+
+## Informe blanco y filtros por columna · 17 de octubre de 2026
+
+La ventana del informe usa un lienzo blanco con texto oscuro, encabezados salvia, separadores suaves y números legibles. El resto de la aplicación conserva su tema oscuro. Se añadieron filtros en cada encabezado: valores exactos para área y números, búsqueda normalizada para texto y opción de vacíos en el nivel original.
+
+Los filtros se combinan antes de paginar; tablas y gráficos muestran el mismo subconjunto. Áreas, Situaciones y Datos mantienen filtros independientes. Limpiar filtros afecta solo a la sección abierta. Las búsquedas conservan foco/cursor al escribir; se conserva el filtro al actualizar y al cambiar de sección, y se reinicia al cambiar período, semana, cuenta o cerrar. No se añaden consultas ni persistencia de filtros.
+
+La descarga sigue incluyendo todo el período, como se acordó para el informe; un aviso visible aclara que los filtros afectan la vista y sus gráficos y que el Excel conserva sus propios filtros. No se alteró el exportador ni el formato del archivo.
+
+Pruebas nuevas aprobadas en Chromium y WebKit: tema blanco, filtros exactos, combinaciones, texto sin distinguir acentos, vacíos, paginación filtrada, gráficos coincidentes, independencia de secciones, limpieza, ausencia de resultados, reinicio por período, descarga completa aunque la vista esté filtrada y distribución móvil. También aprobaron los recorridos de vista previa y descarga con errores/reintento e invalidación de respuestas. Se revisaron capturas de escritorio y móvil con datos simulados. Pendiente la revisión táctil en dispositivo físico.

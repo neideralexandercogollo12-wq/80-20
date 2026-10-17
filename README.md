@@ -76,3 +76,7 @@ Los recorridos de navegador requieren Playwright en el entorno de desarrollo (no
 Al completar o volver a pendientes una acción, la lista se actualiza sin vaciarse ni volver al inicio; conserva el contexto visual próximo a la acción marcada. Prueba específica: `node tests/action-scroll.cjs`, también con `TEST_WEBKIT=1`.
 
 La vista previa se mantiene únicamente en memoria y se descarta al cerrar, cambiar cuenta o pasar a segundo plano. Incluye carga, error/reintento y retorno de foco al acceso original; no incorpora tareas, acciones ni CSV.
+
+La vista previa del informe tiene fondo blanco, texto oscuro y encabezados salvia. Cada columna permite filtrar: selección exacta para áreas y números, y búsqueda de texto para situaciones, eventos, emoción y problema. Se combinan filtros de una misma sección y se conservan al cambiar de pestaña; Limpiar filtros borra los de la sección actual. Cambiar el período o cerrar el informe los reinicia. Actualizar conserva los filtros del período abierto. Los gráficos y la paginación siguen las filas filtradas de su sección. Los filtros no se aplican a la descarga: el Excel conserva todo el período y sus filtros nativos independientes.
+
+Prueba adicional: `node tests/report-filters.cjs` (también admite `TEST_WEBKIT=1`).
