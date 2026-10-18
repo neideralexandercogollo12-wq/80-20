@@ -86,7 +86,7 @@
     function bars(items,max,title,levels=false){
       const group=el('section','','report-bars');group.append(el('h3',title));const list=el('ul');
       items.forEach(({name,value,area})=>{const item=el('li'),label=el('div','','report-bar-label');label.append(el('span',name),el('strong',levels?A.formatLevel(value):String(value)));
-        label.lastChild.style.color='#365744';
+        label.lastChild.style.color=levels?A.sage(value):'#b7ccc0';
         const track=el('div','','bar-track'),fill=el('span','','bar-fill');fill.style.width=(max?value/max*100:0)+'%';fill.style.background=levels?A.sage(value):'#96B8A5';track.append(fill);track.setAttribute('aria-hidden','true');
         item.append(label,track);if(area)item.append(el('small',area,'hint'));list.append(item);
       });group.append(list);return group;

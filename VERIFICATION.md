@@ -156,3 +156,15 @@ Los filtros se combinan antes de paginar; tablas y gráficos muestran el mismo s
 La descarga sigue incluyendo todo el período, como se acordó para el informe; un aviso visible aclara que los filtros afectan la vista y sus gráficos y que el Excel conserva sus propios filtros. No se alteró el exportador ni el formato del archivo.
 
 Pruebas nuevas aprobadas en Chromium y WebKit: tema blanco, filtros exactos, combinaciones, texto sin distinguir acentos, vacíos, paginación filtrada, gráficos coincidentes, independencia de secciones, limpieza, ausencia de resultados, reinicio por período, descarga completa aunque la vista esté filtrada y distribución móvil. También aprobaron los recorridos de vista previa y descarga con errores/reintento e invalidación de respuestas. Se revisaron capturas de escritorio y móvil con datos simulados. Pendiente la revisión táctil en dispositivo físico.
+
+## Regreso al tema oscuro del informe · 17 de octubre de 2026
+
+Por solicitud del usuario se retiró el fondo blanco de la vista previa y se recuperaron fondo oscuro, texto claro y encabezados salvia originales. Se conservaron todos los filtros por columna, gráficos, paginación y descarga. Los números de los gráficos recuperan colores salvia legibles sobre el fondo oscuro. La versión de caché se incrementó para preparar la actualización; no se publicó automáticamente.
+
+## Renovación visual del informe · 18 de octubre de 2026
+
+Se rediseñó exclusivamente la presentación del informe: azul profundo con un matiz verde discreto, texto claro, botón de descarga menta, pestañas verdes compactas, filtros integrados en encabezados y gráficos salvia. Se reorganizó la jerarquía de título, controles y lectura de datos; en PC la descarga se alinea al extremo derecho. Las tablas conservan separadores suaves, sin bandas alternas, y los campos mantienen tamaños táctiles en móvil. No se añadieron mensajes motivacionales ni métricas ajenas a los registros.
+
+La hoja de estilos del informe se consolidó para sustituir las reglas anteriores. Se conservaron filtros, gráficos, paginación, período, datos y Excel sin cambios de comportamiento. Se incrementó la versión de la PWA; no se publicó automáticamente.
+
+Pruebas aprobadas: report-filters.cjs en Chromium y WebKit; report-preview.cjs en Chromium. Incluyen distribución móvil, filtros combinados, blancos/acentos, independencia de secciones, gráficos filtrados, exportación completa, textos largos, semanas vacías, errores y respuestas tardías. Se revisó visualmente la captura de Áreas en escritorio con datos simulados. La revisión en dispositivo físico permanece pendiente.
