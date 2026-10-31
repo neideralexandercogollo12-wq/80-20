@@ -398,7 +398,14 @@
   }
   $('refreshActions').addEventListener('click',()=>store.load('actions'));
   function download(bytes,type,name){const url=URL.createObjectURL(new Blob([bytes],{type})),a=el('a');a.href=url;a.download=name;document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),1000);}
-  const report=window.ParetoReport.create({service,context:()=>store.context(),onDownload:bytes=>{download(bytes,'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet','pareto-core.xlsx');toast('Excel exportado.');}});
+  const report=window.ParetoReport.create({service,context:()=>store.context(),
+    confirmRemoval:row=>confirmDelete('¿Eliminar esta situación?','Eliminar','Se eliminará del historial y de todos los informes, no solo de esta vista. Esta acción no se puede deshacer. Las acciones vinculadas se conservarán.\n\n'+row.evento),
+    onDelete:async(row,afterCommit)=>{
+      if(busy)throw new Error('Espera a que termine el guardado actual e inténtalo nuevamente.');
+      const c=store.context();busy=true;
+      try{return await store.deleteRecord(row.id,afterCommit);}finally{if(c.active())busy=false;}
+    },
+    onDownload:bytes=>{download(bytes,'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet','pareto-core.xlsx');toast('Excel exportado.');}});
   function syncExportButtons(){
     const period={today:'Hoy',week:'Semana','30':'30 días','90':'90 días'}[store.period];
     for(const id of ['exportExcel','actionsExportExcel']){$(id).textContent='Ver informe';$(id).disabled=false;$(id).title='Informe de fricciones · '+period;}

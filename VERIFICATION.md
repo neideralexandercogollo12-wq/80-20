@@ -168,3 +168,19 @@ Se rediseñó exclusivamente la presentación del informe: azul profundo con un 
 La hoja de estilos del informe se consolidó para sustituir las reglas anteriores. Se conservaron filtros, gráficos, paginación, período, datos y Excel sin cambios de comportamiento. Se incrementó la versión de la PWA; no se publicó automáticamente.
 
 Pruebas aprobadas: report-filters.cjs en Chromium y WebKit; report-preview.cjs en Chromium. Incluyen distribución móvil, filtros combinados, blancos/acentos, independencia de secciones, gráficos filtrados, exportación completa, textos largos, semanas vacías, errores y respuestas tardías. Se revisó visualmente la captura de Áreas en escritorio con datos simulados. La revisión en dispositivo físico permanece pendiente.
+
+## Borrado de situaciones dentro del informe · 28 de octubre de 2026
+
+Se incorporó Eliminar por registro en Situaciones: columna Registro en PC y botón debajo de la barra en la web móvil. En móvil se muestran primero las barras para acceder a la acción sin desplazar horizontalmente la tabla. Se conserva el diseño azul profundo/esmeralda/salvia. Datos y Excel mantienen sus columnas originales, sin la columna de controles.
+
+La confirmación integrada muestra el texto y explica el borrado permanente del historial y todos los informes, conservando acciones vinculadas. Se reutiliza Store.deleteRecord y el servicio existente, con filtros por propietario/ID, RLS y detección de registros inexistentes. No se modificaron servicios, esquema ni políticas. Al confirmarse el borrado, se actualiza la copia del informe por ID, se recalculan áreas/filas/gráficos/conteos y el próximo Excel, manteniendo filtros y corrigiendo el número de página. Después se refrescan Análisis, nombres y el historial cargado. La descarga y controles de contexto se bloquean durante la operación, con mensajes de progreso y error.
+
+Verificación con datos simulados:
+
+- report-delete.cjs aprobado en Chromium y WebKit, ambos con PC y móvil: cancelar, error/reintento, textos duplicados con IDs distintos, propietario, acciones intactas, actualización del Excel y métricas, desaparición del último nombre reutilizable, filtros, última fila de página, vacío filtrado, registro borrado por otro cliente, último registro y respuesta tardía tras cambiar de cuenta.
+- 33 pruebas de dominio/estado/servicio/exportación aprobadas. También aprobaron filtros del informe, vista previa, exportación con errores/reintento, recorrido funcional móvil, posición al completar acciones y PWA con service worker real.
+- Se revisaron capturas de PC/móvil con datos simulados. No se realizaron escrituras de prueba sobre datos personales. Se incrementó la versión de caché.
+
+Pendiente: revisión táctil en iPhone físico y publicación de la carpeta actualizada en GitHub Pages. No se modificó la aplicación nativa iPhone, no hay migraciones, ZIP, IPA ni publicación automática.
+
+Referencia comprobada: documentación oficial Supabase JavaScript delete (https://supabase.com/docs/reference/javascript/delete), filtros y select del ID borrado. El índice de cambios oficial no requiere cambios en el flujo reutilizado para navegadores modernos.

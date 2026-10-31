@@ -80,3 +80,11 @@ La vista previa se mantiene únicamente en memoria y se descarta al cerrar, camb
 La vista previa del informe utiliza azul profundo, acentos esmeralda y salvia, pestañas compactas y filtros integrados en encabezados verdes. Cada columna permite filtrar: selección exacta para áreas y números, y búsqueda de texto para situaciones, eventos, emoción y problema. Se combinan filtros de una misma sección y se conservan al cambiar de pestaña; Limpiar filtros borra los de la sección actual. Cambiar el período o cerrar el informe los reinicia. Actualizar conserva los filtros del período abierto. Los gráficos y la paginación siguen las filas filtradas de su sección. Los filtros no se aplican a la descarga: el Excel conserva todo el período y sus filtros nativos independientes.
 
 Prueba adicional: `node tests/report-filters.cjs` (también admite `TEST_WEBKIT=1`).
+
+## Eliminar situaciones desde el informe
+
+En Situaciones puedes eliminar un registro sin salir del informe: en PC, desde la columna Registro; en móvil, con Eliminar debajo de su barra. La confirmación identifica el texto y aclara que el borrado es permanente y afecta también al historial y a los informes. No equivale a completar una acción y no elimina las acciones vinculadas.
+
+Solo se retira la fila después de confirmarse el borrado por propietario e identificador. El informe recalcula tablas, gráficos, conteos y el próximo Excel, conservando filtros y ajustando la página si deja de existir. El flujo existente refresca Análisis, historial cargado y nombres reutilizables. Ante un error, conserva el registro y permite reintentar; si otro cliente ya lo borró, Actualizar reconcilia la vista.
+
+Se bloquean la descarga y los cambios de contexto durante el borrado. Cerrar sesión o pasar a segundo plano sigue cerrando el informe y descarta respuestas tardías. No hay borrado masivo ni nuevas columnas en el Excel. Prueba adicional con Supabase simulado: `node tests/report-delete.cjs` (también admite `TEST_WEBKIT=1`).

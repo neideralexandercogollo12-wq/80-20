@@ -19,7 +19,7 @@ La primera entrega instalable conservaba la distribución de escritorio y no tra
 | ActionsView.swift | Formulario dentro de Acciones en móvil/modo instalado, áreas, progreso filtrado, importancia, completar, eliminar y añadir otra acción vinculada sin ocultar casos nuevos |
 | Components.swift | Listo al escribir en móvil/modo instalado, cierre al guardar/cambiar apartado y conservación de saltos de línea |
 | FrictionUpdate.swift | Edición completa, campos opcionales vacíos, conservación de identidad/fecha/respaldo y errores con reintento |
-| ExcelReport.swift | Informe Excel con Áreas, Situaciones y Datos, tablas filtrables y gráficos; exportador existente conservado |
+| ExcelReport.swift | Informe Excel con Áreas, Situaciones y Datos, tablas filtrables y gráficos; vista previa con eliminación confirmada de situaciones en PC y móvil, conservando el exportador |
 
 Los cálculos y gráficos reutilizan el dominio JavaScript existente, con pruebas de equivalencia respecto a Swift. Omitir o recuperar no elimina registros, no reclasifica ni altera la carga ni el 80/20. El 80/20 siempre utiliza todos los registros clasificados del contexto.
 

@@ -1,36 +1,41 @@
-/* Read-only preview. Its in-memory snapshot is also the input to the existing Excel exporter. */
+/* Report preview with confirmed, owner-scoped situation deletion. Its in-memory snapshot is also the input to the existing Excel exporter. */
 (function(root){
   'use strict';
   const A=root.ParetoAnalysis,X=root.ParetoExcel,{el,button}=root.ParetoCharts;
-  function create({service,context,onDownload}){
+  function create({service,context,onDownload,confirmRemoval,onDelete}){
     const $=id=>document.getElementById(id),dialog=$('reportDialog');
-    let sequence=0,snapshot=null,period='week',offset=0,tab='areas',page=0,loading=false,exporting=false,opener=null;
+    let sequence=0,snapshot=null,period='week',offset=0,tab='areas',page=0,loading=false,exporting=false,opener=null,removing=false;
     let filters={areas:{},situations:{},data:{}};
     const date=d=>d.toLocaleDateString('es-CO',{day:'2-digit',month:'short',year:'numeric'});
     function active(c,revision){return c.active()&&revision===sequence&&dialog.open&&!document.hidden;}
     function controls(){
-      $('reportPeriod').value=period;$('reportWeeks').hidden=period!=='week';$('reportNext').disabled=offset===0;
-      $('reportDownload').disabled=loading||!snapshot||exporting;
+      $('reportPeriod').value=period;$('reportPeriod').disabled=removing;$('reportWeeks').hidden=period!=='week';$('reportNext').disabled=offset===0||removing;
+      $('reportPrev').disabled=removing;$('reportCurrent').disabled=removing;$('reportClose').disabled=removing;
+      $('reportTabs').querySelectorAll('button').forEach(b=>b.disabled=removing);
+      $('reportContent').querySelectorAll('.report-delete').forEach(b=>b.disabled=removing||exporting);
+      if(removing)$('reportContent').querySelectorAll('input,select,button').forEach(b=>b.disabled=true);
+      $('reportDownload').disabled=loading||!snapshot||exporting||removing;
       $('reportDownload').textContent=exporting?'Preparando Excel…':'Descargar Excel';
-      $('reportDownload').setAttribute('aria-busy',String(exporting));$('reportRefresh').disabled=loading;
+      $('reportDownload').setAttribute('aria-busy',String(exporting));$('reportRefresh').disabled=loading||removing;
     }
     function close(restoreFocus=true){
-      sequence++;filters={areas:{},situations:{},data:{}};snapshot=null;loading=false;exporting=false;page=0;
-      $('reportContent').replaceChildren();$('reportStatus').replaceChildren();$('reportDownloadError').textContent='';$('reportContext').textContent='';
+      sequence++;filters={areas:{},situations:{},data:{}};snapshot=null;loading=false;exporting=false;removing=false;page=0;
+      $('reportMutationError').textContent='';$('reportContent').replaceChildren();$('reportStatus').replaceChildren();$('reportDownloadError').textContent='';$('reportContext').textContent='';
       dialog.close();controls();const previous=opener;opener=null;
       if(restoreFocus&&previous?.isConnected&&previous.checkVisibility())previous.focus({preventScroll:true});
     }
     async function load(){
+      if(removing)return;
       const c=context();if(!c.user)return close(false);
       const revision=++sequence,bounds=A.periodBounds(period,offset);
-      snapshot=null;loading=true;exporting=false;page=0;$('reportDownloadError').textContent='';
+      snapshot=null;loading=true;exporting=false;page=0;$('reportMutationError').textContent='';$('reportDownloadError').textContent='';
       $('reportContext').textContent=date(bounds.start)+' — '+date(new Date(bounds.end-1));
       $('reportContent').replaceChildren();$('reportContent').setAttribute('aria-busy','true');$('reportStatus').textContent='Cargando informe…';controls();
       try{
         const rows=await service.read(c.user,{bounds,active:()=>active(c,revision)});
         if(!active(c,revision))return;
         snapshot=X.prepareReport(rows,bounds);loading=false;
-        $('reportContext').textContent+=` · ${snapshot.ordered.length} registros`;
+        updateContext();
         $('reportStatus').replaceChildren();render();
       }catch(error){
         if(!active(c,revision))return;
@@ -43,6 +48,7 @@
       if(!dialog.open)dialog.showModal();setTab('areas');$('reportClose').focus();load();
     }
     function setTab(next){
+      if(removing)return;
       tab=next;page=0;
       const buttons=[...$('reportTabs').querySelectorAll('[role=tab]')];
       buttons.forEach(b=>{const selected=b.dataset.reportTab===tab;b.setAttribute('aria-selected',String(selected));b.tabIndex=selected?0:-1;if(selected)$('reportContent').setAttribute('aria-labelledby',b.id);});
@@ -55,6 +61,7 @@
       }));
     }
     function applyFilter(index,kind,value,selection){
+      if(removing)return;
       if(value)filters[tab][index]={kind,value};else delete filters[tab][index];page=0;render();
       const field=$('reportContent').querySelector(`[data-filter-index="${index}"]`);
       if(field){field.focus({preventScroll:true});if(kind==='text')field.setSelectionRange(selection?.[0]??value.length,selection?.[1]??value.length);}
@@ -80,15 +87,23 @@
         }
         input.className='report-column-filter';input.dataset.filterIndex=index;input.setAttribute('aria-label','Filtrar '+h);th.append(input);tr.append(th);
       });head.append(tr);
-      const body=el('tbody');rows.forEach(values=>{const tr=el('tr');values.forEach(value=>tr.append(el('td',value==null?'':String(value),typeof value==='number'?'report-number':'')));body.append(tr);});
+      if(tab==='situations'){const th=el('th','Registro','report-row-actions');th.scope='col';tr.append(th);}
+      const body=el('tbody');rows.forEach(values=>{
+        const tr=el('tr');values.forEach(value=>tr.append(el('td',value==null?'':String(value),typeof value==='number'?'report-number':'')));
+        if(tab==='situations'){
+          const row=snapshot.ordered[values[0]-1],cell=el('td','','report-row-actions');tr.dataset.reportRecordId=row.id;
+          cell.append(deleteButton(row));tr.append(cell);
+        }
+        body.append(tr);
+      });
       table.append(caption,head,body);wrap.append(table);return wrap;
     }
     function bars(items,max,title,levels=false){
       const group=el('section','','report-bars');group.append(el('h3',title));const list=el('ul');
-      items.forEach(({name,value,area})=>{const item=el('li'),label=el('div','','report-bar-label');label.append(el('span',name),el('strong',levels?A.formatLevel(value):String(value)));
+      items.forEach(({name,value,area,row})=>{const item=el('li'),label=el('div','','report-bar-label');label.append(el('span',name),el('strong',levels?A.formatLevel(value):String(value)));
         label.lastChild.style.color=levels?A.sage(value):'#b7ccc0';
         const track=el('div','','bar-track'),fill=el('span','','bar-fill');fill.style.width=(max?value/max*100:0)+'%';fill.style.background=levels?A.sage(value):'#96B8A5';track.append(fill);track.setAttribute('aria-hidden','true');
-        item.append(label,track);if(area)item.append(el('small',area,'hint'));list.append(item);
+        item.append(label,track);if(area)item.append(el('small',area,'hint'));if(row)item.append(deleteButton(row,'report-chart-delete'));list.append(item);
       });group.append(list);return group;
     }
     function render(){
@@ -105,14 +120,48 @@
       const start=page*10,visible=rows.slice(start,start+10);filterSummary(target,total,count,'registros');
       if(total)target.append(el('p',`${start+1}–${Math.min(start+10,total)} de ${total} registros. El Excel incluye todo el período.`,'hint'));
       if(tab==='situations'){
-        const layout=el('div','','report-columns');layout.append(table(['N.º','Situación','Nivel','Área'],visible,'Situaciones del informe',all),bars(visible.map(([,name,value,area])=>({name,value,area})),5,'Fricción por situación (1–5)',true));target.append(layout);
+        const layout=el('div','','report-columns');layout.append(table(['N.º','Situación','Nivel','Área'],visible,'Situaciones del informe',all),bars(visible.map(([number,name,value,area])=>({name,value,area,row:snapshot.ordered[number-1]})),5,'Fricción por situación (1–5)',true));target.append(layout);
       }else target.append(table(snapshot.headers,visible,'Datos del informe',all));
       if(!total&&count)target.append(el('p','No hay resultados con estos filtros.','status'));
       if(total>10){const nav=el('div','','pager'),prev=button('Anterior',()=>{page--;render();}),next=button('Siguiente',()=>{page++;render();});prev.disabled=page===0;next.disabled=(page+1)*10>=total;
         nav.setAttribute('aria-label','Páginas del informe');nav.append(prev,el('span',`${page+1} / ${Math.ceil(total/10)}`),next);target.append(nav);}
     }
+    function updateContext(){
+      const bounds=snapshot.bounds;
+      $('reportContext').textContent=date(bounds.start)+' — '+date(new Date(bounds.end-1))+` · ${snapshot.ordered.length} registros`;
+    }
+    function deleteButton(row,extra=''){
+      const remove=button('Eliminar',()=>removeSituation(row),'plain report-delete '+extra);
+      remove.setAttribute('aria-label','Eliminar situación: '+row.evento);remove.dataset.deleteId=row.id;remove.disabled=removing||exporting;return remove;
+    }
+    async function removeSituation(row){
+      if(removing||loading||exporting||!snapshot?.ordered.some(r=>r.id===row.id))return;
+      const c=context(),revision=sequence,source=snapshot;
+      if(!active(c,revision))return;
+      removing=true;$('reportMutationError').textContent='';$('reportStatus').textContent='';controls();let committed=false;
+      const currentIndex=source.ordered.findIndex(r=>r.id===row.id),nextId=source.ordered[currentIndex+1]?.id||source.ordered[currentIndex-1]?.id;
+      try{
+        if(!await confirmRemoval(row)||!active(c,revision))return;
+        $('reportStatus').textContent='Eliminando situación…';$('reportContent').setAttribute('aria-busy','true');
+        const saved=await onDelete(row,()=>{
+          if(!active(c,revision))return;
+          committed=true;const scroll=dialog.scrollTop;
+          snapshot=X.prepareReport(source.ordered.filter(r=>r.id!==row.id),source.bounds);updateContext();render();controls();dialog.scrollTop=scroll;
+        });
+        if(active(c,revision)&&saved)$('reportStatus').textContent='Situación eliminada. El informe y el Excel se han actualizado.';
+      }catch(error){
+        if(active(c,revision)){$('reportStatus').textContent='';$('reportMutationError').textContent=committed?'La situación se eliminó, pero no se pudieron actualizar todas las vistas. Pulsa Actualizar para comprobarlas.':(error.message||'No se pudo eliminar. Inténtalo nuevamente.');}
+      }finally{
+        if(active(c,revision)){
+          const scroll=dialog.scrollTop;removing=false;render();$('reportContent').removeAttribute('aria-busy');controls();dialog.scrollTop=scroll;
+          const candidates=[...$('reportContent').querySelectorAll('.report-delete')];
+          const focus=candidates.find(b=>b.dataset.deleteId===(committed?nextId:row.id)&&b.checkVisibility())||candidates.find(b=>b.checkVisibility())||$('reportClose');
+          focus.focus({preventScroll:true});
+        }
+      }
+    }
     async function download(){
-      if(!snapshot||loading||exporting)return;
+      if(!snapshot||loading||exporting||removing)return;
       const c=context(),revision=sequence,report=snapshot;exporting=true;$('reportDownloadError').textContent='';controls();
       try{
         const bytes=await X.workbook(report.ordered,report.bounds);
@@ -120,12 +169,12 @@
       }catch(error){if(active(c,revision))$('reportDownloadError').textContent=error.message||'No se pudo preparar el Excel. Intenta descargar nuevamente.';}
       finally{if(active(c,revision)){exporting=false;controls();}}
     }
-    $('reportClose').onclick=()=>close();dialog.addEventListener('cancel',event=>{event.preventDefault();close();});
+    $('reportClose').onclick=()=>{if(!removing)close();};dialog.addEventListener('cancel',event=>{event.preventDefault();if(!removing)close();});
     $('reportPeriod').onchange=()=>{filters={areas:{},situations:{},data:{}};period=$('reportPeriod').value;offset=0;load();};
     $('reportPrev').onclick=()=>{filters={areas:{},situations:{},data:{}};offset--;load();};$('reportCurrent').onclick=()=>{filters={areas:{},situations:{},data:{}};offset=0;load();};$('reportNext').onclick=()=>{filters={areas:{},situations:{},data:{}};offset=Math.min(0,offset+1);load();};
     $('reportRefresh').onclick=load;$('reportDownload').onclick=download;
     $('reportTabs').querySelectorAll('[role=tab]').forEach(b=>b.onclick=()=>setTab(b.dataset.reportTab));
-    $('reportTabs').onkeydown=event=>{const tabs=[...$('reportTabs').querySelectorAll('[role=tab]')],i=tabs.indexOf(document.activeElement);if(i<0)return;
+    $('reportTabs').onkeydown=event=>{if(removing)return;const tabs=[...$('reportTabs').querySelectorAll('[role=tab]')],i=tabs.indexOf(document.activeElement);if(i<0)return;
       const next=event.key==='ArrowRight'?(i+1)%tabs.length:event.key==='ArrowLeft'?(i+tabs.length-1)%tabs.length:event.key==='Home'?0:event.key==='End'?tabs.length-1:null;
       if(next!==null){event.preventDefault();setTab(tabs[next].dataset.reportTab);tabs[next].focus();}};
     return {open,close};
