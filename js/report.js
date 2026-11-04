@@ -43,10 +43,10 @@
         loading=false;$('reportStatus').replaceChildren(el('p',error.message||'No se pudo cargar el informe.','error'),button('Reintentar',load));
       }finally{if(active(c,revision)){$('reportContent').removeAttribute('aria-busy');controls();}}
     }
-    function open(source){
+    function open(source,initialTab='areas'){
       if(!context().user)return;
       filters={areas:{},situations:{},data:{}};snapshot=null;opener=source;period='all';offset=0;tab='areas';page=0;
-      if(!dialog.open)dialog.showModal();setTab('areas');$('reportClose').focus();load();
+      if(!dialog.open)dialog.showModal();setTab(initialTab);$('reportClose').focus();load();
     }
     function setTab(next){
       if(removing)return;

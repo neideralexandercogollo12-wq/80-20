@@ -119,6 +119,7 @@
     $('analysisTitle').textContent=mobile?'Resumen':'Mapa de fricciones';
     $('analysisIntro').hidden=mobile;
     $('summaryAdd').hidden=!mobile;
+    $('summaryChart').hidden=!mobile;
     const summaryTab=document.querySelector('[data-panel="analysis"]');
     summaryTab.textContent=mobile?'Resumen':'Análisis';
     const all=$('period').querySelector('[value=all]');
@@ -527,6 +528,7 @@
     for(const id of ['exportExcel','actionsExportExcel']){$(id).textContent='Ver informe';$(id).disabled=false;$(id).title='Informe de fricciones';}
   }
   function cancelExport(){report.close(false);}
+  $('summaryChart').addEventListener('click',()=>report.open($('summaryChart'),'situations'));
   $('exportExcel').addEventListener('click',()=>report.open($('exportExcel')));
   $('actionsExportExcel').addEventListener('click',()=>report.open($('actionsExportExcel')));
   async function verifySession(){
