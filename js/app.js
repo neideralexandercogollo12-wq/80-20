@@ -84,7 +84,7 @@
   function rememberEmail(){try{if($('remember').checked)localStorage.setItem(rememberKey,$('email').value.trim());else localStorage.removeItem(rememberKey);}catch{}}
   function changed(channel){
     if(channel==='account'){
-      closeArchived();updatingActionId=null;finishDeleteConfirmation();enteringActions.clear();closeActionChoice();syncActionForm();$('actionFilter').value='';closeDetails();closeEditor();cancelExport();historyOpen=false;historyPage=0;busy=false;
+      closeArchived();updatingActionId=null;finishDeleteConfirmation();enteringActions.clear();closeActionChoice();closeSummaryActionEditor();syncActionForm();$('actionFilter').value='';closeDetails();closeEditor();cancelExport();historyOpen=false;historyPage=0;busy=false;
       $('captureForm').reset();captureLevel=null;areaDescription();$('captureError').textContent='';
       $('actionForm').reset();actionFormBusy(false);$('actionError').textContent='';$('password').value='';
       $('historyQuery').value='';$('historyLevel').value='';opts($('historyArea'),[['','Todas']],'');
@@ -165,38 +165,33 @@
   $('summaryAddSituation').onclick=()=>addFromSummary('scanner');
   $('summaryAddAction').onclick=()=>addFromSummary('new-action');
   function renderMobileSummary(target){
-    const focus=card('En qué enfocarme');
-    if(!status('analysis',focus)){
-      const pending=store.pendingProblems;
-      const total=pending.reduce((sum,p)=>sum+p.load,0);
-      let accumulated=0;
-      for(const problem of pending){
-        if(accumulated>=total*0.8)break;
-        accumulated+=problem.load;
-        const link=button('',()=>openDetail({kind:'problem',key:problem.key}),'area-row');
-        link.append(el('span',problem.name),el('span',pct(problem.load/total*100)+' ›'));
-        focus.append(link);
-      }
-      if(pending.length)focus.append(el('p',pct(accumulated/total*100)+' de la carga de problemas pendientes.','hint'));
-      else focus.append(el('p',store.analysis.length?'No hay problemas pendientes en este período.':'No hay situaciones en este período.','hint'));
-      if(store.analysis.some(row=>!A.problemKey(row.problema))){
-        focus.append(button('Clasificar situaciones',()=>{if(!historyOpen)$('historyToggle').click();$('historySection').scrollIntoView({block:'start'});},'plain'));
-      }
-      if(store.archivedProblems.length)focus.append(button('Ver apartados',()=>{$('archivedError').textContent='';renderArchived();$('archivedDialog').showModal();},'plain'));
-    }
-    const actions=card('Qué tengo pendiente');
+    const actions=card('Tus acciones');
     if(!status('actions',actions)){
-      const pending=A.filterActions(store.actions,'').filter(row=>!row.completada);
-      if(!pending.length)actions.append(el('p','No tienes acciones pendientes.','hint'));
-      for(const row of pending.slice(0,3)){
-        const label=el('label','','check summary-action'),check=el('input');
-        check.type='checkbox';
-        check.addEventListener('change',async()=>{check.disabled=true;await changeAction(row,{completada:true});if(check.isConnected){check.checked=false;check.disabled=false;}});
-        label.append(check,el('span',row.texto));actions.append(label);
+      const ordered=A.filterActions(store.actions,'');
+      if(!ordered.length)actions.append(el('p','No tienes acciones.','hint'));
+      for(const completed of [false,true]){
+        const rows=ordered.filter(row=>Boolean(row.completada)===completed);
+        if(!rows.length)continue;
+        actions.append(el('h3',completed?'Completadas':'Pendientes'));
+        for(const row of rows){
+          const label=el('label','','check summary-action'),check=el('input');
+          check.type='checkbox';check.checked=completed;
+          check.addEventListener('change',async()=>{
+            check.disabled=true;
+            await changeAction(row,{completada:check.checked});
+            if(check.isConnected){check.checked=completed;check.disabled=false;}
+          });
+          label.append(check,el('span',row.texto));
+          const edit=button('Editar',()=>editSummaryAction(row),'plain');
+          edit.dataset.summaryActionId=row.id;
+          edit.setAttribute('aria-label','Editar acción: '+row.texto);
+          const item=el('div','','summary-action-item');
+          item.append(label,edit);actions.append(item);
+        }
       }
-      actions.append(button('Ver todas las acciones',()=>selectPanel('actions'),'plain'));
+      actions.append(button('Gestionar acciones',()=>selectPanel('actions'),'plain'));
     }
-    target.append(focus,actions);
+    target.append(actions);
   }
   function renderAnalysis(){
     const target=$('analysisBody');target.replaceChildren();
@@ -361,6 +356,57 @@
   const currentAreas = () => A.areas.map(([n])=>[n,n]);
   opts($('actionArea'),[['','Sin área'],...currentAreas()],'');
   opts($('actionFilter'),[['','Todas las áreas'],...currentAreas(),['__none','Sin área']],'');
+  let summaryActionEditing=null;
+  function closeSummaryActionEditor(){
+    summaryActionEditing=null;
+    $('summaryActionEditor').close();
+    $('summaryActionForm').reset();
+    $('summaryActionError').textContent='';
+    $('summaryActionSave').disabled=false;
+  }
+  function editSummaryAction(row){
+    if(busy)return;
+    summaryActionEditing=row;
+    $('summaryActionText').value=row.texto;
+    opts($('summaryActionArea'),[['','Sin área'],...currentAreas()],row.categoria||'');
+    opts($('summaryActionImportance'),[
+      ...(row.importancia==null?[['','Sin valorar']]:[]),
+      ...A.importanceLabels.map((_,i)=>[String(i+1),A.importanceLabel(i+1)])
+    ],String(row.importancia??''));
+    $('summaryActionEditor').showModal();
+  }
+  $('summaryActionCancel').onclick=()=>{if(!busy)closeSummaryActionEditor();};
+  $('summaryActionEditor').addEventListener('cancel',event=>{
+    event.preventDefault();
+    if(!busy)closeSummaryActionEditor();
+  });
+  $('summaryActionForm').addEventListener('submit',async event=>{
+    event.preventDefault();
+    const row=summaryActionEditing;
+    if(!row||busy)return;
+    const texto=$('summaryActionText').value.trim();
+    if(!texto||[...texto].length>300){
+      $('summaryActionError').textContent='Escribe una acción de 1 a 300 caracteres.';
+      return;
+    }
+    const patch={texto,categoria:$('summaryActionArea').value||null};
+    if($('summaryActionImportance').value)patch.importancia=Number($('summaryActionImportance').value);
+    const c=store.context();
+    busy=true;$('summaryActionSave').disabled=true;$('summaryActionError').textContent='';
+    dismissKeyboard();
+    try{
+      if(await store.changeAction(row.id,patch)&&summaryActionEditing===row){
+        closeSummaryActionEditor();
+        [...document.querySelectorAll('[data-summary-action-id]')]
+          .find(b=>b.dataset.summaryActionId===row.id)?.focus({preventScroll:true});
+        toast('Acción actualizada.');
+      }
+    }catch(error){
+      if(c.active()&&summaryActionEditing===row)$('summaryActionError').textContent=error.message;
+    }finally{
+      if(c.active()){busy=false;$('summaryActionSave').disabled=false;}
+    }
+  });
   let choiceCallback = null;
   function closeActionChoice(){ choiceCallback=null; $('actionChoice').close(); }
   function chooseArea(title, areas, value, callback){
@@ -501,7 +547,7 @@
   });
   document.addEventListener('visibilitychange',()=>{
     const hidden=document.hidden;$('privacy').hidden=!hidden;$('app').inert=hidden;$('auth').inert=hidden;
-    if(hidden){closeArchived();finishDeleteConfirmation();closeActionChoice();closeDetails();closeEditor();cancelExport();}
+    if(hidden){closeSummaryActionEditor();closeArchived();finishDeleteConfirmation();closeActionChoice();closeDetails();closeEditor();cancelExport();}
     else if(store.user){if(panel==='analysis')store.load('analysis');if(panel==='actions')store.load('actions');}
   });
   if(db){

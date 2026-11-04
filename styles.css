@@ -207,3 +207,5 @@ dialog{border-color:#303c50;box-shadow:0 24px 100px #0009}
  #analysisBody .area-row span:first-child,.summary-action span{overflow-wrap:anywhere;min-width:0}
  .summary-action{min-height:44px}
 }
+
+.summary-action-item{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;gap:.5rem}

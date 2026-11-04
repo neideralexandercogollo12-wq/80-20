@@ -1,5 +1,5 @@
 /* Only public application files are cached. API responses, config and user data are excluded. */
-const VERSION = 'pareto-shell-2026-11-03-2';
+const VERSION = 'pareto-shell-2026-11-03-4';
 const PREFIX = 'pareto-shell-';
 const BASE = new URL('./', self.location.href);
 const CACHE = VERSION + ':' + BASE.pathname;
