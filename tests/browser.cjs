@@ -15,7 +15,7 @@ async function setup(browser,viewport={width:1280,height:900}){
 }
 async function login(page){await page.getByLabel('Correo',{exact:true}).fill('demo@example.com');await page.getByLabel('Contraseña',{exact:true}).fill('password');await page.getByRole('button',{name:'Entrar',exact:true}).click();await page.locator('#app').waitFor({state:'visible'});}
 // Analysis is part of the native-equivalent navigation.
-async function openAnalysis(page){await page.getByRole('button',{name:'Análisis',exact:true}).click();}
+async function openAnalysis(page){await page.getByRole('button',{name:/^(Análisis|Resumen)$/}).click();}
 async function ready(page){await page.locator('#analysisBody .metrics').waitFor();}
 async function main(){
   const browser=await chromium.launch({headless:true});

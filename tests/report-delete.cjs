@@ -28,6 +28,25 @@ const {chromium,webkit}=require(process.env.PLAYWRIGHT_MODULE||'playwright');con
   // Last real row and already-deleted row; refresh reconciles a missing record.
   await page.evaluate(()=>window.mock.fricciones=[{id:'last',user_id:'u1',categoria:'Mundo interior',evento:'Último',nivel:4,created_at:new Date().toISOString()}]);await page.locator('#exportExcel').click();await readyMutation();await page.getByRole('tab',{name:'Situaciones',exact:true}).click();await page.evaluate(()=>window.mock.fricciones=[]);await remove('last').click();await page.locator('#deleteConfirm').click();await page.locator('#reportMutationError').getByText(/ya no está disponible/).waitFor();await readyMutation();await page.locator('#reportRefresh').click();await readyMutation();assert.match(await page.locator('#reportContent').innerText(),/No hay registros/);
   await page.evaluate(()=>window.mock.fricciones=[{id:'last2',user_id:'u1',categoria:'Mundo interior',evento:'Último real',nivel:4,created_at:new Date().toISOString()}]);await page.locator('#reportRefresh').click();await readyMutation();await remove('last2').click();await page.locator('#deleteConfirm').click();await readyMutation();assert.match(await page.locator('#reportContent').innerText(),/No hay registros/);assert.match(await page.locator('#reportContext').innerText(),/0 registros/);assert.equal(await page.locator('#reportContent tbody tr').count(),0);
+  // An older record is visible by default, editable and deletable without a date limit.
+  await page.locator('#reportClose').click();
+  await page.evaluate(()=>window.mock.fricciones=[{id:'older',user_id:'u1',categoria:'Mundo interior',evento:'Situación antigua',nivel:2,emocion:'Conservar',problema:'Vínculo',created_at:'2020-01-01T12:00:00Z',nivel_original_10:4}]);
+  await page.locator('#exportExcel').click();await readyMutation();
+  assert.equal(await page.locator('#reportPeriod').inputValue(),'all');
+  await page.getByRole('tab',{name:'Situaciones',exact:true}).click();
+  await page.locator('.report-edit[data-edit-id="older"]:visible').click();
+  await page.locator('#editEvent').fill('Situación corregida');
+  await page.locator('#editArea').selectOption('Trabajo y estudio');
+  await page.locator('#editLevels input[value="5"]').check();
+  await page.locator('#editSave').click();
+  await page.locator('#reportStatus').getByText('Situación actualizada.').waitFor();
+  const edited=await page.evaluate(()=>window.mock.fricciones[0]);
+  assert.deepEqual([edited.evento,edited.categoria,edited.nivel,edited.emocion,edited.problema,edited.nivel_original_10],['Situación corregida','Trabajo y estudio',5,'Conservar','Vínculo',4]);
+  await page.locator('#reportPeriod').selectOption('week');await readyMutation();
+  assert.equal(await remove('older').count(),0);
+  await page.locator('#reportPeriod').selectOption('all');await readyMutation();
+  await remove('older').click();await page.locator('#deleteConfirm').click();await readyMutation();
+  assert.equal(await count(),0);
   // Late deletion after changing account must not reopen or populate another account's report.
   await page.evaluate(()=>window.mock.fricciones=[{id:'late',user_id:'u1',categoria:'Mundo interior',evento:'Respuesta tardía',nivel:2,created_at:new Date().toISOString()}]);await page.locator('#reportRefresh').click();await readyMutation();await remove('late').click();await page.evaluate(()=>window.mock.nextDelay=180);await page.locator('#deleteConfirm').click();await page.evaluate(()=>{window.mock.user={id:'u2'};window.mock.callback('SIGNED_IN',{user:window.mock.user});});await page.waitForTimeout(250);assert.equal(await page.locator('#reportDialog').isVisible(),false);assert.equal(await page.locator('#reportContent').innerText(),'');assert.equal(await page.locator('#reportMutationError').innerText(),'');assert.deepEqual(errors,[]);await page.close();
  }

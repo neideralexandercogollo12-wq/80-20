@@ -2,17 +2,18 @@
 (function(root){
   'use strict';
   const A=root.ParetoAnalysis,X=root.ParetoExcel,{el,button}=root.ParetoCharts;
-  function create({service,context,onDownload,confirmRemoval,onDelete}){
+  function create({service,context,onDownload,confirmRemoval,onDelete,onEdit}){
     const $=id=>document.getElementById(id),dialog=$('reportDialog');
-    let sequence=0,snapshot=null,period='week',offset=0,tab='areas',page=0,loading=false,exporting=false,opener=null,removing=false;
+    let sequence=0,snapshot=null,period='all',offset=0,tab='areas',page=0,loading=false,exporting=false,opener=null,removing=false;
     let filters={areas:{},situations:{},data:{}};
     const date=d=>d.toLocaleDateString('es-CO',{day:'2-digit',month:'short',year:'numeric'});
+    const periodLabel=bounds=>bounds ? date(bounds.start)+' — '+date(new Date(bounds.end-1)) : 'Todo el historial';
     function active(c,revision){return c.active()&&revision===sequence&&dialog.open&&!document.hidden;}
     function controls(){
       $('reportPeriod').value=period;$('reportPeriod').disabled=removing;$('reportWeeks').hidden=period!=='week';$('reportNext').disabled=offset===0||removing;
       $('reportPrev').disabled=removing;$('reportCurrent').disabled=removing;$('reportClose').disabled=removing;
       $('reportTabs').querySelectorAll('button').forEach(b=>b.disabled=removing);
-      $('reportContent').querySelectorAll('.report-delete').forEach(b=>b.disabled=removing||exporting);
+      $('reportContent').querySelectorAll('.report-delete,.report-edit').forEach(b=>b.disabled=removing||exporting);
       if(removing)$('reportContent').querySelectorAll('input,select,button').forEach(b=>b.disabled=true);
       $('reportDownload').disabled=loading||!snapshot||exporting||removing;
       $('reportDownload').textContent=exporting?'Preparando Excel…':'Descargar Excel';
@@ -27,9 +28,9 @@
     async function load(){
       if(removing)return;
       const c=context();if(!c.user)return close(false);
-      const revision=++sequence,bounds=A.periodBounds(period,offset);
+      const revision=++sequence,bounds=period==='all' ? null : A.periodBounds(period,offset);
       snapshot=null;loading=true;exporting=false;page=0;$('reportMutationError').textContent='';$('reportDownloadError').textContent='';
-      $('reportContext').textContent=date(bounds.start)+' — '+date(new Date(bounds.end-1));
+      $('reportContext').textContent=periodLabel(bounds);
       $('reportContent').replaceChildren();$('reportContent').setAttribute('aria-busy','true');$('reportStatus').textContent='Cargando informe…';controls();
       try{
         const rows=await service.read(c.user,{bounds,active:()=>active(c,revision)});
@@ -42,9 +43,9 @@
         loading=false;$('reportStatus').replaceChildren(el('p',error.message||'No se pudo cargar el informe.','error'),button('Reintentar',load));
       }finally{if(active(c,revision)){$('reportContent').removeAttribute('aria-busy');controls();}}
     }
-    function open(source,initialPeriod,initialOffset){
+    function open(source){
       if(!context().user)return;
-      filters={areas:{},situations:{},data:{}};snapshot=null;opener=source;period=initialPeriod;offset=initialPeriod==='week'?Math.min(0,initialOffset):0;tab='areas';page=0;
+      filters={areas:{},situations:{},data:{}};snapshot=null;opener=source;period='all';offset=0;tab='areas';page=0;
       if(!dialog.open)dialog.showModal();setTab('areas');$('reportClose').focus();load();
     }
     function setTab(next){
@@ -92,7 +93,7 @@
         const tr=el('tr');values.forEach(value=>tr.append(el('td',value==null?'':String(value),typeof value==='number'?'report-number':'')));
         if(tab==='situations'){
           const row=snapshot.ordered[values[0]-1],cell=el('td','','report-row-actions');tr.dataset.reportRecordId=row.id;
-          cell.append(deleteButton(row));tr.append(cell);
+          cell.append(editButton(row),deleteButton(row));tr.append(cell);
         }
         body.append(tr);
       });
@@ -103,7 +104,7 @@
       items.forEach(({name,value,area,row})=>{const item=el('li'),label=el('div','','report-bar-label');label.append(el('span',name),el('strong',levels?A.formatLevel(value):String(value)));
         label.lastChild.style.color=levels?A.sage(value):'#b7ccc0';
         const track=el('div','','bar-track'),fill=el('span','','bar-fill');fill.style.width=(max?value/max*100:0)+'%';fill.style.background=levels?A.sage(value):'#96B8A5';track.append(fill);track.setAttribute('aria-hidden','true');
-        item.append(label,track);if(area)item.append(el('small',area,'hint'));if(row)item.append(deleteButton(row,'report-chart-delete'));list.append(item);
+        item.append(label,track);if(area)item.append(el('small',area,'hint'));if(row)item.append(editButton(row,'report-chart-delete'),deleteButton(row,'report-chart-delete'));list.append(item);
       });group.append(list);return group;
     }
     function render(){
@@ -128,7 +129,24 @@
     }
     function updateContext(){
       const bounds=snapshot.bounds;
-      $('reportContext').textContent=date(bounds.start)+' — '+date(new Date(bounds.end-1))+` · ${snapshot.ordered.length} registros`;
+      $('reportContext').textContent=periodLabel(bounds)+` · ${snapshot.ordered.length} registros`;
+    }
+    function editButton(row,extra=''){
+      const edit=button('Editar',()=>{
+        const c=context(),revision=sequence;
+        if(removing||loading||exporting||!active(c,revision))return;
+        onEdit(row,patch=>{
+          if(!active(c,revision))return;
+          const scroll=dialog.scrollTop;
+          snapshot=X.prepareReport(snapshot.ordered.map(r=>r.id===row.id?{...r,...patch}:r),snapshot.bounds);
+          updateContext();render();controls();dialog.scrollTop=scroll;
+          $('reportStatus').textContent='Situación actualizada.';
+          const next=[...$('reportContent').querySelectorAll('.report-edit')].find(b=>b.dataset.editId===row.id&&b.checkVisibility());
+          (next||$('reportClose')).focus({preventScroll:true});
+        });
+      },'plain report-edit '+extra);
+      edit.dataset.editId=row.id;edit.setAttribute('aria-label','Editar situación: '+row.evento);
+      return edit;
     }
     function deleteButton(row,extra=''){
       const remove=button('Eliminar',()=>removeSituation(row),'plain report-delete '+extra);

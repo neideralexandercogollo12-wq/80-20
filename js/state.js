@@ -12,7 +12,7 @@
       this.problemContexts = []; this.actionArea = ''; this.actionProblem = null; this.actionFilter = '';
       this.status = {}; this.historyLoaded = false; this.actionDraft = ''; this.importance = '';
     }
-    bounds() { return A.periodBounds(this.period, this.weekOffset); }
+    bounds() { return this.period === 'all' ? null : A.periodBounds(this.period, this.weekOffset); }
     context(channel) {
       const epoch = this.epoch, user = this.user?.id;
       const ticket = channel ? this.tickets[channel] = (this.tickets[channel] || 0) + 1 : null;
@@ -64,12 +64,14 @@
     async refreshRecords() {
       await Promise.all([this.load('analysis'), this.load('names'), ...(this.historyLoaded ? [this.load('history')] : [])]);
     }
-    async saveRecord(draft, original = null) {
+    async saveRecord(draft, original = null, afterCommit = () => {}, situationOnly = false) {
       const patch = A.validateRecord(draft, original?.categoria);
+      if(situationOnly){delete patch.emocion;delete patch.problema;}
       const c = this.context(); if(!c.user) throw new Error('Inicia sesión para continuar.');
       if(original) await this.service.change(c.user, 'fricciones', original.id, patch, c.active);
       else await this.service.create(c.user, 'fricciones', patch, c.active);
       if(!c.active()) return false;
+      afterCommit(patch);
       await this.refreshRecords(); return c.active();
     }
     async deleteRecord(id, afterCommit = async () => {}) {

@@ -193,9 +193,17 @@ dialog{border-color:#303c50;box-shadow:0 24px 100px #0009}
 #reportContent>.hint{margin-top:1rem;font-size:.78rem}#reportContent .pager{margin-top:1.3rem}#reportContent .pager button{font-size:.82rem;border-color:#2c4938;color:#b7dcc4}#reportDownloadError{margin-top:.8rem}
 @media(max-width:750px){#reportDialog{width:calc(100% - 1rem);padding:1rem;border-radius:17px}#reportDialog .dialog-head{top:-1rem;margin-bottom:1.1rem}.report-tools{gap:.55rem}.report-tools label{flex:1}.report-tools button{font-size:.8rem;padding:.65rem .8rem}#reportDownload{margin-left:0}.report-columns{grid-template-columns:minmax(0,1fr);gap:1.5rem}#reportTabs{width:100%;margin-top:1.1rem}#reportTabs button{flex:1;padding:.6rem .4rem;font-size:.83rem}.report-bar-label strong{max-width:40%;white-space:normal}#reportDialog .report-column-filter{min-height:44px}.report-weeks button{font-size:.76rem;padding:.45rem}.report-filter-note{font-size:.72rem}.report-table th,.report-table td{padding:.75rem .65rem}}
 
-.report-row-actions{min-width:95px!important;width:95px}.report-delete{font-size:.78rem;color:#b6c8bd;min-height:44px;padding:.4rem .55rem}.report-delete:hover{color:#edf7f1;background:#19372a}.report-chart-delete{display:none}#reportMutationError{margin:.7rem 0;line-height:1.5}#deleteDescription{white-space:pre-line;overflow-wrap:anywhere}
+.report-row-actions{min-width:95px!important;width:95px}.report-edit,.report-delete{font-size:.78rem;color:#b6c8bd;min-height:44px;padding:.4rem .55rem}.report-edit:hover,.report-delete:hover{color:#edf7f1;background:#19372a}.report-chart-delete{display:none}#reportMutationError{margin:.7rem 0;line-height:1.5}#deleteDescription{white-space:pre-line;overflow-wrap:anywhere}
 @media(max-width:750px){.report-row-actions{display:none}.report-chart-delete{display:inline-flex;align-items:center;margin-top:.35rem}}
 
 @media(min-width:961px){#reportDialog .report-columns:has(.report-situations){grid-template-columns:minmax(0,1.3fr) minmax(0,.9fr)}}
 @media(max-width:960px){#reportDialog .report-columns:has(.report-situations){grid-template-columns:minmax(0,1fr)}}
 @media(max-width:750px){#reportDialog .report-columns:has(.report-situations) .report-bars{order:-1}}
+
+@media(max-width:767px){
+ #summaryAdd{margin-top:.75rem}
+ #summaryAdd > summary{width:fit-content;padding:.6rem 1rem;border-radius:10px;background:#064e3b}
+ #summaryAdd .row{margin-top:.4rem}
+ #analysisBody .area-row span:first-child,.summary-action span{overflow-wrap:anywhere;min-width:0}
+ .summary-action{min-height:44px}
+}

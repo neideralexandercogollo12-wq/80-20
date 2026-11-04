@@ -42,7 +42,7 @@
   }
   const dataHeaders=['Área','Evento','Emoción','Nivel (1–5)','Problema','Nivel original (1–10)'];
   function prepareReport(rows,bounds){
-    const snapshotBounds={start:new Date(bounds.start),end:new Date(bounds.end)};
+    const snapshotBounds=bounds ? {start:new Date(bounds.start),end:new Date(bounds.end)} : null;
     const ordered=A.situationPoints(rows,snapshotBounds).map(p=>({...p.row}));
     return {bounds:snapshotBounds,ordered,areas:A.categoryTotals(ordered),headers:[...dataHeaders],
       situations:ordered.map((r,i)=>[i+1,r.evento,Number(r.nivel),A.areaLabel(r.categoria)]),
